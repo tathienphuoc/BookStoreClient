@@ -15,12 +15,24 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
+import { NavComponent } from './nav/nav.component';
+import { BookCardComponent } from './books/book-card/book-card.component';
+import { BookDetailComponent } from './books/book-detail/book-detail.component';
+import { BookEditComponent } from './books/book-edit/book-edit.component';
+import { BookEditorComponent } from './books/book-editor/book-editor.component';
+import { BookListComponent } from './books/book-list/book-list.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavComponent,
+    BookCardComponent,
+    BookDetailComponent,
+    BookEditComponent,
+    BookEditorComponent,
+    BookListComponent
   ],
   imports: [
     BrowserModule,
