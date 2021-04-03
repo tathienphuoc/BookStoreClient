@@ -1,1 +1,49 @@
-<p>book-list works!</p>
+<div class="container">
+  <form #form="ngForm" (ngSubmit)="loadBooks()" autocomplete="off">
+    <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <input
+            name="s"
+            value=""
+            type="text"
+            class="form-control"
+            id="keyword"
+            placeholder="Book Title"
+          />
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+            <ng-select [(ngModel)]="selectedCar" important>
+                <ng-option *ngFor="let car of cars" [value]="car.id">{{car.name}}</ng-option>
+             </ng-select>   
+          <i class="select-arrow fa fa-angle-down"></i>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <select name="book_author" id="book_author" class="form-control">
+            <option value="0">Book Author</option>
+            <option class="level-0" value="atkia">Atkia</option>
+            <option class="level-0" value="brian-owell">Brian O’Well</option>
+            <option class="level-0" value="saifudin-a">Saifudin A.</option>
+            <option class="level-0" value="sarfaraz">Sarfaraz</option>
+          </select>
+          <i class="select-arrow fa fa-angle-down"></i>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <input type="hidden" name="post_type" value="product" />
+          <button type="submit" class="btn btn-dark btn-block rounded-pill">
+            <i class="fa fa-search"></i> &nbsp; Find Book
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -10,6 +10,12 @@ export class NavComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.ngDoCheck();
+  }
+
+  checked = 0;
+  ngDoCheck() {
+    console.log(++this.checked);
   }
 
 }

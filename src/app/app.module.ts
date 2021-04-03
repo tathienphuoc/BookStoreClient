@@ -21,8 +21,9 @@ import { BookDetailComponent } from './books/book-detail/book-detail.component';
 import { BookEditComponent } from './books/book-edit/book-edit.component';
 import { BookEditorComponent } from './books/book-editor/book-editor.component';
 import { BookListComponent } from './books/book-list/book-list.component';
+import { SlideShowComponent } from './slide-show/slide-show.component';
 
-
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { BookListComponent } from './books/book-list/book-list.component';
     BookDetailComponent,
     BookEditComponent,
     BookEditorComponent,
-    BookListComponent
+    BookListComponent,
+    SlideShowComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,8 @@ import { BookListComponent } from './books/book-list/book-list.component';
     NgxSpinnerModule,
     FileUploadModule,
     ReactiveFormsModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    NgSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
