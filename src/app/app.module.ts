@@ -24,6 +24,10 @@ import { BookListComponent } from './books/book-list/book-list.component';
 import { SlideShowComponent } from './slide-show/slide-show.component';
 
 import { NgSelectModule } from '@ng-select/ng-select';
+import { RegisterComponent } from './register/register.component';
+import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
     BookEditComponent,
     BookEditorComponent,
     BookListComponent,
-    SlideShowComponent
+    SlideShowComponent,
+    RegisterComponent,
+    TextInputComponent,
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
