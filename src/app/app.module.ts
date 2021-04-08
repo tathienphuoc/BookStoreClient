@@ -22,6 +22,8 @@ import { BookDetailComponent } from './books/book-detail/book-detail.component';
 import { BookEditComponent } from './books/book-edit/book-edit.component';
 import { BookEditorComponent } from './books/book-editor/book-editor.component';
 import { BookListComponent } from './books/book-list/book-list.component';
+import { HeaderComponent } from "./header/header.component";
+import { FilterComponent } from "./filter/filter.component";
 import { SlideShowComponent } from './slide-show/slide-show.component';
 
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -43,7 +45,9 @@ import { HomeComponent } from './home/home.component';
     RegisterComponent,
     TextInputComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
