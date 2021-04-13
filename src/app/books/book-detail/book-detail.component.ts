@@ -10,14 +10,23 @@ import { BookService } from 'src/app/_services/book.service';
 })
 export class BookDetailComponent implements OnInit {
   book: Book;
+  books: Book[];
   constructor(private bookService: BookService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.loadMember();
+    this.loadBook();
+    this.loadBooks();
   }
-  loadMember() {
+  loadBook() {
     this.bookService.getBook(this.route.snapshot.paramMap.get('bookId')).subscribe(book => {
       this.book = book;
     })
   }
+
+  loadBooks() {
+    this.bookService.getBooks().subscribe(response => {
+      this.books = response;
+    })
+  }
+  
 }
