@@ -16,7 +16,7 @@ const routes: Routes = [
       {path: 'register', component: RegisterComponent},
       {path: 'login', component: LoginComponent},
       {path: 'books', component: BookListComponent},
-      {path: 'books/book-detail', component: BookDetailComponent},
+      {path: 'books/:bookId', component: BookDetailComponent},
       
       // {path: 'members/:username', component: MemberDetailComponent},
       // {path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard]},

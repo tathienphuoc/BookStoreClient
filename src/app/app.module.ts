@@ -9,7 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ToastrModule } from "ngx-toastr";
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
@@ -56,7 +57,6 @@ import { HomeComponent } from './home/home.component';
     HttpClientModule,
     NgbModule,
     FormsModule,
-    FontAwesomeModule,
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
@@ -67,7 +67,9 @@ import { HomeComponent } from './home/home.component';
     FileUploadModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
-    NgSelectModule
+    NgSelectModule,
+    MatCardModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
