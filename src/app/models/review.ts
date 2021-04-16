@@ -1,6 +1,6 @@
 import { User } from "./user";
 
-export interface Reivew {
+export interface Review {
     account: User;
     content: string;
     createdAt: string;

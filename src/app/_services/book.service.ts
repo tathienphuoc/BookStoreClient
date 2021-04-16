@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Book } from '../models/book';
 import { BookParams } from '../models/bookParams';
+import { ReviewParams } from '../models/reviewParams';
 import { getPaginationHeaders, getPaginationResult } from './paginationHelpers';
 
 @Injectable({
@@ -25,6 +26,12 @@ export class BookService {
     let params = getPaginationHeaders(bookParams.pageNumber, bookParams.pageSize);
     if(bookParams.categoryid?.toString()!=null){
       params = params.append('categoryid', bookParams.categoryid.toString());
+    }
+    if(bookParams.authorid?.toString()!=null){
+      params = params.append('authorid', bookParams.authorid.toString());
+    }
+    if(bookParams.titleSearch != ""){
+      params = params.append('titleSearch', bookParams.titleSearch);
     }
     console.log(params);
     

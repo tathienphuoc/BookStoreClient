@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,6 +36,8 @@ import { HomeComponent } from './home/home.component';
 import { AdminBookListComponent } from './admin/books/admin-book-list/admin-book-list.component';
 import { AdminBookEditComponent } from './admin/books/admin-book-edit/admin-book-edit.component';
 import { AdminBookCardComponent } from './admin/books/admin-book-card/admin-book-card.component';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -79,7 +81,10 @@ import { AdminBookCardComponent } from './admin/books/admin-book-card/admin-book
     MatButtonModule,
     PaginationModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
