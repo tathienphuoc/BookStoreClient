@@ -11,6 +11,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ToastrModule } from "ngx-toastr";
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
@@ -32,6 +33,9 @@ import { RegisterComponent } from './register/register.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { AdminBookListComponent } from './admin/books/admin-book-list/admin-book-list.component';
+import { AdminBookEditComponent } from './admin/books/admin-book-edit/admin-book-edit.component';
+import { AdminBookCardComponent } from './admin/books/admin-book-card/admin-book-card.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +52,10 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     HomeComponent,
     HeaderComponent,
-    FilterComponent
+    FilterComponent,
+    AdminBookListComponent,
+    AdminBookEditComponent,
+    AdminBookCardComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +76,8 @@ import { HomeComponent } from './home/home.component';
     BsDatepickerModule.forRoot(),
     NgSelectModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    PaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

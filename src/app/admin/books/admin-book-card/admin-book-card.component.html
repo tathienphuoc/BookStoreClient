@@ -1,0 +1,24 @@
+<div class="card mb-4">
+    <div class="card-img-wrapper">
+        <img src="{{book.image || '/assets/user.png'}}" alt="" class="card-img-top" />
+        <ul class="list-inline member-icons animate text-center">
+            <li class="list-inline-item">
+                <button class="btn btn-info btn-block mr-4" routerLink='/books/{{book.id}}'>
+                    <i class="fas fa-edit"></i> Update
+                </button>
+            </li>
+            <li class="list-inline-item">
+                <button class="btn btn-danger btn-block mr-4" (click)="deleteBook(book.id)">
+                    <i class="fad fa-trash"></i> Delete
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body p-1">
+        <h4 class="card-title text-center">
+            <i class="far fa-book"></i>
+            {{book.title}}
+        </h4>
+        <p class="text-center text-muted card-text text-truncate">{{book.summary}}</p>
+    </div>
+</div>

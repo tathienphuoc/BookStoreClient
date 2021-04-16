@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -12,6 +12,7 @@ import { AccountService } from '../_services/account.service';
 })
 export class HeaderComponent implements OnInit {
   model : any = {}
+  
 
   currentUser$: Observable<User>;
   constructor(private accountService : AccountService, private router: Router,
