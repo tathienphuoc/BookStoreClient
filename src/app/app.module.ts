@@ -38,6 +38,7 @@ import { AdminBookEditComponent } from './admin/books/admin-book-edit/admin-book
 import { AdminBookCardComponent } from './admin/books/admin-book-card/admin-book-card.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
+import { AdminBookCreateComponent } from './admin/books/admin-book-create/admin-book-create.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
     FilterComponent,
     AdminBookListComponent,
     AdminBookEditComponent,
-    AdminBookCardComponent
+    AdminBookCardComponent,
+    AdminBookCreateComponent
   ],
   imports: [
     BrowserModule,

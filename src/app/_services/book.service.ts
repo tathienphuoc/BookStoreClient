@@ -48,6 +48,14 @@ export class BookService {
     }))
   }
 
+  addBook(model: any) {
+    JSON.stringify(model) 
+    return this.http.post(this.baseUrl+'book/', model).pipe(
+      map(response => {
+        return response;
+      }))
+  }
+
   deleteBook(bookId: number) {
     return this.http.delete(this.baseUrl +'book/'+bookId).pipe(
       map(response => {

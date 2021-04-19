@@ -1,5 +1,5 @@
-import { Author } from "./author";
 import { AuthorBooks } from "./authorBooks";
+import { BookCategory } from "./bookCategory";
 import { OrderRecipts } from "./orderRecipts";
 import { Publisher } from "./publisher";
 import { Review } from "./review";
@@ -9,6 +9,7 @@ export interface Book {
   order_Receipts: OrderRecipts[];
   reviews: Review[];
   authorBooks: AuthorBooks[];
+  bookCategories: BookCategory[];
   id: number;
   isbn: string;
   title: string;

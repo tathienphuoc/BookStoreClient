@@ -7,7 +7,7 @@
             </option>
           </select>
           <select class="form-select me-4" name="authorid" [(ngModel)]="bookParams.authorid" id="inputGroupSelect01">
-            <option *ngFor="let author of authors">
+            <option *ngFor="let author of authors" [value]= "author.id">
                 {{author.fullName}}
             </option>
           </select>

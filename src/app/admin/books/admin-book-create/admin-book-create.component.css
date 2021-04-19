@@ -1,0 +1,16 @@
+.layout {
+    background-color: #edf3f4;
+    padding: 50px;
+  }
+  .book-detail-container {
+    width: 1125px;
+    height: 1740px;
+    background-color: #ffffff;
+    margin: auto;
+    padding: 45px 60px;
+    border-radius: 10px;
+  }
+  .product-section {
+    display: flex;
+    position: relative;
+  }

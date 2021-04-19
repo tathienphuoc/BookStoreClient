@@ -1,5 +1,41 @@
-<div class="row">
-    <div class="col-3" *ngFor="let book of books">
-        <app-admin-book-card [book]="book"></app-admin-book-card>
+<div class="container-fluid d-flex">
+    <form #form="ngForm" (ngSubmit)="loadBooks()" class="d-flex m-auto">
+          <input type="text" name="titleSearch" [(ngModel)]="bookParams.titleSearch" class="form-control me-4" placeholder="Book Title" />
+          <select class="form-select me-4" name="categoryid" [(ngModel)]="bookParams.categoryid" id="inputGroupSelect01">
+            <option *ngFor="let category of categories" [value]= "category.id">
+                {{category.name}}
+            </option>
+          </select>
+          <select class="form-select me-4" name="authorid" [(ngModel)]="bookParams.authorid" id="inputGroupSelect01">
+            <option *ngFor="let author of authors">
+                {{author.fullName}}
+            </option>
+          </select>
+        <button type="submit" class="btn btn-dark rounded-pill" (click)="loadBooks()">
+          <em class="bi bi-search me-3"></em>FIND BOOK
+        </button>
+      </form>
+  </div>
+<div class="text-center fs-3 text-dark">
+    <p class="text-center fs-3 p-5">Admin Book</p>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-3" *ngFor="let book of books">
+            <app-admin-book-card [book]="book"></app-admin-book-card>
+        </div>
     </div>
+</div>
+<div class="d-flex justify-content-lg-center" *ngIf="pagination!= undefined">
+    <pagination 
+        [boundaryLinks]="false" 
+        [totalItems]="pagination.totalItems"
+        [itemsPerPage]="pagination.itemsPerPage"
+        [(ngModel)]="pagination.currentPage"
+        (pageChanged)="pageChanged($event)"
+        previousText="&lsaquo;" 
+        nextText="&rsaquo;" 
+        firstText="&laquo;" 
+        lastText="&raquo;">
+    </pagination>
 </div>
