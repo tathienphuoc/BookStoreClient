@@ -8,6 +8,7 @@ import { BookListComponent } from './books/book-list/book-list.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -22,7 +23,8 @@ const routes: Routes = [
       {path: 'books/:bookId', component: BookDetailComponent},
       {path: 'admin/books/edit/:bookId', component: AdminBookEditComponent},
       {path: 'admin/books', component: AdminBookListComponent},
-      {path: 'admin/books/create', component: AdminBookCreateComponent}
+      { path: 'admin/books/create', component: AdminBookCreateComponent },
+      { path: 'shoppingcart', component: ShoppingcartComponent }
 
       // {path: 'members/:username', component: MemberDetailComponent},
       // {path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard]},

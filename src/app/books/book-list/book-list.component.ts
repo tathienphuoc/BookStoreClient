@@ -41,7 +41,6 @@ export class BookListComponent implements OnInit {
   loadAuthors() {
     this.authorService.getAuthors().subscribe(response => {
         this.authors = response;
-        console.log(response); 
     })
   }
   loadCatgories() {

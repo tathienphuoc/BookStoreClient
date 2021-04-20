@@ -1,0 +1,247 @@
+ .cart {
+  margin: 20px auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.cart-info {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 150px;
+  margin-left: auto;
+}
+
+tr button{
+    margin-top: 100px;
+} 
+.cart-info .product_name p{
+ margin-top: 55px;
+}
+td img {
+  width: 8rem;
+  height: 8rem;
+  margin-right: 0.5rem;
+}
+
+
+
+.header_cart {
+   color: #ffffff;
+    background: #2f2b35;
+    font-size: 15px;
+    font-weight: 700;
+    height: 50px;
+}
+th {
+  text-align: center;
+  padding: 0.5rem;
+  color: white;
+  font-weight: normal;
+}
+td {
+  padding: 1rem 0.5rem;
+  text-align: center;
+}
+
+.total-price{
+    float: right;
+    padding-top: 150px;
+}
+
+.book_interested{
+  padding-top: 150px;
+}
+/*update cart*/
+.updatecart{
+/* border-radius: 20px;
+float: right;
+background-color: gray;
+margin-left: 10px;
+margin-left: 200px;
+ padding: 15px 32px;
+padding:7px;
+margin:10px; */
+float:right;
+
+ padding:0.6em 2em;
+  border-radius: 20px;
+  color:#fff;
+  background-color:gray;
+  font-size:1.1em;
+  border:0;
+  cursor:pointer;
+  margin:1em;
+
+}
+.updatecart:hover{
+opacity: 2;
+  background-color:black
+}
+
+
+/* button*/
+.container-cart table .close {
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  width: 20px;
+  height: 22px;
+  opacity: 0.3;
+
+}
+.close:hover {
+  opacity: 1;
+  color: red;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 120px;
+  content: ' ';
+  height: 10px;
+  width: 2px;
+  background-color:red;
+  
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
+
+.container_container_cart{
+  background-color: cadetblue;
+}
+
+
+
+
+.wrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #060d25
+}
+
+.card {
+    width: 400px;
+    background-color: #001334;
+    color: #fff
+}
+
+.about {
+    padding: 10px;
+    color: #fff
+}
+
+.about small {
+    font-size: 10px
+}
+
+hr {
+    color: #fff;
+    margin-top: 0px
+}
+
+.steam {
+    margin-top: -5px
+}
+
+.seller {
+    margin-top: -6px;
+    font-size: 14px
+}
+
+.steam-price {
+    margin-right: 115px !important
+}
+
+.margin {
+    margin-top: -6px;
+    color: #6c757d !important;
+    font-size: 13px
+}
+
+.response div {
+    margin-right: 10px
+}
+
+.fa-check-circle {
+    color: #1775e5
+}
+
+.fa-thumbs-up {
+    color: #79d254
+}
+
+.fa-thumbs-down {
+    color: #e05a59
+}
+
+.cart {
+    height: 50px
+}
+
+.pl-book {
+    background-color: #edf3f4;
+}
+.cart_info{
+  background-color: #fff;
+} 
+
+.wrapper_cart{
+  background-color: #fff;
+}
+
+
+
+/*  Interesting Book*/
+.card:hover img {
+    transform: scale(1.2, 1.2);
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+    opacity: 0.7;
+}
+
+.card img {
+    transform: scale(1.0, 1.0);
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+}
+
+.card-img-wrapper {
+    overflow: hidden;
+    position: relative;
+}
+
+.member-icons {
+    position: absolute;
+    bottom: -30%;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    opacity: 0;
+}
+
+.card-img-wrapper:hover .member-icons {
+    bottom: 0;
+    opacity: 1;
+}
+
+.animate {
+    transition: all 0.3s ease-in-out;
+}
+
+@keyframes fa-blink {
+    0% {opacity: 1;}
+    100% {opacity: 0.4;}
+}
+
+.is-online {
+    animation: fa-blink 1.5s linear infinite;
+    color: rgb(1, 189, 42);
+}
