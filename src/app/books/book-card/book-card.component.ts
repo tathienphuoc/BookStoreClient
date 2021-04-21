@@ -15,7 +15,7 @@ import { CartService } from 'src/app/_services/cart.service';
 export class BookCardComponent implements OnInit {
   @Input() book: Book;
   @Input() user: User;
-  bookIds: number[];
+  bookIds: Array<Book> = [];
   shoppingcartParam: ShoppingCartParam;
   id: number;
   constructor(private shoppingcartService : CartService, private accountService: AccountService) {
@@ -27,11 +27,11 @@ export class BookCardComponent implements OnInit {
   
   ngOnInit(): void {
   }
-  addToCart(accountId: number, bookId: number) {
-    this.bookIds.push(bookId);
-    console.log(bookId);
+  addToCart(accountId: number, book: Book) {
+    this.bookIds.push(book);
     this.shoppingcartService.addToCart(accountId, this.bookIds).subscribe(response => {
       console.log(response);
     })
   }
 }
+

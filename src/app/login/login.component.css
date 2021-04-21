@@ -70,3 +70,33 @@ input:focus {
   background-color: #2f2b35;
   color: #dddddd;
 }
+.breadcrumb-container {
+  height: 150px;
+  background-color: #515570;
+  color: white;
+  text-align: center;
+}
+.breadcrumb-body {
+  margin: auto;
+}
+.breadcrumb-body h1 {
+  font-size: 50px;
+  line-height: 60px;
+  text-transform: capitalize;
+}
+.breadcrumb-body .path {
+  font-style: italic;
+  line-height: 20px;
+}
+.path span {
+  margin-left: 5px;
+}
+a {
+  font-size: 15px;
+  text-decoration: none;
+  color: white;
+}
+a:hover {
+  color: #28cdf0;
+}
+

@@ -8,6 +8,15 @@
         <button class="btn btn-success mr-2 mt-2" type="submit">Đăng nhập</button>
       </div>
     </form> -->
+<div class="breadcrumb-container d-flex">
+  <div class="breadcrumb-body">
+    <h1>My Account</h1>
+    <div class="path">
+      <a href="">Home</a>
+      <span>/ My Account</span>
+    </div>
+  </div>
+</div>
 <div class="container-fluid d-flex">
   <div class="row m-auto flex-1">
     <div class="col">
@@ -15,14 +24,16 @@
       <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Username or email address</label>
-          <input type="email" name="username" [(ngModel)]="model.username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+          <input type="email" name="username" [(ngModel)]="model.username" class="form-control" id="exampleInputEmail1"
+            aria-describedby="emailHelp" />
           <div id="emailHelp" class="form-text">
             We'll never share your email with anyone else.
           </div>
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" name="password" [(ngModel)]="model.password" class="form-control" id="exampleInputPassword1" />
+          <input type="password" name="password" [(ngModel)]="model.password" class="form-control"
+            id="exampleInputPassword1" />
         </div>
         <div class="mb-3 form-check">
           <input type="checkbox" class="form-check-input" id="exampleCheck1" />

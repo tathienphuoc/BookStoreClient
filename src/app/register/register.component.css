@@ -12,10 +12,7 @@ input[type="number"]:focus,
 [contenteditable].form-control:focus {
   box-shadow: inset 0 -1px 0 #ddd;
 }
-.container-fluid {
-  height: 1000px;
-  background-color: #edf3f4;
-}
+
 .row {
   padding: 0 15px;
 }
@@ -23,8 +20,13 @@ input[type="number"]:focus,
   border-radius: 10px;
   background-color: white;
   padding: 45px 50px 20px;
-  height: 418px;
+  height: 890px;
   width: 1050px;
+  margin-top: 50px;
+}
+.container-fluid {
+  height: 1000px;
+  background-color: #edf3f4;
 }
 h1 {
   font-size: 24px;
@@ -67,6 +69,36 @@ input:focus {
   background-color: #dddddd;
 }
 .btn-login:hover {
-  background-color: #2f2b35;
+  background-color: #ac2c2c;
   color: #dddddd;
 }
+.breadcrumb-container {
+  height: 150px;
+  background-color: #515570;
+  color: white;
+  text-align: center;
+}
+.breadcrumb-body {
+  margin: auto;
+}
+.breadcrumb-body h1 {
+  font-size: 50px;
+  line-height: 60px;
+  text-transform: capitalize;
+}
+.breadcrumb-body .path {
+  font-style: italic;
+  line-height: 20px;
+}
+.path span {
+  margin-left: 5px;
+}
+a {
+  font-size: 15px;
+  text-decoration: none;
+  color: white;
+}
+a:hover {
+  color: #28cdf0;
+}
+
