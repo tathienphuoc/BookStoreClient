@@ -1,4 +1,22 @@
-<div class="card mb-4">
+<div class="col">
+    <div class="book-card">
+        <img class="book-card-img"
+        src="{{book.image || '/assets/user.png'}}" alt="" />
+        <p class="sale-icon d-none">Sale!</p>
+        <div class="book-card-body">
+            <h2>Lyrics of the Lalala Musical</h2>
+            <span>Saifudin A.</span>
+            <div class="price-box">
+                <span class="price-text">$2.00</span>
+            </div>
+        </div>
+        <div class="book-card-btn">
+            <a href="" class="btn btn-detail"><em class="bi bi-dash-square-fill"></em>DETAIL</a>
+            <a href="" class="btn btn-buy"><em class="bi bi-cart-fill"></em>BUY</a>
+        </div>
+    </div>
+</div>
+<!-- <div class="card mb-4">
     <div class="card-img-wrapper">
         <img src="{{book.image || '/assets/user.png'}}" alt="" class="card-img-top" />
         <ul class="list-inline member-icons animate text-center">
@@ -21,4 +39,4 @@
         </h4>
         <p class="text-center text-muted card-text text-truncate">{{book.summary}}</p>
     </div>
-</div>
+</div> -->

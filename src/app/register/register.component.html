@@ -1,27 +1,32 @@
-<div class="container">
-    <form [formGroup]='registerForm' (ngSubmit)="registerForm.valid && register()">
-      <h2 class="text-center text-primary">Đăng ký</h2>
-      <hr>
-      <app-text-input [formControl]='registerForm.controls["userName"]' [label]='"Tên đăng nhập"'></app-text-input>
-      <app-text-input [formControl]='registerForm.controls["fullName"]' [label]='"Họ và tên"'></app-text-input>
-      <app-text-input [formControl]='registerForm.controls["email"]' [label]='"Email"'></app-text-input>
-      <app-text-input [formControl]='registerForm.controls["phoneNumber"]' [label]='"Điện thoại"'></app-text-input>
-      <app-text-input [formControl]='registerForm.controls["homeAddress"]' [label]='"Địa chỉ"'></app-text-input>
-      <app-text-input [formControl]='registerForm.controls["password"]' [label]='"Mật khẩu"' [type]='"password"'>
-      </app-text-input>
-      <app-text-input [formControl]='registerForm.controls["confirmPassword"]' [label]='"Xác thực mật khẩu"'
-        [type]='"password"'></app-text-input>
-  
-      <div class="row mt-5" *ngIf="validationErrors.length >0">
-        <ul class="text-danger">
-          <li *ngFor="let error of validationErrors">
-            {{error}}
-          </li>
-        </ul>
-      </div>
-      <div class="form-group text-center">
-        <button [disabled]='!registerForm.valid' class="btn btn-success mr-2" type="submit">Đăng ký</button>
-        <button class="btn btn-light mr-2" (click)="cancel()">Hủy bỏ</button>
-      </div>
-    </form>
+<div class="container-fluid d-flex">
+  <div class="row m-auto flex-1">
+    <div class="col">
+      <h1>Login</h1>
+      <form [formGroup]='registerForm' (ngSubmit)="registerForm.valid && register()">
+        <h2 class="text-center text-primary">Đăng ký</h2>
+        <hr>
+        <app-text-input [formControl]='registerForm.controls["userName"]' [label]='"Tên đăng nhập"'></app-text-input>
+        <app-text-input [formControl]='registerForm.controls["fullName"]' [label]='"Họ và tên"'></app-text-input>
+        <app-text-input [formControl]='registerForm.controls["email"]' [label]='"Email"'></app-text-input>
+        <app-text-input [formControl]='registerForm.controls["phoneNumber"]' [label]='"Điện thoại"'></app-text-input>
+        <app-text-input [formControl]='registerForm.controls["homeAddress"]' [label]='"Địa chỉ"'></app-text-input>
+        <app-text-input [formControl]='registerForm.controls["password"]' [label]='"Mật khẩu"' [type]='"password"'>
+        </app-text-input>
+        <app-text-input [formControl]='registerForm.controls["confirmPassword"]' [label]='"Xác thực mật khẩu"'
+          [type]='"password"'></app-text-input>
+
+        <div class="row mt-5" *ngIf="validationErrors.length >0">
+          <ul class="text-danger">
+            <li *ngFor="let error of validationErrors">
+              {{error}}
+            </li>
+          </ul>
+        </div>
+        <div class="form-group text-center">
+          <button [disabled]='!registerForm.valid' class="btn btn-success mr-2" type="submit">Đăng ký</button>
+          <button class="btn btn-light mr-2" (click)="cancel()">Hủy bỏ</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

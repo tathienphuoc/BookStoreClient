@@ -8,4 +8,5 @@ export interface User {
     homeAddress: string;
     image: string;
     token: string;
+    roles: string;
 }

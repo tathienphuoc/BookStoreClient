@@ -8,21 +8,22 @@ import { BookListComponent } from './books/book-list/book-list.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AdminGuard } from './_guards/admin.guard';
+import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {
     path: '',
     runGuardsAndResolvers: 'always',
-    // canActivate: [AuthGuard],
     children: [
       {path: 'register', component: RegisterComponent},
       {path: 'login', component: LoginComponent},
       {path: 'books', component: BookListComponent},
       {path: 'books/:bookId', component: BookDetailComponent},
-      {path: 'admin/books/edit/:bookId', component: AdminBookEditComponent},
+      {path: 'admin/books/edit/:bookId', component: AdminBookEditComponent, canActivate: [AdminGuard]}, 
       {path: 'admin/books', component: AdminBookListComponent},
-      {path: 'admin/books/create', component: AdminBookCreateComponent}
+      {path: 'admin/books/create', component: AdminBookCreateComponent, canActivate: [AdminGuard]}
 
       // {path: 'members/:username', component: MemberDetailComponent},
       // {path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard]},
