@@ -1,0 +1,277 @@
+<div class="py-5 text-center" style="background-color: slategray; width: 100%;">
+
+
+    <p class="lead" style="color: white;font-size: 50px;">Checkout</p>
+</div>
+
+<div class="container">
+
+    <main>
+        <div class="row">
+            <div class="col">
+                <div class="row row-cols-2">
+                    <div class="col">
+                    <div class="row g-5">
+                        <div class="col-md-5 col-lg-4 order-md-last">
+                        </div>
+                        <div class="col-md-7 col-lg-8">
+
+                            <h1 class="mb-3">Billing details</h1>
+                            <form class="needs-validation" novalidate>
+                                <div class="row g-3">
+                                    <div class="col-sm-6">
+                                        <label for="firstName" class="form-label text-muted">First name <strong
+                                                style="color: red;">*</strong></label>
+                                        <input type="text" class="form-control" id="firstName" placeholder="" value=""
+                                            required>
+                                        <div class="invalid-feedback">
+                                            Valid first name is required.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label for="lastName" class="form-label text-muted">Last name <strong
+                                                style="color: red;">*</strong></label>
+                                        <input type="text" class="form-control" id="lastName" placeholder="" value=""
+                                            required>
+                                        <div class="invalid-feedback">
+                                            Valid last name is required.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="username" class="form-label text-muted">Company name (optional)
+                                            <strong style="color: red;">*</strong></label>
+                                        <div class="input-group has-validation">
+                                            <!-- <span class="input-group-text"></span> -->
+                                            <input type="text" class="form-control" id="companyname"
+                                                placeholder="Company name" required>
+                                            <div class="invalid-feedback">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label for="country" class="form-label text-muted">Country/Region <strong
+                                                style="color: red;">*</strong></label>
+                                        <select class="form-select" id="country" required>
+                                            <option value="">Choose...</option>
+                                            <option>United States</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid country.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="address2" class="form-label text-muted">Street Address <strong
+                                                style="color: red;">*</strong> <span class="text-muted"></span></label>
+                                        <input type="text" class="form-control" id="address2"
+                                            placeholder="House number and street name"><br>
+                                        <input type="text" class="form-control" id="address2"
+                                            placeholder="Apartment,suite or unit">
+                                    </div>
+
+                                    <!-- <div class="col-md-5">
+                            <label for="country" class="form-label">Country</label>
+                            <select class="form-select" id="country" required>
+                                <option value="">Choose...</option>
+                                <option>United States</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid country.
+                            </div>
+                        </div> -->
+                                    <div class="col-12">
+                                        <label for="address2" class="form-label text-muted">Town City <strong
+                                                style="color: red;">*</strong> <span class="text-muted"></span></label>
+                                        <input type="text" class="form-control" id="address2" placeholder="">
+
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="address2" class="form-label text-muted">Country <strong
+                                                style="color: red;">*</strong> <span class="text-muted"></span></label>
+                                        <input type="text" class="form-control" id="address2" placeholder="">
+
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="address2" class="form-label text-muted">Post code <strong
+                                                style="color: red;">*</strong> <span class="text-muted"></span></label>
+                                        <input type="text" class="form-control" id="address2" placeholder="">
+
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="address2" class="form-label text-muted">Phone<strong
+                                                style="color: red;">*</strong> <span class="text-muted"></span></label>
+                                        <input type="text" class="form-control" id="address2" placeholder="">
+
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="address2" class="form-label text-muted">Email address<strong
+                                                style="color: red;">*</strong> <span class="text-muted"></span></label>
+                                        <input type="text" class="form-control" id="address2" placeholder="">
+
+                                    </div>
+
+
+                                </div>
+
+                                <hr class="my-4">
+
+                            </form>
+                        </div> <!-- -->
+                        
+                    </div> <!-- -->
+                </div>
+
+
+                   <div class="col">
+                    <div class="row g-5">
+                        <div class="col-md-5 col-lg-4 order-md-last">
+                        </div>
+                        <div class="col-md-7 col-lg-8">
+                    
+                            <h1 class="mb-3">Shipping to this address ?</h1>
+                            <form class="needs-validation" novalidate>
+                                <div class="row g-3">
+                                    <div class="col-sm-6">
+                                        <label for="firstName" class="form-label text-muted">First name <strong
+                                                style="color: red;">*</strong></label>
+                                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                                        <div class="invalid-feedback">
+                                            Valid first name is required.
+                                        </div>
+                                    </div>
+                    
+                                    <div class="col-sm-6">
+                                        <label for="lastName" class="form-label text-muted">Last name <strong
+                                                style="color: red;">*</strong></label>
+                                        <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                                        <div class="invalid-feedback">
+                                            Valid last name is required.
+                                        </div>
+                                    </div>
+                    
+                                    <div class="col-12">
+                                        <label for="username" class="form-label text-muted">Company name (optional)
+                                            <strong style="color: red;">*</strong></label>
+                                        <div class="input-group has-validation">
+                                            <!-- <span class="input-group-text"></span> -->
+                                            <input type="text" class="form-control" id="companyname" placeholder="Company name" required>
+                                            <div class="invalid-feedback">
+                    
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                                    <div class="col-md-12">
+                                        <label for="country" class="form-label text-muted">Country/Region <strong
+                                                style="color: red;">*</strong></label>
+                                        <select class="form-select" id="country" required>
+                                            <option value="">Choose...</option>
+                                            <option>United States</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid country.
+                                        </div>
+                                    </div>
+                    
+                                    <div class="col-12">
+                                        <label for="address2" class="form-label text-muted">Street Address <strong
+                                                style="color: red;">*</strong> <span class="text-muted"></span></label>
+                                        <input type="text" class="form-control" id="address2"
+                                            placeholder="House number and street name"><br>
+                                        <input type="text" class="form-control" id="address2" placeholder="Apartment,suite or unit">
+                                    </div>
+                    
+                                    <!-- <div class="col-md-5">
+                                                <label for="country" class="form-label">Country</label>
+                                                <select class="form-select" id="country" required>
+                                                    <option value="">Choose...</option>
+                                                    <option>United States</option>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Please select a valid country.
+                                                </div>
+                                            </div> -->
+                                    <div class="col-12">
+                                        <label for="address2" class="form-label text-muted">Town City <strong style="color: red;">*</strong>
+                                            <span class="text-muted"></span></label>
+                                        <input type="text" class="form-control" id="address2" placeholder="">
+                    
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="address2" class="form-label text-muted">Country <strong style="color: red;">*</strong>
+                                            <span class="text-muted"></span></label>
+                                        <input type="text" class="form-control" id="address2" placeholder="">
+                    
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="address2" class="form-label text-muted">Post code <strong style="color: red;">*</strong>
+                                            <span class="text-muted"></span></label>
+                                        <input type="text" class="form-control" id="address2" placeholder="">
+                    
+                                    </div>
+                    
+                                    <div class="col-12">
+                                        <label for="address2" class="form-label text-muted">Phone<strong style="color: red;">*</strong>
+                                            <span class="text-muted"></span></label>
+                                        <input type="text" class="form-control" id="address2" placeholder="">
+                    
+                                    </div>
+                    
+                                    <div class="col-12">
+                                        <label for="address2" class="form-label text-muted">Order note(optional)<strong
+                                                style="color: red;">*</strong> <span class="text-muted"></span></label>
+                                        <input type="text" class="form-control" id="address2" placeholder="">
+                    
+                                    </div>
+                    
+                    
+                                </div>
+                    
+                                <hr class="my-4">
+                    
+                            </form>
+                        </div>
+                    </div> <!-- -->
+                   </div> 
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+</div>
+
+<div class="container mt-3">
+    <div class="container cart">
+        <table>
+            <tr class="header_cart">
+
+                <th>Product</th>
+
+                <th>Subtotal</th>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    <div class="cart-info">
+                        <img src="" alt="" />
+                        <div class="product_name text">
+                            <p>Bambi Print Mini Backpack</p>
+                        </div>
+                    </div>
+                </td>
+                <td>$50.00</td>
+
+            </tr>
+
+        </table>
+        <hr style="width:100%;text-align:left;margin-left:0;color:black">

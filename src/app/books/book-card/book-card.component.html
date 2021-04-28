@@ -40,7 +40,7 @@
                 </div>
                 <div class="book-card-btn">
                     <a  routerLink='/books/{{book.id}}' class="btn btn-detail"><em class="bi bi-dash-square-fill"></em>DETAIL</a>
-                    <a  routerLink='/shoppingcart' (click)="addToCart(user.id, book)" class="btn btn-buy"><em class="bi bi-cart-fill"></em>BUY</a>
+                    <a (click)="addToCart(user.id, book)" class="btn btn-buy"><em class="bi bi-cart-fill"></em>BUY</a>
                 </div>
             </div>
         </div>

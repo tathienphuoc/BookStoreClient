@@ -11,6 +11,7 @@ import { RegisterComponent } from './register/register.component';
 import { AdminGuard } from './_guards/admin.guard';
 import { AuthGuard } from './_guards/auth.guard';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -26,7 +27,8 @@ const routes: Routes = [
       {path: 'admin/books', component: AdminBookListComponent},
       {path: 'admin/books/create', component: AdminBookCreateComponent, canActivate: [AdminGuard]},
       { path: 'admin/books/create', component: AdminBookCreateComponent },
-      { path: 'shoppingcart', component: ShoppingcartComponent }
+      { path: 'shoppingcart', component: ShoppingcartComponent },
+      {path:'checkout',component:CheckoutComponent}
 
       // {path: 'members/:username', component: MemberDetailComponent},
       // {path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard]},

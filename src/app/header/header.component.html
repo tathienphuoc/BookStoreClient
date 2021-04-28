@@ -70,7 +70,7 @@
         </ul>
       </div>
       <div class="dropdown mr-3" *ngIf="(currentUser$ | async) as user" dropdown>
-        <img src="{{user.image || '/assets/user.png'}}" alt="{{user.photoUrl}}">
+        <img src="{{user.image || '/assets/user.png'}}" alt="{{user.image}}">
         <a class="dropdown-toggle text-info  ml-3" dropdownToggle>Xin chào {{user.fullName | titlecase}}</a>
         <div class="dropdown-menu mt-3" *dropdownMenu>
           <a class="dropdown-item" routerLink="user/edit">Thông tin</a>
