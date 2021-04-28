@@ -34,6 +34,8 @@ export class BookCardComponent implements OnInit {
   addToCart(accountId: number, book: Book) {
     this.bookIds.push(book);
     this.shoppingcartService.addToCart(accountId, this.bookIds).subscribe(response => {
+      window.location.href = '/shoppingcart';
+      console.log(response);
     })
   }
 }

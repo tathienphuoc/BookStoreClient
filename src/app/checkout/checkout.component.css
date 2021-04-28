@@ -8,8 +8,10 @@ table {
 .cart-info {
   display: flex;
   flex-wrap: wrap;
-  padding-left: 150px;
+  
   margin-left: auto;
+  
+  
 }
 
 tr button{
@@ -32,12 +34,14 @@ td img {
     font-size: 15px;
     font-weight: 700;
     height: 50px;
+   text-align: left;
 }
 th {
   text-align: center;
   padding: 0.5rem;
   color: white;
   font-weight: normal;
+  text-align: left;
 }
 td {
   padding: 1rem 0.5rem;
@@ -198,8 +202,8 @@ hr {
 
 
 
- /* Interesting Book */
-/* .card:hover img {
+/*  Interesting Book*/
+.card:hover img {
     transform: scale(1.2, 1.2);
     transition-duration: 500ms;
     transition-timing-function: ease-out;
@@ -244,9 +248,4 @@ hr {
 .is-online {
     animation: fa-blink 1.5s linear infinite;
     color: rgb(1, 189, 42);
-} */
-
-
-
-/* Add button*/
-
+}

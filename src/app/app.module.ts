@@ -42,6 +42,7 @@ import { AdminBookCreateComponent } from './admin/books/admin-book-create/admin-
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { HasRoleDirective } from './_directive/has-role.directive';
 import { RankComponent } from './rank/rank.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { RankComponent } from './rank/rank.component';
     AdminBookCreateComponent,
     ShoppingcartComponent,
     HasRoleDirective,
-    RankComponent
+    RankComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
