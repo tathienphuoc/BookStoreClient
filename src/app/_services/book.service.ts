@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -24,10 +24,10 @@ export class BookService {
     // }    
     
     let params = getPaginationHeaders(bookParams.pageNumber, bookParams.pageSize);
-    if(bookParams.categoryid?.toString()!=null){
+    if(bookParams.categoryid?.toString() != "0" ){
       params = params.append('categoryid', bookParams.categoryid.toString());
     }
-    if(bookParams.authorid?.toString()!=null){
+    if(bookParams.authorid?.toString() != "0"){
       params = params.append('authorid', bookParams.authorid.toString());
     }
     if(bookParams.titleSearch != ""){
@@ -49,8 +49,13 @@ export class BookService {
   }
 
   addBook(model: any) {
-    JSON.stringify(model) 
-    return this.http.post(this.baseUrl+'book/', model).pipe(
+    const httpOptions = {
+      headers: new HttpHeaders({
+          'Content-Disposition': 'multipart/form-data'
+      })
+    };
+    // JSON.stringify(model); 
+    return this.http.post(this.baseUrl+'book/', model, httpOptions).pipe(
       map(response => {
         return response;
       }))

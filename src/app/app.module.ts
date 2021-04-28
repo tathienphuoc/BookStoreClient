@@ -40,6 +40,8 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { AdminBookCreateComponent } from './admin/books/admin-book-create/admin-book-create.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
+import { HasRoleDirective } from './_directive/has-role.directive';
+import { RankComponent } from './rank/rank.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
     AdminBookEditComponent,
     AdminBookCardComponent,
     AdminBookCreateComponent,
-    ShoppingcartComponent
+    ShoppingcartComponent,
+    HasRoleDirective,
+    RankComponent
   ],
   imports: [
     BrowserModule,

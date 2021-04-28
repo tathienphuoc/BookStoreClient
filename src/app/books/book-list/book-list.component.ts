@@ -31,7 +31,12 @@ export class BookListComponent implements OnInit {
     this.loadAuthors();
     this.loadCatgories();
   }
-
+  getAuthorByBook(book: Book) {
+    const index = this.books.indexOf(book);
+    console.log(index);
+    
+    return index;
+  }
   loadBooks() {
     this.bookService.getBooks(this.bookParams).subscribe(response => {
         this.books = response.result;

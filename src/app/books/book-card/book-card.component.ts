@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, Pipe } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import { take } from 'rxjs/operators';
+import { Author } from 'src/app/models/author';
 import { Book } from 'src/app/models/book';
 import { ShoppingCartParam } from 'src/app/models/shoppingcartParam';
 import { User } from 'src/app/models/user';
@@ -15,22 +17,23 @@ import { CartService } from 'src/app/_services/cart.service';
 export class BookCardComponent implements OnInit {
   @Input() book: Book;
   @Input() user: User;
+  @Input() author: Author;
   bookIds: Array<Book> = [];
   shoppingcartParam: ShoppingCartParam;
   id: number;
-  constructor(private shoppingcartService : CartService, private accountService: AccountService) {
+  constructor(private sanitizer: DomSanitizer,private shoppingcartService : CartService, private accountService: AccountService) {
     accountService.currentUser$.pipe(take(1)).subscribe(user => {
       this.user = user;
+
     })
   }
 
-  
   ngOnInit(): void {
   }
+
   addToCart(accountId: number, book: Book) {
     this.bookIds.push(book);
     this.shoppingcartService.addToCart(accountId, this.bookIds).subscribe(response => {
-      console.log(response);
     })
   }
 }

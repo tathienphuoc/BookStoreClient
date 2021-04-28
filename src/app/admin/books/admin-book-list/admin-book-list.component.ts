@@ -39,7 +39,6 @@ export class AdminBookListComponent implements OnInit {
   loadAuthors() {
     this.authorService.getAuthors().subscribe(response => {
         this.authors = response;
-        console.log(response); 
     })
   }
   loadCatgories() {

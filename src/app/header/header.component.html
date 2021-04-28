@@ -1,91 +1,60 @@
 <nav class="navbar navbar-expand-lg header">
-    <div class="container-fluid d-flex">
-      <a class="navbar-brand flex-fill me-5" href="#">
-        <div class="float-end">
-          <h1 class="text m-0">Bookie</h1>
-          <small>Just another WordPress site</small>
-        </div>
-      </a>
-      <div
-        class="collapse navbar-collapse flex-fill ms-5"
-        id="navbarSupportedContent"
-        >
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              HOME
-            </a>
-            <ul
-              class="dropdown-menu dropdown-color"
-              aria-labelledby="navbarDropdown"
-            >
-              <li><a class="dropdown-item" href="#">Homepage #1</a></li>
-              <li><a class="dropdown-item" href="#">Homepage #2</a></li>
-              <li><a class="dropdown-item" href="#">Homepage #3</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink='/books'>BOOKSTORE</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">BLOG</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              VC ADD-ONS
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Vc add-ons #1</a></li>
-              <li><a class="dropdown-item" href="#">Vc add-ons #2</a></li>
-              <li><a class="dropdown-item" href="#">Vc add-ons #3</a></li>
-              <li><a class="dropdown-item" href="#">Vc add-ons #4</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">CONTACT</a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link active bi bi-basket icon"
-              aria-current="page"
-               routerLink="/shoppingcart" routerLinkActive="active"
-            >
-              <span class="amount">3</span>
-            </a>
-          </li>
-        </ul>
+  <div class="container-fluid d-flex">
+    <a class="navbar-brand flex-fill me-5" href="#">
+      <div class="float-end">
+        <h1 class="text m-0">Bookie</h1>
+        <small>Just another WordPress site</small>
       </div>
-      <div class="dropdown mr-3" *ngIf="(currentUser$ | async) as user" dropdown>
-        <img src="{{user.image || '/assets/user.png'}}" alt="{{user.photoUrl}}">
-        <a class="dropdown-toggle text-info  ml-3" dropdownToggle>Xin chào {{user.fullName | titlecase}}</a>
-        <div class="dropdown-menu mt-3" *dropdownMenu>
-          <a class="dropdown-item" routerLink="user/edit">Thông tin</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="logout()">Đăng xuất</a>
-        </div>
-      </div>
-      <div *ngIf="(currentUser$ | async) === null">
-        <a routerLink="/login">
-          <button class="btn btn-link mr-2" style='text-decoration:none;'>Đăng nhập</button>
-        </a>
-        <a routerLink="/register">
-          <button class="btn btn-outline-primary">Đăng ký</button>
-        </a>
+    </a>
+    <div class="collapse navbar-collapse flex-fill ms-5" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+        <li class="nav-item dropdown">
+          <a class="nav-link active" aria-current="page" routerLink='/books'>HOME</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink='/books'>BOOKSTORE</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">BLOG</a>
+        </li>
+        <li class="nav-item dropdown" *appHasRole='["Admin"]'>
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            ADMIN
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/admin/books">List Book</a></li>
+            <!-- <li><a class="dropdown-item" href="#">Vc add-ons #3</a></li>
+            <li><a class="dropdown-item" href="#">Vc add-ons #4</a></li> -->
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">CONTACT</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active bi bi-basket icon" aria-current="page" routerLink="/shoppingcart"
+            routerLinkActive="active">
+            <span class="amount">3</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="dropdown mr-3" *ngIf="(currentUser$ | async) as user" dropdown>
+      <img src="{{user.image || '/assets/user.png'}}" alt="{{user.photoUrl}}">
+      <a class="dropdown-toggle text-info  ml-3" dropdownToggle>Xin chào {{user.fullName | titlecase}}</a>
+      <div class="dropdown-menu mt-3" *dropdownMenu>
+        <a class="dropdown-item" routerLink="user/edit">Thông tin</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" (click)="logout()">Đăng xuất</a>
       </div>
     </div>
-  </nav>
-  
+    <div *ngIf="(currentUser$ | async) === null">
+      <a routerLink="/login">
+        <button class="btn btn-link mr-2" style='text-decoration:none;'>Đăng nhập</button>
+      </a>
+      <a routerLink="/register">
+        <button class="btn btn-outline-primary">Đăng ký</button>
+      </a>
+    </div>
+  </div>
+</nav>

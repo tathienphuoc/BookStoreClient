@@ -14,3 +14,18 @@
     display: flex;
     position: relative;
   }
+  .img-fluid {
+    max-width: 100px;
+    max-height: 150px;
+  }
+  .btn-upload {
+    color: #3f3f3f;
+    border-radius: 50px;
+    line-height: 20px;
+    letter-spacing: 1px;
+    background-color: #dddddd;
+  }
+  .btn-upload:hover {
+    background-color: #2f2b35;
+    color: #dddddd;
+  }

@@ -28,19 +28,19 @@
         <div class="col">
             <div class="book-card">
                 <img class="book-card-img"
-                    src="https://demo.tokopress.com/bookie/wp-content/uploads/sites/7/2016/06/book-23-250x333.jpg"
+                    src="{{book.image || '.assets/default.png'}}"
                     alt="" />
                 <p class="sale-icon">Sale!</p>
                 <div class="book-card-body">
-                    <h2>Lyrics of the Lalala Musical</h2>
-                    <span>Saifudin A.</span>
+                    <h2>{{book.title}}</h2>
+                    <span>{{book.title}}</span>
                     <div class="price-box">
-                        <span class="price-text"><del>$3.00</del>$2.00</span>
+                        <span class="price-text"><del>$3.00</del>{{book.price}}</span>
                     </div>
                 </div>
                 <div class="book-card-btn">
                     <a href="" class="btn btn-detail"><em class="bi bi-dash-square-fill"></em>DETAIL</a>
-                    <a href="" class="btn btn-buy"><em class="bi bi-cart-fill"></em>BUY</a>
+                    <a routerLink='/admin/books' (click)="deleteBook(book.id)" class="btn btn-buy"><em class="bi bi-cart-fill"></em>DETELE</a>
                 </div>
             </div>
         </div>

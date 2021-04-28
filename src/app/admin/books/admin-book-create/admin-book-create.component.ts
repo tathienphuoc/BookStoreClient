@@ -10,6 +10,10 @@ import { BookService } from 'src/app/_services/book.service';
 import { CategoryService } from 'src/app/_services/category.service';
 import { PublisherService } from 'src/app/_services/publisher.service';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FileUploader } from 'ng2-file-upload';
+import { environment } from 'src/environments/environment';
+import { take } from 'rxjs/operators';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-admin-book-create',
@@ -17,28 +21,35 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Valida
   styleUrls: ['./admin-book-create.component.css']
 })
 export class AdminBookCreateComponent implements OnInit {
-fieldName: string;
-formCreateBook: FormGroup;
-book: Book;
-categories: Category[];
-authors: Author[];
-publishers: Publisher[];
-bookCreate : BookCreate;
-category: string;
-validationErrors: string[] = [];
+  fileToUpload: File = null;
+  hasBaseDropzoneOver = false;
+  baseUrl = environment.apiUrl;
+  formCreateBook: FormGroup;
+  book: Book;
+  categories: Category[];
+  authors: Author[];
+  publishers: Publisher[];
+  bookCreate : BookCreate;
+  category: string;
+  user: User;
+  validationErrors: string[] = [];
   constructor(private bookService: BookService, private accountService: AccountService, 
     private categoryService: CategoryService, private authorService:AuthorService,
     private publisherService: PublisherService, private fb: FormBuilder) { 
+      this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
       this.bookCreate = new BookCreate();
     }
 
   ngOnInit(): void {
-    console.log(this.fieldName);
     this.initializeFrom();
     this.loadAuthors();
     this.loadCategories();
     this.loadPublishers();
   }
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+}
 
   initializeFrom() {
     this.formCreateBook = this.fb.group({
@@ -52,9 +63,8 @@ validationErrors: string[] = [];
       categoryId: new FormArray([]),
       authorId: new FormArray([]),
       order_ReceiptId: new FormArray([]),
-      publisherId: [''],
-      image:['']
-    })
+      publisherId: new FormControl(null)
+    });
   }
 
   changePublisher(e) {
@@ -127,13 +137,29 @@ validationErrors: string[] = [];
     })
   }
   submitForm() {
-    console.log(this.formCreateBook.value);
-    // console.log(this.category);
-    this.bookService.addBook(this.formCreateBook.value).subscribe(response => {
+    const formData = new FormData();
+    formData.append('title', this.formCreateBook.get('title').value);
+    formData.append('isbn', this.formCreateBook.get('isbn').value);
+    formData.append('price', this.formCreateBook.get('price').value);
+    formData.append('discount', this.formCreateBook.get('discount').value);
+    formData.append('summary', this.formCreateBook.get('summary').value);
+    formData.append('quantityInStock', this.formCreateBook.get('quantityInStock').value);
+    formData.append('publicationDate', this.formCreateBook.get('publicationDate').value);
+    for (let cate of this.formCreateBook.get('categoryId').value) {
+      formData.append('categoryId', cate);
+    }
+    for (let author of this.formCreateBook.get('authorId').value) {
+      formData.append('authorId', author);
+    }
+    for (let order of this.formCreateBook.get('order_ReceiptId').value) {
+      formData.append('authorId', order);
+    }
+    formData.append('publisherId', this.formCreateBook.get('publisherId').value);
+    formData.append('image', this.fileToUpload);
+      this.bookService.addBook(formData).subscribe(response => {
       console.log(response);
     }, error => {
       this.validationErrors = error;
-      console.log(error);
     })
   }
 }

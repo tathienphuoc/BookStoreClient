@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Author } from 'src/app/models/author';
 import { Book } from 'src/app/models/book';
+import { AuthorService } from 'src/app/_services/author.service';
 import { BookService } from 'src/app/_services/book.service';
 
 @Component({
@@ -10,7 +12,11 @@ import { BookService } from 'src/app/_services/book.service';
 })
 export class AdminBookCardComponent implements OnInit {
   @Input() book: Book;
-  constructor(private bookService: BookService, private route: Router) { }
+  @Input() author: Author;
+
+  @Output() update = new EventEmitter();
+
+  constructor(private bookService: BookService, private route: Router, private authorService: AuthorService) { }
 
   ngOnInit(): void {
   }
@@ -18,7 +24,7 @@ export class AdminBookCardComponent implements OnInit {
   deleteBook(bookId: number) {
     this.bookService.deleteBook(bookId).subscribe(response=> {
       console.log(response);
-      this.route.navigateByUrl('/admin/books');
+      this.update.emit();
     })
   }
 }

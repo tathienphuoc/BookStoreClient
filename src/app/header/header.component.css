@@ -23,6 +23,7 @@ opacity: 0.8;
 .dropdown-menu {
 background-color: #26c4e6;
 color: white;
+margin-right: 10px;
 }
 .dropdown-item {
 color: white;

@@ -24,19 +24,14 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.accountService.login(this.model).subscribe(response=>{
-      this.toastr.success("Đăng nhập thành công")
-      this.router.navigateByUrl('/');
+      this.toastr.success("Đăng nhập thành công") 
+      window.location.href='/';
     })
   }
   register() {
     this.router.navigateByUrl('register');
   }
-  logout() {
-    this.router.navigateByUrl('/');
-    this.accountService.logout();
-  }
   cancel() {
     this.router.navigateByUrl('/');
   }
-
 }

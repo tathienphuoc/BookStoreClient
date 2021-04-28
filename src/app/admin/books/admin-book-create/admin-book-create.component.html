@@ -4,55 +4,65 @@
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-1 col-form-label">Title</label>
                 <div class="col-sm-8">
-                    <app-text-input [formControl]='formCreateBook.controls["title"]' [label]='"Title"'></app-text-input>                
+                    <app-text-input [formControl]='formCreateBook.controls["title"]' [label]='"Title"'></app-text-input>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-1 col-form-label">ISBN</label>
                 <div class="col-sm-8">
-                    <app-text-input [formControl]='formCreateBook.controls["isbn"]' [label]='"ISBN"'></app-text-input>                
+                    <app-text-input [formControl]='formCreateBook.controls["isbn"]' [label]='"ISBN"'></app-text-input>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-1 col-form-label">Price</label>
                 <div class="col-sm-8">
-                    <app-text-input [formControl]='formCreateBook.controls["price"]' [label]='"Price"'></app-text-input>                
+                    <app-text-input [formControl]='formCreateBook.controls["price"]' [label]='"Price"'></app-text-input>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-1 col-form-label">Summary</label>
                 <div class="col-sm-8">
-                    <textarea class="col-sm-12" [formControl]='formCreateBook.controls["summary"]'></textarea>
-                    <!-- <div *ngIf="ngControl.control.errors?.required" class="invalid-feedback">Vui lòng điền {{label}}</div>                 -->
+                    <app-text-input [formControl]='formCreateBook.controls["summary"]' [label]='"Summary"'>
+                    </app-text-input>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-1 col-form-label">Discount</label>
                 <div class="col-sm-8">
-                    <app-text-input [formControl]='formCreateBook.controls["discount"]' [label]='"Discount"'></app-text-input>                
+                    <app-text-input [formControl]='formCreateBook.controls["discount"]' [label]='"Discount"'>
+                    </app-text-input>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-1 col-form-label">Quantity In Stock</label>
                 <div class="col-sm-8">
-                    <app-text-input [formControl]='formCreateBook.controls["quantityInStock"]' [label]='"Quantity In Stock"'></app-text-input>                
+                    <app-text-input [formControl]='formCreateBook.controls["quantityInStock"]'
+                        [label]='"Quantity In Stock"'></app-text-input>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-1 col-form-label">Publication Date</label>
                 <div class="col-sm-8">
-                    <app-text-input [formControl]='formCreateBook.controls["publicationDate"]' [label]='"Publication Date"'></app-text-input>                
+                    <app-text-input [formControl]='formCreateBook.controls["publicationDate"]'
+                        [label]='"Publication Date"'></app-text-input>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-1 col-form-label">Image</label>
+                <div class="col-sm-8">
+                    <img class="img-fluid">
+                    <input type="file"
+                        id="file"
+                        (change)="handleFileInput($event.target.files)">
+
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-sm-2">Các tác giả</div>
                 <div class="col-sm-2" *ngFor="let author of authors">
                     <div class="form-check">
-                        <input class="form-check-input"
-                        name="authors" 
-                        [value]="author.id"
-                        (change)="onCheckAuthorChange($event)"
-                        type="checkbox">
+                        <input class="form-check-input" name="authors" [value]="author.id"
+                            (change)="onCheckAuthorChange($event)" type="checkbox">
                         <label class="form-check-label">
                             {{author.fullName}}
                         </label>
@@ -63,11 +73,8 @@
                 <div class="col-sm-2">Các thể loại</div>
                 <div class="col-sm-2" *ngFor="let category of categories">
                     <div class="form-check">
-                        <input class="form-check-input"
-                        name="categories"
-                        [value]="category.id"
-                        (change)="onCheckChange($event)"
-                        type="checkbox">
+                        <input class="form-check-input" name="categories" [value]="category.id"
+                            (change)="onCheckChange($event)" type="checkbox">
                         <label class="form-check-label">
                             {{category.name}}
                         </label>
@@ -77,10 +84,13 @@
             <div class="form-group row">
                 <div class="col-sm-2">Nhà xuất bản</div>
                 <div class="col-sm-4">
-                    <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" 
-                    (change)="changePublisher($event)" formControlName="publisherId">
-                        <option *ngFor="let publisher of publishers" [ngValue]="publisher.id">{{publisher.name}}</option>
-                      </select>
+                    <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example"
+                        formControlName="publisherId">
+                        <option>Chọn nhà cung cấp</option>
+                        <option *ngFor="let publisher of publishers" [ngValue]="publisher.id">
+                            {{publisher.name}}
+                        </option>
+                    </select>
                 </div>
             </div>
             <div class="form-group row">
