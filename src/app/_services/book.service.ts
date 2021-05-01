@@ -17,6 +17,14 @@ export class BookService {
 
   }
 
+  getAllBook(){
+    return this.http.get<Book[]>(this.baseUrl+"book/all").pipe(
+      map(response => {
+        return response;
+      })
+    )
+  }
+
   getBooks(bookParams: BookParams) {
     // var response = this.bookCache.get(Object.values(bookParams).join('-'));  
     // if (response) {
@@ -37,6 +45,8 @@ export class BookService {
     
     return getPaginationResult<Book[]>(this.baseUrl + 'book/', params, this.http)
       .pipe(map(response => {
+        console.log(response);
+        
         return response;
       }))
     }

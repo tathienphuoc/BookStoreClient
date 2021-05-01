@@ -12,6 +12,8 @@ import { BookParams } from 'src/app/models/bookParams';
 import { ReviewParams } from 'src/app/models/reviewParams';
 import { ReviewService } from 'src/app/_services/review.service';
 import { Review } from 'src/app/models/review';
+import { CategoryService } from 'src/app/_services/category.service';
+import { Category } from 'src/app/models/category';
 
 @Component({
   selector: 'app-book-detail',
@@ -21,6 +23,7 @@ import { Review } from 'src/app/models/review';
 export class BookDetailComponent implements OnInit {
   book: Book;
   books: Book[];
+  categories: Category[];
   authors: Author[];
   reviews: Review[];
   user: User;
@@ -28,7 +31,8 @@ export class BookDetailComponent implements OnInit {
   reviewParams: ReviewParams;
   constructor(private bookService: BookService, private route: ActivatedRoute, 
     private authorService: AuthorService, private accountService: AccountService,
-    private toastr: ToastrService, private reviewService: ReviewService) { 
+    private toastr: ToastrService, private reviewService: ReviewService,
+    private categoryService: CategoryService) { 
       accountService.currentUser$.pipe(take(1)).subscribe(user =>{
         this.user = user;
         this.reviewParams = new ReviewParams(user);
@@ -39,6 +43,16 @@ export class BookDetailComponent implements OnInit {
     this.loadBook();
     this.getReview();
   }
+
+  displayCategory(book: Book) {
+    let name: string[] = [];
+    let categories = book.bookCategories;
+    categories.forEach(element => {
+      name.push(' '+element.category.name);
+    });
+    return name;
+  }
+
   loadBook() {
     this.bookService.getBook(this.route.snapshot.paramMap.get('bookId')).subscribe(book => {
       this.book = book;
@@ -69,6 +83,12 @@ export class BookDetailComponent implements OnInit {
           this.a++;
         }
       }   
+    })
+  }
+
+  loadCategories() {
+    this.categoryService.getCategories().subscribe(response => {
+      this.categories = response;
     })
   }
 }

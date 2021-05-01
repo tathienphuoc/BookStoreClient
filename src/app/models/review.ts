@@ -1,3 +1,4 @@
+import { Book } from "./book";
 import { User } from "./user";
 
 export interface Review {
@@ -7,4 +8,5 @@ export interface Review {
     liked: boolean;
     accountId: number;
     bookId: number;
+    book: Book;
 }

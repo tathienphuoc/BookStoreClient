@@ -2,43 +2,29 @@
     <div class="rank-container d-flex">
   <div class="rank-body">
     <div class="heading">
-      <h1>Bang xep hang Fahasa</h1>
+      <h1>Bảng xếp hạng Bookie</h1>
     </div>
-    <div class="categories">
-      <a class="btn btn-lg active">Van hoc</a>
-      <a class="btn btn-lg">Van hoc</a>
-      <a class="btn btn-lg">Van hoc</a>
-      <a class="btn btn-lg">Van hoc</a>
-      <a class="btn btn-lg">Van hoc</a>
-      <a class="btn btn-lg">Van hoc</a>
-      <a class="btn btn-lg">Van hoc</a>
-      <a class="btn btn-lg">Van hoc</a>
-      <a class="btn btn-lg">Van hoc</a>
-      <a class="btn btn-lg">Van hoc</a>
-      <a class="btn btn-lg">Van hoc</a>
-      <a class="btn btn-lg">Van hoc</a>
-      <a class="btn btn-lg">Van hoc</a>
-      <a class="btn btn-lg">Van hoc</a>
-      <a class="btn btn-lg">Van hoc</a>
-      <a class="btn btn-lg">Van hoc</a>
-    </div>
-    <div class="rank-item d-flex">
+    <div class="categories" >
+      <a class="btn btn-lg active" (click)="changeCategory(0)">Tất cả</a>
+      <a class="btn btn-lg" (click)="changeCategory(category.id)" *ngFor="let category of categories">{{category.name}}</a>
+    </div> 
+    <div routerLink='/books/{{book.id}}' class="rank-item d-flex" *ngFor="let book of books">
       <div class="rank-number">
-        02
+        2
         <em class="bi bi-arrow-down-short d-block"></em>
       </div>
       <img
         alt=""
-        src="https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/400x400/9df78eab33525d08d6e5fb8d27136e95/b/i/bia1_tobinhyen_2_1.jpg"
+        src="{{book.image || '.assets/default.png'}}"
       />
       <div class="vote-info">
-        <div class="name">Tô Bình Yên Vẽ Hạnh Phúc (Tái Bản 2020)</div>
-        <div class="author-name">Kulzsc</div>
-        <div class="vote-text">20355 điểm</div>
+        <div class="name">{{book.title}}</div>
+        <div class="author-name">{{book.authorBooks[0]?.author.fullName || "Tác giả"}}</div>
+        <div class="vote-text" >Số lượt thích {{count(book) | number}}</div>
       </div>
     </div>
 
-    <div class="rank-item d-flex">
+    <!-- <div class="rank-item d-flex">
       <div class="rank-number">
         02
         <em class="bi bi-arrow-up-short d-block"></em>
@@ -52,121 +38,7 @@
         <div class="author-name">Kulzsc</div>
         <div class="vote-text">20355 điểm</div>
       </div>
-    </div>
-
-    <div class="rank-item d-flex">
-      <div class="rank-number">
-        02
-        <em class="bi bi-arrow-down-short d-block"></em>
-      </div>
-      <img
-        alt=""
-        src="https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/400x400/9df78eab33525d08d6e5fb8d27136e95/b/i/bia1_tobinhyen_2_1.jpg"
-      />
-      <div class="vote-info">
-        <div class="name">Tô Bình Yên Vẽ Hạnh Phúc (Tái Bản 2020)</div>
-        <div class="author-name">Kulzsc</div>
-        <div class="vote-text">20355 điểm</div>
-      </div>
-    </div>
-
-    <div class="rank-item d-flex">
-      <div class="rank-number">
-        02
-        <em class="bi bi-arrow-down-short d-block"></em>
-      </div>
-      <img
-        alt=""
-        src="https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/400x400/9df78eab33525d08d6e5fb8d27136e95/b/i/bia1_tobinhyen_2_1.jpg"
-      />
-      <div class="vote-info">
-        <div class="name">Tô Bình Yên Vẽ Hạnh Phúc (Tái Bản 2020)</div>
-        <div class="author-name">Kulzsc</div>
-        <div class="vote-text">20355 điểm</div>
-      </div>
-    </div>
-
-    <div class="rank-item d-flex">
-      <div class="rank-number">
-        02
-        <em class="bi bi-arrow-down-short d-block"></em>
-      </div>
-      <img
-        alt=""
-        src="https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/400x400/9df78eab33525d08d6e5fb8d27136e95/b/i/bia1_tobinhyen_2_1.jpg"
-      />
-      <div class="vote-info">
-        <div class="name">Tô Bình Yên Vẽ Hạnh Phúc (Tái Bản 2020)</div>
-        <div class="author-name">Kulzsc</div>
-        <div class="vote-text">20355 điểm</div>
-      </div>
-    </div>
-
-    <div class="rank-item d-flex">
-      <div class="rank-number">
-        02
-        <em class="bi bi-arrow-down-short d-block"></em>
-      </div>
-      <img
-        alt=""
-        src="https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/400x400/9df78eab33525d08d6e5fb8d27136e95/b/i/bia1_tobinhyen_2_1.jpg"
-      />
-      <div class="vote-info">
-        <div class="name">Tô Bình Yên Vẽ Hạnh Phúc (Tái Bản 2020)</div>
-        <div class="author-name">Kulzsc</div>
-        <div class="vote-text">20355 điểm</div>
-      </div>
-    </div>
-
-    <div class="rank-item d-flex">
-      <div class="rank-number">
-        02
-        <em class="bi bi-arrow-down-short d-block"></em>
-      </div>
-      <img
-        alt=""
-        src="https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/400x400/9df78eab33525d08d6e5fb8d27136e95/b/i/bia1_tobinhyen_2_1.jpg"
-      />
-      <div class="vote-info">
-        <div class="name">Tô Bình Yên Vẽ Hạnh Phúc (Tái Bản 2020)</div>
-        <div class="author-name">Kulzsc</div>
-        <div class="vote-text">20355 điểm</div>
-      </div>
-    </div>
-
-    <div class="rank-item d-flex">
-      <div class="rank-number">
-        02
-        <em class="bi bi-arrow-down-short d-block"></em>
-      </div>
-      <img
-        alt=""
-        src="https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/400x400/9df78eab33525d08d6e5fb8d27136e95/b/i/bia1_tobinhyen_2_1.jpg"
-      />
-      <div class="vote-info">
-        <div class="name">Tô Bình Yên Vẽ Hạnh Phúc (Tái Bản 2020)</div>
-        <div class="author-name">Kulzsc</div>
-        <div class="vote-text">20355 điểm</div>
-      </div>
-    </div>
-
-    <div class="rank-item d-flex">
-      <div class="rank-number">
-        02
-        <em class="bi bi-arrow-down-short d-block"></em>
-      </div>
-      <img
-        alt=""
-        src="https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/400x400/9df78eab33525d08d6e5fb8d27136e95/b/i/bia1_tobinhyen_2_1.jpg"
-      />
-      <div class="vote-info">
-        <div class="name">Tô Bình Yên Vẽ Hạnh Phúc (Tái Bản 2020)</div>
-        <div class="author-name">Kulzsc</div>
-        <div class="vote-text">20355 điểm</div>
-      </div>
-    </div>
-
-    
+    </div> -->
   </div>
 </div>
 
