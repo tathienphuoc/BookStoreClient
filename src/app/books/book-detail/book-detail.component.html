@@ -7,8 +7,8 @@
         <div class="product-detail">
           <h1 class="lead">{{book.title}}</h1>
           <span class="rating">
-            <button class="btn btn-outline-primary" (click)='addLike()'>
-              <em class="bi bi-suit-heart"></em><span class="rating-text" >{{a}} điểm. Bình chọn ngay</span>
+            <button class="btn btn-outline-primary" (click)='addLike(book.id)'>
+              <em class="bi bi-suit-heart"></em><span class="rating-text" >{{count(book)}} điểm. Bình chọn ngay</span>
             </button>
           </span>
           <p>
@@ -26,17 +26,18 @@
           </div>
           <div class="product-categories">
             <span>Categories:</span> {{displayCategory(book)}} <br />
-            <span>Publisher:</span> Spartan S & S<br />
-            <span>Released:</span> July 2013
+            <span>Publisher:</span> {{book.publisher.name}}<br />
+            <span>Co-author:</span> {{displayAuthors(book)}}<br />
+            <span>Released:</span> {{book.publicationDate}}
           </div>
         </div>
       </div>
-      <div *ngFor="let author of authors" class="detail-section">
-        <img src="https://demo.tokopress.com/bookie/wp-content/uploads/sites/7/2016/06/author-02.jpg" alt="" />
-        <h4>{{author.fullName}}</h4>
+      <div class="detail-section">
+        <img src="{{book.authorBooks[0].author.image}}" alt="" />
+        <h4>{{book.authorBooks[0].author.fullName}}</h4>
         <div class="dash"></div>
         <div class="bio">
-          {{author.biography}}
+          {{book.authorBooks[0].author.biography}}
         </div>
       </div>
       <div class="review-section">

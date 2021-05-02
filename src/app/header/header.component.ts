@@ -11,15 +11,21 @@ import { AccountService } from '../_services/account.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  public href: string = "";
   model : any = {}
-  
+  visible = false;
 
   currentUser$: Observable<User>;
   constructor(private accountService : AccountService, private router: Router,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.href = this.router.url;
     this.currentUser$ = this.accountService.currentUser$;
+    if (this.href === "/") {
+      this.visible = true;
+    }
+    
   }
 
   logout() {

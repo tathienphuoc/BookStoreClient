@@ -1,25 +1,98 @@
 <div class="carousel slide carousel-fade" id="myCarousel" data-bs-ride="carousel">
+  <div class="header-container container-fluid">
+    <nav class="navbar navbar-expand-lg header">
+      <div class="container-fluid d-flex">
+        <a class="navbar-brand flex-fill me-5" href="#">
+          <div class="float-end">
+            <h1 class="text m-0">Bookie</h1>
+            <small>Just another WordPress site</small>
+          </div>
+        </a>
+        <div class="collapse navbar-collapse flex-fill ms-5" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link active" aria-current="page" routerLink='/home'>HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" routerLink='/books'>BOOKSTORE</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" routerLink='/rank'>RANK</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">BLOG</a>
+            </li>
+            <li class="nav-item dropdown" *appHasRole='["Admin"]'>
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                ADMIN
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/admin/books">List Book</a></li>
+                <li><a class="dropdown-item" href="/admin/books/create">Create Book</a></li>
+                <!-- <li><a class="dropdown-item" href="#">Vc add-ons #3</a></li>
+                <li><a class="dropdown-item" href="#">Vc add-ons #4</a></li> -->
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">CONTACT</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active bi bi-basket icon" aria-current="page" routerLink="/shoppingcart"
+                routerLinkActive="active">
+                <span class="amount">3</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="dropdown mr-3" *ngIf="(currentUser$ | async) as user" dropdown>
+          <img src="{{user.image || '/assets/user.png'}}" alt="{{user.photoUrl}}">
+          <a class="dropdown-toggle text-info  ml-3" dropdownToggle>Xin chào {{user.fullName | titlecase}}</a>
+          <div class="dropdown-menu mt-3" *dropdownMenu>
+            <a class="dropdown-item" routerLink="user/edit">Thông tin</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="logout()">Đăng xuất</a>
+          </div>
+        </div>
+        <div *ngIf="(currentUser$ | async) === null">
+          <a routerLink="/login">
+            <button class="btn btn-link mr-2" style='text-decoration:none;'>Đăng nhập</button>
+          </a>
+          <a routerLink="/register">
+            <button class="btn btn-outline-primary">Đăng ký</button>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+  </div>
   <ol class="carousel-indicators">
     <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
     <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
     <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
   </ol>
   <div class="carousel-inner">
-    <div class="carousel-item active" style="background-image: url(https://demo.tokopress.com/bookie/wp-content/uploads/sites/7/2016/06/slider-01.jpg);">
+    <div class="carousel-item active" style="
+        background-image: url(https://demo.tokopress.com/bookie/wp-content/uploads/sites/7/2016/06/slider-01.jpg);
+      ">
       <div class="container">
         <p>Reading is the best for get idea</p>
         <h1>Keep Reading</h1>
         <a href="" class="btn see-more-btn hover">See more</a>
       </div>
     </div>
-    <div class="carousel-item" style="background-image: url(https://demo.tokopress.com/bookie/wp-content/uploads/sites/7/2016/06/slider-02.jpg);">
+    <div class="carousel-item" style="
+        background-image: url(https://demo.tokopress.com/bookie/wp-content/uploads/sites/7/2016/06/slider-02.jpg);
+      ">
       <div class="container">
         <p>Writing to improve your imagination</p>
         <h1>Let's Writing</h1>
         <a href="" class="btn see-more-btn hover">See more</a>
       </div>
     </div>
-    <div class="carousel-item" style="background-image: url(https://demo.tokopress.com/bookie/wp-content/uploads/sites/7/2016/06/slider-03.jpg);">
+    <div class="carousel-item" style="
+        background-image: url(https://demo.tokopress.com/bookie/wp-content/uploads/sites/7/2016/06/slider-03.jpg);
+      ">
       <div class="container">
         <p>Reading is the best for get idea</p>
         <h1>Start Reading</h1>

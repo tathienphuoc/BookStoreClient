@@ -17,4 +17,8 @@ export class PublisherService {
         return response;
       }))
   }
+
+  getPublisher(id: number) {
+    return this.http.get<Publisher>(this.baseUrl + 'publisher/' + id);
+  }
 }

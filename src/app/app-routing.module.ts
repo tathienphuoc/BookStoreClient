@@ -28,7 +28,6 @@ const routes: Routes = [
       {path: 'admin/books/create', component: AdminBookCreateComponent, canActivate: [AdminGuard]},
       {path: 'shoppingcart', component: ShoppingcartComponent },
       {path: 'rank', component: RankComponent },
-      { path: 'admin/books/create', component: AdminBookCreateComponent },
       { path: 'shoppingcart', component: ShoppingcartComponent },
       {path:'checkout',component:CheckoutComponent}
 
@@ -37,7 +36,7 @@ const routes: Routes = [
       // {path: 'lists', component: ListsComponent},
     ]
   },
-  {path: '**', component: HomeComponent, pathMatch: 'full'}
+  {path: '**', redirectTo: '/'}
 ];
 
 @NgModule({

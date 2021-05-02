@@ -6,4 +6,5 @@ export interface Author {
     biography: string;
     image: string;
     books: Book[]
+    author: Author;
 }

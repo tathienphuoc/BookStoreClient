@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="book-card-btn">
-                    <a href="" class="btn btn-detail"><em class="bi bi-dash-square-fill"></em>DETAIL</a>
+                    <a routerLink='/admin/books/edit/{{book.id}}' class="btn btn-detail"><em class="bi bi-dash-square-fill"></em>EDIT</a>
                     <a routerLink='/admin/books' (click)="deleteBook(book.id)" class="btn btn-buy"><em class="bi bi-cart-fill"></em>DETELE</a>
                 </div>
             </div>

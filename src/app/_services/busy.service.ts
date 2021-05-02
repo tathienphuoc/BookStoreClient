@@ -20,10 +20,12 @@ export class BusyService {
   }
 
   idle() {
-    this.busyRequestCount--;
-    if (this.busyRequestCount <= 0) {
-      this.busyRequestCount = 0;
-      this.spinnerService.hide();
-    }
+    setTimeout(() => {
+      this.busyRequestCount--;
+      if (this.busyRequestCount <= 0) {
+        this.busyRequestCount = 0;
+        this.spinnerService.hide();
+      }
+    }, 500);
   }
 }

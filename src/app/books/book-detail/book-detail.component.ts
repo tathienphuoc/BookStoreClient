@@ -14,6 +14,7 @@ import { ReviewService } from 'src/app/_services/review.service';
 import { Review } from 'src/app/models/review';
 import { CategoryService } from 'src/app/_services/category.service';
 import { Category } from 'src/app/models/category';
+import { PublisherService } from 'src/app/_services/publisher.service';
 
 @Component({
   selector: 'app-book-detail',
@@ -28,11 +29,12 @@ export class BookDetailComponent implements OnInit {
   reviews: Review[];
   user: User;
   a = 0;
+  name: string = '';
   reviewParams: ReviewParams;
   constructor(private bookService: BookService, private route: ActivatedRoute, 
     private authorService: AuthorService, private accountService: AccountService,
     private toastr: ToastrService, private reviewService: ReviewService,
-    private categoryService: CategoryService) { 
+    private categoryService: CategoryService, private publisherService: PublisherService) { 
       accountService.currentUser$.pipe(take(1)).subscribe(user =>{
         this.user = user;
         this.reviewParams = new ReviewParams(user);
@@ -43,12 +45,37 @@ export class BookDetailComponent implements OnInit {
     this.loadBook();
     this.getReview();
   }
-
+  role() {
+    let role = this.user.roles.toString();    
+    return role;
+  }
   displayCategory(book: Book) {
     let name: string[] = [];
     let categories = book.bookCategories;
     categories.forEach(element => {
       name.push(' '+element.category.name);
+    });
+    return name;
+  }
+  displayPublisher() {
+    return this.name
+  }
+
+  count(book: Book) {
+    return book.reviews.length;
+  }
+  
+  loadplsher(id: number) {
+    this.publisherService.getPublisher(id).subscribe(response=> {
+      this.name = response.name;
+    })
+  }
+
+  displayAuthors(book: Book) {
+    let name: string[] = [];
+    let authors = book.authorBooks;
+    authors.slice(1).forEach(element => {
+      name.push(' '+element.author.fullName);
     });
     return name;
   }
@@ -60,6 +87,7 @@ export class BookDetailComponent implements OnInit {
       
       this.reviewParams.bookId = book.id;
       this.loadAuthorByBook(book.id);
+      this.loadplsher(book.publisherId);
     })
   }
   loadAuthorByBook(id: number) {
@@ -67,9 +95,10 @@ export class BookDetailComponent implements OnInit {
       this.authors = authors;
     })
   }
-  addLike() {
+  addLike(id:number) {
     this.reviewService.addLike(this.reviewParams).subscribe(() =>{
       this.toastr.success("Bạn đã thích sách " + this.book.title);
+      location.href="books/"+id;
     }, error => {
       this.toastr.error(error.error);
     })
@@ -77,12 +106,6 @@ export class BookDetailComponent implements OnInit {
   getReview() {
     this.reviewService.getReviews().subscribe(reviews => {
       this.reviews = reviews;   
-      for (let index = 0; index < reviews.length; index++) {
-        let element = reviews[index];
-        if (element.bookId == this.book.id) {
-          this.a++;
-        }
-      }   
     })
   }
 

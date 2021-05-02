@@ -1,0 +1,133 @@
+
+/* // Slideshow */
+.carousel{
+  position: relative;
+}
+.carousel-item {
+  height: 600px;
+  background-color: black;
+  color: white;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+.container {
+  position: absolute;
+  bottom: 20%;
+  left: 5%;
+  right: 0;
+  padding-bottom: 50px;
+}
+.overlay-image {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  opacity: 0.5;
+}
+h1 {
+  color: #ffffff;
+  font-size: 75px;
+  font-weight: normal;
+  line-height: 1;
+  text-transform: capitalize;
+  padding: 4px 0 18px 0px;
+}
+.container p {
+  font-family: "PT Serif", serif;
+  font-size: 21px;
+  font-style: italic;
+  line-height: 1;
+  margin: 0;
+}
+.see-more-btn {
+  height: 50px;
+  width: 150px;
+  border: none;
+  background-color: #2f2b35;
+  color: white;
+  border-radius: 50px;
+  font-size: 20px;
+  line-height: 40px;
+  font-family: "Montserrat", sans-serif;
+}
+.hover:hover {
+  background-color: #5a5462;
+}
+
+
+/* // Header */
+
+.header-container{
+  z-index: 100;
+  position: absolute;
+}
+nav {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.header {
+  height: 130px;
+}
+.header h1{
+  font-size: 55px;
+  padding-bottom: 0;
+}
+.header h1,
+small {
+  color: white;
+}
+div > ul > li {
+  font-size: 15px;
+  padding: 15px;
+}
+div > ul > li > a {
+  color: white;
+}
+.dropdown-item:hover,
+div > ul > li > a:hover {
+  opacity: 0.8;
+}
+.dropdown-menu {
+  background-color: #26c4e6;
+  color: white;
+}
+.dropdown-item {
+  color: white;
+  background-color: #26c4e6;
+  padding: 7px 20px;
+  width: 200px;
+}
+small {
+  font-size: 13px;
+}
+.icon {
+  font-size: 30px;
+  line-height: 30px;
+  padding: 0;
+}
+.amount {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  line-height: 1;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: center;
+  background-color: #777;
+  border-radius: 10px;
+}
+
+.dropdown-toggle, .dropdown-item{
+    cursor: pointer;
+    }
+    
+    img {
+        max-height: 30px;
+        border: 1px solid #fff;
+        display: inline;
+    }
+

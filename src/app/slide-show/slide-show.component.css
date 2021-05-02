@@ -1,53 +1,56 @@
+/* // Slideshow */
+.carousel{
+  position: relative;
+}
 .carousel-item {
-    height: 600px;
-    background-color: black;
-    color: white;
-    background-position: center;
-    background-size: cover;
-    position: relative;
-  }
-  .container {
-    position: absolute;
-    bottom: 20%;
-    left: 5%;
-    right: 0;
-    padding-bottom: 50px;
-  }
-  .overlay-image {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    opacity: 0.5;
-  }
-  h1 {
-    color: #ffffff;
-    font-size: 75px;
-    font-weight: normal;
-    line-height: 1;
-    text-transform: capitalize;
-    padding: 4px 0 18px 0px;
-  }
-  .container p {
-    font-family: "PT Serif", serif;
-    font-size: 21px;
-    font-style: italic;
-    line-height: 1;
-    margin: 0;
-  }
-  .see-more-btn {
-    height: 50px;
-    width: 150px;
-    border: none;
-    background-color: #2f2b35;
-    color: white;
-    border-radius: 50px;
-    font-size: 20px;
-    line-height: 40px;
-    font-family: "Montserrat", sans-serif;
-  }
-  .hover:hover {
-    background-color: #5a5462;
-  }
-  
+  height: 600px;
+  background-color: black;
+  color: white;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+.container {
+  position: absolute;
+  bottom: 20%;
+  left: 5%;
+  right: 0;
+  padding-bottom: 50px;
+}
+.overlay-image {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  opacity: 0.5;
+}
+h1 {
+  color: #ffffff;
+  font-size: 75px;
+  font-weight: normal;
+  line-height: 1;
+  text-transform: capitalize;
+  padding: 4px 0 18px 0px;
+}
+.container p {
+  font-family: "PT Serif", serif;
+  font-size: 21px;
+  font-style: italic;
+  line-height: 1;
+  margin: 0;
+}
+.see-more-btn {
+  height: 50px;
+  width: 150px;
+  border: none;
+  background-color: #2f2b35;
+  color: white;
+  border-radius: 50px;
+  font-size: 20px;
+  line-height: 40px;
+  font-family: "Montserrat", sans-serif;
+}
+.hover:hover {
+  background-color: #5a5462;
+}
