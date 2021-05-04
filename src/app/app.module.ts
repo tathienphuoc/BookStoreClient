@@ -12,6 +12,7 @@ import { ToastrModule } from "ngx-toastr";
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
@@ -89,6 +90,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
     NgSelectModule,
     MatCardModule,
     MatButtonModule,
+    NgMultiSelectDropDownModule.forRoot(),
     PaginationModule
   ],
   providers: [

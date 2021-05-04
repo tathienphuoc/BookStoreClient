@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Book } from '../models/book';
@@ -21,6 +22,15 @@ export class BookService {
     return this.http.get<Book[]>(this.baseUrl+"book/all").pipe(
       map(response => {
         return response;
+      })
+    )
+  }
+
+  updateBook(book: Book) {
+    return this.http.put(this.baseUrl + 'book/', book).pipe(
+      map(()=>{
+        const index = this.books.indexOf(book);
+        this.books[index] =  book;
       })
     )
   }
@@ -51,7 +61,7 @@ export class BookService {
       }))
     }
 
-  getBook(bookId: string) {
+  getBook(bookId: string): Observable<Book> {
     return this.http.get<Book>(this.baseUrl+'book/'+bookId).pipe(
       map(response => {
         return response;
