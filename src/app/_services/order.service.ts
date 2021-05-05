@@ -23,4 +23,12 @@ export class OrderService {
         return response;
       }))
   }
+
+  createOrder(model: any) {
+    return this.Http.post(this.baseUrl + "order_receipt/", model).pipe(
+      map(response => {
+        return response;
+      })
+    )
+  }
 }

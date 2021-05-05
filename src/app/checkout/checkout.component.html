@@ -14,10 +14,10 @@
                         <div class="row g-5">
                             <div class="col-md-5 col-lg-4 order-md-last">
                             </div>
-                            <div class="col-md-7 col-lg-8">
+                            <div class="col-md-7 col-lg-8" *ngIf="items != null">
 
                                 <h1 class="mb-3">Billing details</h1>
-                                <form class="needs-validation" novalidate>
+                                <form [formGroup]="orderForm" class="needs-validation">
                                     <div class="row g-3">
                                         <!-- <div class="col-sm-6">
                                             <label for="firstName" class="form-label text-muted">First name <strong
@@ -38,90 +38,19 @@
                                                 Valid last name is required.
                                             </div>
                                         </div> -->
-                                    <div class="col-12">
-                                        <label for="address2" class="form-label text-muted">Full Name <strong style="color: red;">*</strong> <span
-                                                class="text-muted"></span></label>
-                                        <input type="text" class="form-control" id="address2" placeholder="House number and street name"
-                                            value="{{user.fullName}}">
-                                        <br>
-                                        <input type="text" class="form-control" id="address2" placeholder="Apartment,suite or unit">
-                                    </div>
-
-
                                         <div class="col-12">
-                                            <label for="username" class="form-label text-muted">Company name (optional)
-                                                <strong style="color: red;">*</strong></label>
-                                            <div class="input-group has-validation">
-                                                <!-- <span class="input-group-text"></span> -->
-                                                <input type="text" class="form-control" id="companyname"
-                                                    placeholder="Company name" required>
-                                                <div class="invalid-feedback">
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            <label for="country" class="form-label text-muted">Country/Region <strong
-                                                    style="color: red;">*</strong></label>
-                                            <select class="form-select" id="country" required>
-                                                <option value="">Choose...</option>
-                                                <option>United States</option>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                Please select a valid country.
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <label for="address2" class="form-label text-muted">Street Address <strong
+                                            <label for="address2" class="form-label text-muted">Full Name <strong
                                                     style="color: red;">*</strong> <span
                                                     class="text-muted"></span></label>
-                                            <input type="text" class="form-control" id="address2"
-                                                placeholder="House number and street name"
-                                                value="{{user.homeAddress}}">
+                                            <input formControlName="fullName" type="text" class="form-control" id="address2"
+                                                placeholder="House number and street name" value="{{user.fullName}}">
                                             <br>
-                                            <input type="text" class="form-control" id="address2"
-                                                placeholder="Apartment,suite or unit">
                                         </div>
-
-                                        <!-- <div class="col-md-5">
-                            <label for="country" class="form-label">Country</label>
-                            <select class="form-select" id="country" required>
-                                <option value="">Choose...</option>
-                                <option>United States</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please select a valid country.
-                            </div>
-                        </div> -->
-                                        <div class="col-12">
-                                            <label for="address2" class="form-label text-muted">Town City <strong
-                                                    style="color: red;">*</strong> <span
-                                                    class="text-muted"></span></label>
-                                            <input type="text" class="form-control" id="address2" placeholder="">
-
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="address2" class="form-label text-muted">Country <strong
-                                                    style="color: red;">*</strong> <span
-                                                    class="text-muted"></span></label>
-                                            <input type="text" class="form-control" id="address2" placeholder="">
-
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="address2" class="form-label text-muted">Post code <strong
-                                                    style="color: red;">*</strong> <span
-                                                    class="text-muted"></span></label>
-                                            <input type="text" class="form-control" id="address2" placeholder="">
-
-                                        </div>
-
                                         <div class="col-12">
                                             <label for="address2" class="form-label text-muted">Phone<strong
                                                     style="color: red;">*</strong> <span
                                                     class="text-muted"></span></label>
-                                            <input type="text" class="form-control" id="address2" placeholder=""
+                                            <input formControlName="phone" type="text" class="form-control" id="address2" placeholder=""
                                                 value="{{user.phoneNumber}}">
 
                                         </div>
@@ -130,7 +59,7 @@
                                             <label for="address2" class="form-label text-muted">Email<strong
                                                     style="color: red;">*</strong> <span
                                                     class="text-muted"></span></label>
-                                            <input type="text" class="form-control" id="address2" placeholder=""
+                                            <input formControlName="email" type="text" class="form-control" id="address2" placeholder=""
                                                 value="{{user.email}}">
 
                                         </div>
@@ -146,9 +75,10 @@
                                             <label for="card-element">
                                                 Credit card or debit card
                                             </label>
-                                            <div id="card-element">
-                                                <!-- Stripe elements insert heare -->
-                                            </div>
+                                                <label for="address2" class="form-label text-muted">Email<strong style="color: red;">*</strong> <span
+                                                        class="text-muted"></span></label>
+                                                <input formControlName="cardNumber" type="text" class="form-control" id="address2" placeholder="" value="">
+                                            
 
 
                                             <!-- display form errors-->
@@ -159,7 +89,7 @@
 
 
                                         <button type="submit" style="border-radius: 20px; width: 100%;height: auto; "
-                                            class="btn btn-outline-dark">Complete Order</button>
+                                            class="btn btn-outline-dark" (click)="createOrder()">Complete Order</button>
 
 
 

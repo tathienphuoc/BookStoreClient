@@ -7,35 +7,60 @@ import { take } from 'rxjs/operators';
 import { User } from '../models/user';
 import { Item } from '../models/item';
 import { ShoppingCartUpdate } from '../models/shoppingCartUpdate';
+// import { loadStripe } from '@stripe/stripe-js';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OrderCreate } from '../models/orderCreate';
+import { OrderService } from '../_services/order.service';
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent {
 
 
-
+  orderForm: FormGroup;
   user: User;
   cart: Cart;
-  items: Item[];
+  items: Item[] = [];
   books: Book[];
-
-  params: ShoppingCartUpdate;
-  constructor(private cartService: CartService, private accountService: AccountService) {
+  constructor(private cartService: CartService, private accountService: AccountService,
+    private fb: FormBuilder, private orderService: OrderService) {
     accountService.currentUser$.pipe(take(1)).subscribe(user => {
       this.user = user;
       console.log(user);
-
     });
-    this.params = new ShoppingCartUpdate();
+  }
+  
+
+  async ngOnInit() {
+    // const stripe = await loadStripe('pk_test_51InEfmFUXuaVDPZFYcahVXD2oe1pQyOsVOFAvHvGOZunjYrxN8GRd2v2aNNxL5GvBMTEbbyIJG8iDTtkH01EfJ4n00LCzkuKTV');
+    // this.loadCart();
+    // this.loadUser();
+    // this.initialForm();
   }
 
-  ngOnInit(): void {
-    this.loadCart();
-    this.loadUser();
+  initialForm() {
+    this.orderForm = this.fb.group({
+      fullName: ['', Validators.required],
+      phone: ['', Validators.required],
+      email: ['', Validators.required],
+      cardNumber: ['', Validators.required],
+    });
+  }
 
-    // console.log( countCart[bookId]);
+  createOrder() {
+    let orderDto = new OrderCreate()
+    orderDto.fullName = this.orderForm.get('fullName').value;
+    orderDto.email = this.orderForm.get('email').value;
+    orderDto.phone = this.orderForm.get('phone').value;
+    orderDto.cardNumber = this.orderForm.get('cardNumber').value;
+    orderDto.items = this.items;
+    this.orderService.createOrder(orderDto).subscribe(response => {
+      console.log(response);
+    })
+    location.href="books/"
   }
 
   loadCart() {
