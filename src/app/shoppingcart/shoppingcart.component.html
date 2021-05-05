@@ -27,7 +27,7 @@
                     </div>
                 </td>
                 <td >{{item.unitPrice}}</td>
-                <td><button (click)="addToCart()" >Add</button> <input type="number" #quantity (change)="changeQuantity(cart.id, item.id, quantity.value)" value="{{item.quantity}}" min="1" /> <button>Delete</button> </td>
+                <td> <input type="number" #quantity (change)="changeQuantity(cart.id, item.id, quantity.value)" value="{{item.quantity}}" min="1" />  </td>
                 <td>{{item.totalPrice}}</td>
             </tr>
             <!-- <tr>
