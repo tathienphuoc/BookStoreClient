@@ -14,6 +14,8 @@ import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
 import { take } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-admin-book-create',
@@ -21,6 +23,12 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./admin-book-create.component.css']
 })
 export class AdminBookCreateComponent implements OnInit {
+  listCategories = [];
+  listAuthors = [];
+  selectedCategories = [] ;
+  selectedAuthors = [];
+  dropdownSettings:IDropdownSettings ={};
+  dropdownAuthorSettings: IDropdownSettings = {};
   fileToUpload: File = null;
   hasBaseDropzoneOver = false;
   baseUrl = environment.apiUrl;
@@ -35,7 +43,8 @@ export class AdminBookCreateComponent implements OnInit {
   validationErrors: string[] = [];
   constructor(private bookService: BookService, private accountService: AccountService, 
     private categoryService: CategoryService, private authorService:AuthorService,
-    private publisherService: PublisherService, private fb: FormBuilder) { 
+    private publisherService: PublisherService, private fb: FormBuilder,
+    private toastr: ToastrService) { 
       this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
       this.bookCreate = new BookCreate();
     }
@@ -45,6 +54,20 @@ export class AdminBookCreateComponent implements OnInit {
     this.loadAuthors();
     this.loadCategories();
     this.loadPublishers();
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name',
+      itemsShowLimit:3,
+      allowSearchFilter: true
+    };
+    this.dropdownAuthorSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'fullName',
+      itemsShowLimit:3,
+      allowSearchFilter: true
+    };
   }
 
   handleFileInput(files: FileList) {
@@ -60,18 +83,70 @@ export class AdminBookCreateComponent implements OnInit {
       summary: ['',Validators.required],
       quantityInStock: ['',Validators.required],
       publicationDate: ['',Validators.required],
-      categoryId: new FormArray([]),
-      authorId: new FormArray([]),
+      categoryId: ['', Validators.required],
+      authorId: ['', Validators.required],
       order_ReceiptId: new FormArray([]),
       publisherId: new FormControl(null)
     });
   }
+  onItemDeSelectAuthor (item: any) {
+    let index = this.selectedAuthors.indexOf(item);
+    this.selectedAuthors.splice(index, 1);
+    if (this.selectedAuthors.length == 0) {
+      this.toastr.error("Choose at least one author");
+    }
+    console.log(this.selectedAuthors);
+  }
+  onItemSelectAuthor(item: any) {    
+    this.selectedAuthors.push(item.id);
+    console.log(this.selectedAuthors);
+  }
+  onSelectAllAuthor(items: any) {
+    items.forEach(element => {
+      this.selectedAuthors.push(element.id);
+    });
+    console.log(this.selectedAuthors);
+  }
+  onDeSelectAllAuthor(items: any) {
+    this.selectedAuthors = [];
+    if(this.selectedAuthors.length == 0) {
+      this.toastr.error("Choose at least one category");
+    }
+    console.log(this.selectedAuthors);
+  }
 
+  onItemDeSelectCategory (item: any) {
+    let index = this.selectedCategories.indexOf(item);
+    this.selectedCategories.splice(index, 1);
+    if (this.selectedCategories.length == 0) {
+      this.toastr.error("Choose at least one author");
+    }
+    console.log(this.selectedCategories);
+  }
+  onItemSelectCategory(item: any) {    
+    this.selectedCategories.push(item.id);
+    console.log(this.selectedCategories);
+  }
+  onSelectAllCategory(items: any) {
+    items.forEach(element => {
+      this.selectedCategories.push(element.id);
+    });
+    console.log(this.selectedCategories);
+  }
+  onDeSelectAllCategory(items: any) {
+    this.selectedCategories = [];
+    if(this.selectedCategories.length == 0) {
+      this.toastr.error("Choose at least one category");
+    }
+    console.log(this.selectedCategories);
+  }
   changePublisher(e) {
     this.formCreateBook.get('publisherId').setValue(e.target.value, {
       onlySelf: true
     })
   }
+
+  
 
   onCheckChange(event) {
     const formArray: FormArray = this.formCreateBook.get('categoryId') as FormArray;
@@ -121,15 +196,13 @@ export class AdminBookCreateComponent implements OnInit {
     }
   }
 
-  loadCategories() {
-    this.categoryService.getCategories().subscribe(response => {
-      this.categories = response;
-    })
+  async loadCategories() {
+    const result = await this.categoryService.getCategories().toPromise();   
+    this.listCategories = result;
   }
-  loadAuthors() {
-    this.authorService.getAuthors().subscribe(response => {
-      this.authors = response;
-    })
+  async loadAuthors() {
+    const result = await this.authorService.getAuthors().toPromise();   
+    this.listAuthors = result;
   }
   loadPublishers() {
     this.publisherService.getPublishers().subscribe(response => {
@@ -144,18 +217,17 @@ export class AdminBookCreateComponent implements OnInit {
     formData.append('discount', this.formCreateBook.get('discount').value);
     formData.append('summary', this.formCreateBook.get('summary').value);
     formData.append('quantityInStock', this.formCreateBook.get('quantityInStock').value);
-    formData.append('publicationDate', this.formCreateBook.get('publicationDate').value);
-    for (let cate of this.formCreateBook.get('categoryId').value) {
-      formData.append('categoryId', cate);
-    }
-    for (let author of this.formCreateBook.get('authorId').value) {
-      formData.append('authorId', author);
-    }
+    formData.append('publicationDate', this.formCreateBook.get('publicationDate').value);    
+    formData.append('categoryId',JSON.stringify(this.selectedCategories));
+    formData.append('authorId',JSON.stringify(this.selectedAuthors));
+    
     for (let order of this.formCreateBook.get('order_ReceiptId').value) {
-      formData.append('authorId', order);
+      formData.append('order_ReceiptId', order);
     }
     formData.append('publisherId', this.formCreateBook.get('publisherId').value);
-    formData.append('image', this.fileToUpload);
+    formData.append('image', this.fileToUpload); 
+    console.log(formData);
+       
       this.bookService.addBook(formData).subscribe(response => {
       console.log(response);
     }, error => {

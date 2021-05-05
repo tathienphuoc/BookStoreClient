@@ -97,7 +97,6 @@ opacity: 2;
 .close:before, .close:after {
   position: absolute;
   left: 120px;
-  content: ' ';
   height: 10px;
   width: 2px;
   background-color:red;
