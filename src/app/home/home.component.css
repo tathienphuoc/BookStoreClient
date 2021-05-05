@@ -1,6 +1,5 @@
-
 /* // Slideshow */
-.carousel{
+.carousel {
   position: relative;
 }
 .carousel-item {
@@ -56,10 +55,9 @@ h1 {
   background-color: #5a5462;
 }
 
-
 /* // Header */
 
-.header-container{
+.header-container {
   z-index: 100;
   position: absolute;
 }
@@ -69,7 +67,7 @@ nav {
 .header {
   height: 130px;
 }
-.header h1{
+.header h1 {
   font-size: 55px;
   padding-bottom: 0;
 }
@@ -121,13 +119,28 @@ small {
   border-radius: 10px;
 }
 
-.dropdown-toggle, .dropdown-item{
-    cursor: pointer;
-    }
-    
-    img {
-        max-height: 30px;
-        border: 1px solid #fff;
-        display: inline;
-    }
+.dropdown-toggle,
+.dropdown-item {
+  cursor: pointer;
+}
+
+img {
+  max-height: 30px;
+  border: 1px solid #fff;
+  display: inline;
+}
+
+.btn-link {
+  color: white !important;
+  cursor: pointer;
+}
+.btn-outline-primary:hover,
+.btn-link:hover {
+  opacity: 0.9;
+}
+.btn-outline-primary {
+  border: 1px solid white;
+ background-color: transparent !important;
+ color: white;
+}
 

@@ -73,6 +73,8 @@ export class BookService {
   }
 
   addBook(model: any) {
+    console.log(model.get('categoryId'));
+    
     const httpOptions = {
       headers: new HttpHeaders({
           'Content-Disposition': 'multipart/form-data'
