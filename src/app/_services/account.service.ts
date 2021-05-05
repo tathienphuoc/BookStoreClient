@@ -22,6 +22,12 @@ export class AccountService {
       })
     )
   }
+  getUser(id: number) {
+    return this.http.get<User>(this.baseUrl + "account/register" + id).pipe(
+      map(response => {
+        return response;
+      }))
+  }
 
   login(model: any) {
     return this.http.post(this.baseUrl + 'account/login', model).pipe(
