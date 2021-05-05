@@ -20,7 +20,7 @@ import { PublisherService } from 'src/app/_services/publisher.service';
 export class AdminBookEditComponent implements OnInit, AfterViewInit {
 listCategories = [];
 listAuthors = [];
-selectedCategories:object[]  = [] ;
+selectedCategories = [] ;
 selectedAuthors = [];
 dropdownSettings:IDropdownSettings ={};
 dropdownAuthorSettings: IDropdownSettings = {};
@@ -32,7 +32,7 @@ authors: Author[];
 categories: Category[];
 publishers: Publisher[];
 formCreateBook: FormGroup;
-@HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
+@HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {  
   if (this.editForm.dirty) {
     $event.returnValue = true;
   }
@@ -50,24 +50,15 @@ formCreateBook: FormGroup;
 
   async ngOnInit() {   
     await this.loadBook();
-    console.log('a', this.selectedCategories);
-
-    // this.selectedCategories=[{
-    //   id:2,
-    //   name:"hello"
-    // }];
-    console.log('b', this.selectedCategories);
+    console.log(this.book);
+    
     this.loadCategories();
     this.loadAuthors();
-    setTimeout(() => {
-      
-    }, 5000);
+    this.loadPublishers();
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'id',
       textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All', 
       itemsShowLimit:3,
       allowSearchFilter: true
     };
@@ -75,54 +66,55 @@ formCreateBook: FormGroup;
       singleSelection: false,
       idField: 'id',
       textField: 'fullName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All', 
       itemsShowLimit:3,
       allowSearchFilter: true
     };
   } 
   onItemDeSelectCategory (item: any) {
-    let index = this.selectedCategories.indexOf(item.id);
-    this.selectedCategories.splice(index, 1);
+    if (this.selectedCategories.length == 0) {
+      this.toastr.error("Choose at least one category");
+    }
   }
   onItemSelectCategory(item: any) {    
-    this.selectedCategories.push(item);
-    console.log(this.selectedCategories);
-    
+    console.log("select",this.selectedCategories);
   }
   onSelectAllCategory(items: any) {
     items.forEach(element => {
       this.selectedCategories.push(element.id);
     });
+    console.log("selectAll",this.selectedCategories);
   }
-  onDeSelectAllCategory() {
+  onDeSelectAllCategory(items: any) {
     this.selectedCategories = [];
+    if(this.selectedCategories.length == 0) {
+      this.toastr.error("Choose at least one category");
+    }
+    console.log("DeSelectAll",this.selectedCategories);
   }
 
   onItemDeSelectAuthor (item: any) {
-    let index = this.selectedAuthors.indexOf(item.id);
-    this.selectedAuthors.splice(index, 1);
-    console.log(this.selectedAuthors);
+    if (this.selectedAuthors.length == 0) {
+      this.toastr.error("Choose at least one author");
+    }
   }
-  onItemSelectAuthor(item: any) {
-    this.selectedAuthors.push(item.id);
-    console.log(this.selectedAuthors);
+  onItemSelectAuthor(item: any) {    
   }
   onSelectAllAuthor(items: any) {
     items.forEach(element => {
       this.selectedAuthors.push(element.id);
     });
-    console.log(this.selectedAuthors);
   }
-  onDeSelectAllAuthor() {
+  onDeSelectAllAuthor(items: any) {
     this.selectedAuthors = [];
-    console.log(this.selectedAuthors);
-    
+    if(this.selectedAuthors.length == 0) {
+      this.toastr.error("Choose at least one category");
+    }
   }
   
   async loadBook() {
     console.log("Truoc khi load");
-    
+    let categories = [];
+    let authors = [];
     const result = await this.bookService.getBook(this.route.snapshot.paramMap.get('bookId')).toPromise()
     
     result.bookCategories.forEach(e=>{
@@ -130,10 +122,21 @@ formCreateBook: FormGroup;
         id: e.category.id,
         name: e.category.name
       }
-      this.selectedCategories.push(a);
+      categories.push(a);
     })
-    console.log('c', this.selectedCategories);
-    return this.selectedCategories;
+    this.selectedCategories = categories;
+
+    result.authorBooks.forEach(e=> {
+      let a = {
+        id: e.author.id,
+        fullName: e.author.fullName
+      }
+      authors.push(a);
+    })
+    this.selectedAuthors = authors;
+    this.book = result;
+    this.imageSrc = result.image;
+
     // .subscribe(book => {
     //   book.bookCategories.forEach(e=>{
     //     let a = {
@@ -144,8 +147,6 @@ formCreateBook: FormGroup;
     //     console.log("loadbook" + this.selectedCategories);
         
     //   })
-    //   this.book = book;
-    //   this.imageSrc = book.image;
     //   book.authorBooks.forEach(e=>{
     //     this.selectedAuthors.push(e.author);
     //   })
@@ -153,13 +154,37 @@ formCreateBook: FormGroup;
   }
 
   updateBook() {
+    const formData = new FormData();  
+    formData.append('id', this.book.id.toString());    
+    formData.append('title', this.book.title);
+    formData.append('price', this.book.price.toString());
+    formData.append('isbn', this.book.isbn);
+    formData.append('discount', this.book.discount.toString());
+    formData.append('publicationDate', this.book.publicationDate);
+    formData.append('publisherId', this.book.publisherId.toString());
+    formData.append('quantityInStock', this.book.quantityInStock.toString());
+    formData.append('summary', this.book.summary.toString());
+    for (let cate of this.selectedCategories) {
+      formData.append('categoryId', cate.id);
+    }
+    for (let author of this.selectedAuthors) {
+      formData.append('authorId', author.id);
+    } 
+    if (this.fileToUpload != null) {
+      formData.append('image', this.fileToUpload);
+    }
+    this.bookService.updateBook(formData).subscribe(res => {
+      console.log(res);
+    })
     console.log(this.book);
   }
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
   }  
-  
+  onSelectedChange(event: any) {
+    this.book.publisherId = event as number;
+  }
   readURL(event: any): void {
     if (event.target.files && event.target.files[0]) {
         const file = event.target.files[0];
@@ -167,10 +192,12 @@ formCreateBook: FormGroup;
         const reader = new FileReader();
         reader.onload = () => {
           this.imageSrc = reader.result as string;
-          this.book.image = file;
+          this.fileToUpload = file;
         }
         reader.readAsDataURL(file);
     }
+    console.log(this.imageSrc, this.book.image);
+    
 }
 
   loadCategories() {

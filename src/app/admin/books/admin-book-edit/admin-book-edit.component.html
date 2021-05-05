@@ -1,29 +1,94 @@
 <div class="layout">
-    <div class="book-detail-container">
-        <!-- <div class="col-8">
-            <div class="alert alert-warning" *ngIf="formEditBook.dirty">
+    <div class="book-detail-container" *ngIf="book">
+        <div class="col-12">
+            <div class="alert alert-warning" *ngIf="editForm.dirty">
                 <strong>Chú ý: Thông tin đã được chỉnh sửa. Thông tin chỉnh sửa sẽ mất nếu không được lưu</strong>
             </div>
-        </div> -->
-        <!-- <form #editForm='ngForm' id='editForm' (ngSubmit)="updateBook()">
-            <div class="form-group row">
-                <div class="col-sm-2">Các thể loại</div>
-                <div class="col-sm-6"> -->
-                    <!-- <div hidden>{{this.selectedCategories[0].id}}</div> -->
-                    <div>
-                        <ng-multiselect-dropdown
-                        [placeholder]="'custom placeholder'"
-                        [settings]="dropdownSettings"
-                        [data]="listCategories"
-                        [(ngModel)]="selectedCategories"
-                        (onSelect)="onItemSelectCategory($event)"
-                        (onSelectAll)="onSelectAllCategory($event)"
-                      >
-                      </ng-multiselect-dropdown>
+        </div>
+        <form #editForm='ngForm' id='editForm' (ngSubmit)="updateBook()">
+            <div class="row">
+                <div class="col-7">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Title</label>
+                        <input type="text" name="title" [(ngModel)]="book.title" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">ISBN</label>
+                        <input type="text" name="isbn" [(ngModel)]="book.isbn" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Price</label>
+                        <input type="text" name="price" [(ngModel)]="book.price" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Summary</label>
+                        <input type="text" name="summary" [(ngModel)]="book.summary" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Quantity In Stock</label>
+                        <input type="text" name="quantityInStock" [(ngModel)]="book.quantityInStock" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Discount</label>
+                        <input type="text" name="discount" [(ngModel)]="book.discount" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" />
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-2">Các thể loại</div>
+                        <div class="col-sm-10">
+                            <div>
+                                <ng-multiselect-dropdown [placeholder]="'Choose Category'" [settings]="dropdownSettings"
+                                    [data]="listCategories" [(ngModel)]="selectedCategories" name="selectedCategories"
+                                    (onSelect)="onItemSelectCategory($event)" (onSelectAll)="onSelectAllCategory($event)"
+                                    (onDeSelect)="onItemDeSelectCategory($event)"
+                                    (onDeSelectAll)="onDeSelectAllCategory($event)">
+                                </ng-multiselect-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-2">Các tác giả</div>
+                        <div class="col-sm-10">
+                            <div>
+                                <ng-multiselect-dropdown [placeholder]="'Choose Author'" [settings]="dropdownAuthorSettings"
+                                    [data]="listAuthors" [(ngModel)]="selectedAuthors"
+                                    name="selectedAuthors"
+                                    (onSelect)="onItemSelectAuthor($event)"
+                                    (onSelectAll)="onSelectAllAuthor($event)" (onDeSelect)="onItemDeSelectAuthor($event)"
+                                    (onDeSelectAll)="onDeSelectAllAuthor($event)">
+                                </ng-multiselect-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-2">Nhà xuất bản</div>
+                        <div class="col-sm-10">
+                            <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example"
+                                [(ngModel)]="book.publisherId" name="publisherId">
+                                <option *ngFor="let publisher of publishers" [value]="publisher.id">
+                                    {{publisher.name}}
+                                </option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                      <!-- </div>
+                <div class="col-5">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Image</label>
+                        <img [src]="imageSrc" alt="" srcset="">
+                    </div>   
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Image</label>
+                        <input type="file" name="image" [(ngModel)]="book.image" (change)="readURL($event)" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" />
+                    </div>     
                 </div>
             </div>
-        </form> -->
+            <button class="btn btn-success" [disabled]=!editForm.dirty>Edit</button>
+        </form>
     </div>

@@ -40,7 +40,7 @@ export class BookListComponent implements OnInit {
   loadBooks() {
     this.bookService.getBooks(this.bookParams).subscribe(response => {
         this.books = response.result;
-        this.pagination = response.pagination;
+        this.pagination = response.pagination;        
     })
   }
   loadAuthors() {

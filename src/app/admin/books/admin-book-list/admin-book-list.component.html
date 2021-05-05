@@ -27,7 +27,7 @@
 </div>
 <div class="container">
     <div class="row">
-            <app-admin-book-card class="col-3" (update)="ngOnInit()" [book]="book" *ngFor="let book of books; let i=index"></app-admin-book-card>
+            <app-admin-book-card routerLink='/admin/books/edit/{{book.id}}' class="col-3" (update)="ngOnInit()" [book]="book" *ngFor="let book of books; let i=index"></app-admin-book-card>
     </div>
 </div>
 <div class="d-flex justify-content-lg-center" *ngIf="pagination!= undefined">

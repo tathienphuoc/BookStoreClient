@@ -13,6 +13,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { RankComponent } from './rank/rank.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
       {path: 'login', component: LoginComponent},
       {path: 'books', component: BookListComponent},
       {path: 'books/:bookId', component: BookDetailComponent},
-      {path: 'admin/books/edit/:bookId', component: AdminBookEditComponent, canActivate: [AdminGuard]}, 
+      {path: 'admin/books/edit/:bookId', component: AdminBookEditComponent, canActivate: [AdminGuard], canDeactivate: [PreventUnsavedChangesGuard]}, 
       {path: 'admin/books', component: AdminBookListComponent, canActivate: [AdminGuard]},
       {path: 'admin/books/create', component: AdminBookCreateComponent, canActivate: [AdminGuard]},
       {path: 'shoppingcart', component: ShoppingcartComponent },

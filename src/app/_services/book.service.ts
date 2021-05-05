@@ -26,11 +26,15 @@ export class BookService {
     )
   }
 
-  updateBook(book: Book) {
-    return this.http.put(this.baseUrl + 'book/', book).pipe(
-      map(()=>{
-        const index = this.books.indexOf(book);
-        this.books[index] =  book;
+  updateBook(model: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+          'Content-Disposition': 'multipart/form-data'
+      })
+    };
+    return this.http.put(this.baseUrl + 'book/', model, httpOptions).pipe(
+      map(response=>{
+        return response;
       })
     )
   }

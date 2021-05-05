@@ -1,9 +1,9 @@
 <div class="container d-flex justify-content-center">
     <div class="row float-start">
         <div class="col">
-            <div class="book-card">
+            <div class="book-card" *ngIf="book != undefined">
                <input type="hidden" formControle="" id="">
-                <img class="book-card-img" src="{{book.image || '.assets/default.png'}}" />
+                <img class="book-card-img" src="{{book.image || './assets/default.png'}}" />
                 <p class="sale-icon">Sale!</p>
                 <div class="book-card-body">
                     <h2>{{book.title}}</h2>
