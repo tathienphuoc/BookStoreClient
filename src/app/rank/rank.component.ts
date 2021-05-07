@@ -75,6 +75,10 @@ export class RankComponent implements OnInit, AfterViewInit {
   count(book: Book) {
     return book.reviews.length;
   }
+  showRank() {
+    let a = 2;
+    return a++;
+  }
   countLike(reviews: Review[], bookId: number) {
     var output = 0;
     reviews.forEach((e) => {

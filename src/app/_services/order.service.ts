@@ -9,6 +9,7 @@ import { ShoppingCartParam } from '../models/shoppingcartParam';
 import { User } from '../models/user';
 import { Cart } from '../models/cart';
 import { ShoppingCartUpdate } from '../models/shoppingCartUpdate';
+import { OrderRecipts } from '../models/orderRecipts';
 @Injectable({
   providedIn: 'root'
 })
@@ -25,9 +26,17 @@ export class OrderService {
   }
 
   createOrder(model: any) {
-    return this.Http.post(this.baseUrl + "order_receipt/", model).pipe(
+    return this.Http.post(this.baseUrl + "OrderReceipt/", model).pipe(
       map(response => {
         return response;
+      })
+    )
+  }
+
+  getOrders() {
+    return this.Http.get<OrderRecipts[]>(this.baseUrl+'OrderReceipt/').pipe(
+      map(res => {
+        return res;
       })
     )
   }

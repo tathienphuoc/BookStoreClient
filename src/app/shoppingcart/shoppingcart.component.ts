@@ -7,6 +7,8 @@ import { take } from 'rxjs/operators';
 import { User } from '../models/user';
 import { Item } from '../models/item';
 import { ShoppingCartUpdate } from '../models/shoppingCartUpdate';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-shoppingcart',
   templateUrl: './shoppingcart.component.html',
@@ -23,7 +25,8 @@ export class ShoppingcartComponent implements OnInit {
   items: Item[];
   books: Book[];
   params: ShoppingCartUpdate;
-  constructor(private cartService: CartService, private accountService: AccountService) {
+  constructor(private cartService: CartService, private accountService: AccountService,
+              private toastr: ToastrService, private route: Router) {
     this.params = new ShoppingCartUpdate();
    }
 
@@ -61,17 +64,19 @@ export class ShoppingcartComponent implements OnInit {
     })
   }
 
-  // addToCart(accountId: number, book: Book) {
-  //   this.bookIds.push(book);
-  //   this.cartService.addToCart(accountId, this.bookIds).subscribe(response => {
-  //     window.location.href = '/shoppingcart';
-  //     console.log(response);
-  //   })
-  // }
+  orderLink() {
+    if (this.items.length == 0) {
+      this.toastr.error("Mua hàng trươc khi thanh toán");
+    } else {
+      location.href="/checkout";
+    }
+  }
 
-
-  
-
-
-
+  showTotalPrice() {
+    let total = 0;
+    this.items?.forEach(element => {
+      total = total + element.totalPrice;
+    });
+    return total;
+  }
 }

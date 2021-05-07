@@ -1,0 +1,46 @@
+.container-fluid {
+    height: 540px;
+    background-color: #edf3f4;
+  }
+  .row {
+    padding: 0 15px;
+  }
+  .col {
+    border-radius: 10px;
+    background-color: white;
+    padding: 45px 50px 20px;
+    height: 418px;
+    width: 1050px;
+  }
+  h1 {
+    font-size: 24px;
+  }
+.breadcrumb-container {
+    height: 150px;
+    background-color: #515570;
+    color: white;
+    text-align: center;
+  }
+  .breadcrumb-body {
+    margin: auto;
+  }
+  .breadcrumb-body h1 {
+    font-size: 50px;
+    line-height: 60px;
+    text-transform: capitalize;
+  }
+  .breadcrumb-body .path {
+    font-style: italic;
+    line-height: 20px;
+  }
+  .path span {
+    margin-left: 5px;
+  }
+  a {
+    font-size: 15px;
+    text-decoration: none;
+    color: white;
+  }
+  a:hover {
+    color: #28cdf0;
+  }

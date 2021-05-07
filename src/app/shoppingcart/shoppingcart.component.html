@@ -84,7 +84,7 @@
                         <strong>Subtotal</strong>
 
                     </div>
-                    <span class="text-muted">$12</span>
+                    <span class="text-muted">$ {{showTotalPrice()}}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
@@ -105,7 +105,7 @@
 
 
 
-                <a href="#" class="btn btn-outline-dark" routerLink="/checkout" routerLinkActive="active"
+                <a class="btn btn-outline-dark" (click)="orderLink()"
                     style="border-radius: 20px;width: 100%;">Proceed To
                     Checkout</a>
             </div>

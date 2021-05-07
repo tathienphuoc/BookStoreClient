@@ -30,12 +30,12 @@
                 <img class="book-card-img"
                     src="{{book.image || './assets/default.png'}}"
                     alt="" />
-                <p class="sale-icon">Sale!</p>
+                <p class="sale-icon" *ngIf="book.discount != 0">Sale!</p>
                 <div class="book-card-body">
                     <h2>{{book.title}}</h2>
-                    <span>{{book.title}}</span>
+                    <span>{{showAuthor(book)}}</span>
                     <div class="price-box">
-                        <span class="price-text"><del>$3.00</del>{{book.price}}</span>
+                        <span class="price-text"><del *ngIf="book.discount !=0 ">${{book.price}}</del>${{showPrice(book)}}</span>
                     </div>
                 </div>
                 <div class="book-card-btn">

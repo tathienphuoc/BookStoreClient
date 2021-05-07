@@ -13,6 +13,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { DataTablesModule } from "angular-datatables";
+
 
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
@@ -44,6 +46,7 @@ import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { HasRoleDirective } from './_directive/has-role.directive';
 import { RankComponent } from './rank/rank.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { AdminOrderListComponent } from './admin/admin-order-list/admin-order-list.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +71,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
     ShoppingcartComponent,
     HasRoleDirective,
     RankComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    AdminOrderListComponent
   ],
   imports: [
     BrowserModule,
@@ -91,7 +95,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
     MatCardModule,
     MatButtonModule,
     NgMultiSelectDropDownModule.forRoot(),
-    PaginationModule
+    PaginationModule,
+    DataTablesModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

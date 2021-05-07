@@ -20,7 +20,17 @@ export class AdminBookCardComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  showPrice(book: Book){
+    if(book.discount == 0) {
+      return book.price;
+    } else {
+      return Number((book.price * book.discount).toFixed(1)); ;
+    }
+  }
+  showAuthor (book: Book) {
+    const author = book.authorBooks[0].author.fullName;
+    return author;
+  }
   deleteBook(bookId: number) {
     this.bookService.deleteBook(bookId).subscribe(response=> {
       console.log(response);

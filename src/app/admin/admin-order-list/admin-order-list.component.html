@@ -1,0 +1,35 @@
+<div class="breadcrumb-container d-flex">
+    <div class="breadcrumb-body">
+        <h1>Order Manage</h1>
+        <div class="path">
+            <a href="/">Home</a>
+            <span>/ OrderManage</span>
+        </div>
+    </div>
+</div>
+<div class="container-fluid d-flex">
+    <div class="row m-auto flex-1">
+        <div class="col">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Customer name</th>
+                        <th>Phone</th>
+                        <th>Total price</th>
+                        <th>Status order</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of orders">
+                        <td>{{ order.createdAt | date}}</td>
+                        <td>{{ order.fullName }}</td>
+                        <td>{{ order.phone}}</td>
+                        <td>$ {{ order.totalPrice}}</td>
+                        <td>{{ order.totalPrice}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

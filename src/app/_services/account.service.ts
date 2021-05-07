@@ -23,7 +23,7 @@ export class AccountService {
     )
   }
   getUser(id: number) {
-    return this.http.get<User>(this.baseUrl + "account/register" + id).pipe(
+    return this.http.get<User>(this.baseUrl + "users/" + id).pipe(
       map(response => {
         return response;
       }))
@@ -40,12 +40,13 @@ export class AccountService {
     )
   }
 
-  setCurrentUser(user: User) {    
-    user.roles = [];
-    const roles = this.getDecodedToken(user.token).role;
-    user.roles = roles;
-    localStorage.setItem('user', JSON.stringify(user));
-    this.currentUserSource.next(user);
+  setCurrentUser(user: User) {     
+    if (user != null) {
+      const roles = this.getDecodedToken(user.token).role;
+      user.roles = roles;
+      localStorage.setItem('user', JSON.stringify(user));
+      this.currentUserSource.next(user);
+    }
   }
 
   logout() {

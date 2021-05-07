@@ -14,6 +14,7 @@ import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { RankComponent } from './rank/rank.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
+import { AdminOrderListComponent } from './admin/admin-order-list/admin-order-list.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {
@@ -27,11 +28,12 @@ const routes: Routes = [
       {path: 'admin/books/edit/:bookId', component: AdminBookEditComponent, canActivate: [AdminGuard], canDeactivate: [PreventUnsavedChangesGuard]}, 
       {path: 'admin/books', component: AdminBookListComponent, canActivate: [AdminGuard]},
       {path: 'admin/books/create', component: AdminBookCreateComponent, canActivate: [AdminGuard]},
+      {path: 'admin/orders', component: AdminOrderListComponent, canActivate: [AdminGuard]},
       {path: 'shoppingcart', component: ShoppingcartComponent },
       {path: 'rank', component: RankComponent },
-      { path: 'shoppingcart', component: ShoppingcartComponent },
-      {path:'checkout',component:CheckoutComponent}
-
+      {path: 'shoppingcart', component: ShoppingcartComponent },
+      {path:'checkout',component:CheckoutComponent},
+      
       // {path: 'members/:username', component: MemberDetailComponent},
       // {path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard]},
       // {path: 'lists', component: ListsComponent},

@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from './models/user';
 import { AccountService } from './_services/account.service';
+import {AtomSpinnerModule} from 'angular-epic-spinners'
+
 
 @Component({
   selector: 'app-root',
