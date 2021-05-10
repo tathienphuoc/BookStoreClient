@@ -249,3 +249,24 @@ hr {
     animation: fa-blink 1.5s linear infinite;
     color: rgb(1, 189, 42);
 }
+.StripeElement {
+  background-color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #060d25;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+  }
+  
+  .StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #2f4e6d;
+  }
+  
+  .StripeElement--invalid {
+  border-color: #fa755a;
+  }
+  
+  .StripeElement--webkit-autofill {
+  background-color: #475e91 !important;
+  }

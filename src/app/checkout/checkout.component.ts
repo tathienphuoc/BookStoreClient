@@ -1,119 +1,201 @@
-import { Component, OnInit } from '@angular/core';
-import { Book } from '../models/book';
-import { CartService } from '../_services/cart.service';
-import { Cart } from '../models/cart';
-import { AccountService } from '../_services/account.service';
-import { take } from 'rxjs/operators';
-import { User } from '../models/user';
-import { Item } from '../models/item';
-import { ShoppingCartUpdate } from '../models/shoppingCartUpdate';
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Book } from "../models/book";
+import { CartService } from "../_services/cart.service";
+import { Cart } from "../models/cart";
+import { AccountService } from "../_services/account.service";
+import { take } from "rxjs/operators";
+import { User } from "../models/user";
+import { Item } from "../models/item";
+import { ShoppingCartUpdate } from "../models/shoppingCartUpdate";
 // import { loadStripe } from '@stripe/stripe-js';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { OrderCreate } from '../models/orderCreate';
-import { OrderService } from '../_services/order.service';
-import { Observable } from 'rxjs';
-import { stringify } from '@angular/compiler/src/util';
-import * as util from 'util' // has no default export
-import { inspect } from 'util' // or directly
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  NgModel,
+  Validators,
+} from "@angular/forms";
+import { OrderCreate } from "../models/orderCreate";
+import { OrderService } from "../_services/order.service";
+import { Observable } from "rxjs";
+import { stringify } from "@angular/compiler/src/util";
+import * as util from "util"; // has no default export
+import { inspect } from "util"; // or directly
+import { environment } from "src/environments/environment";
+import { OrderRecipts } from "../models/orderRecipts";
+import { Router } from "@angular/router";
 
-
-
+declare var Stripe;
 @Component({
-  selector: 'app-checkout',
-  templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.css']
+  selector: "app-checkout",
+  templateUrl: "./checkout.component.html",
+  styleUrls: ["./checkout.component.css"],
 })
 export class CheckoutComponent implements OnInit {
+  @ViewChild("cardNumber") cardNumberElement: ElementRef;
+  @ViewChild("cardExpiry") cardExpiryElement: ElementRef;
+  @ViewChild("cardCvc") cardCvcElement: ElementRef;
 
+  order: OrderRecipts;
+  cardError: any;
+
+  private stripe: any;
+  private cardNumber: any;
+  private cardHandler = this.onChange.bind(this);
+
+  private numberCompleted = false;
+  private expiryCompleted = false;
+  private cvcCompleted = false;
+
+  processing = false;
   orderForm: FormGroup;
   user: User;
   cart: Cart;
   items: Item[] = [];
   books: Book[];
-  constructor(private cartService: CartService, private accountService: AccountService,
-    private fb: FormBuilder, private orderService: OrderService) {
+  constructor(
+    private cartService: CartService,
+    private accountService: AccountService,
+    private fb: FormBuilder,
+    private orderService: OrderService,
+    private router: Router
+  ) {
     let u: User;
-    accountService.currentUser$.pipe(take(1)).subscribe(user => {
+    accountService.currentUser$.pipe(take(1)).subscribe((user) => {
       u = user;
-      console.log("contructor",user);
+      console.log("contructor", user);
     });
     this.user = u;
   }
-  
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+    this.stripe = Stripe(environment.publishableKey);
+    const style = {
+      base: {
+        iconColor: "#666ee8",
+        color: "#31325f",
+        fontWeight: 400,
+        fontFamily:
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
+        fontSmoothing: "antialiased",
+        fontSize: "15px",
+        "::placeholder": {
+          color: "#aab7c4",
+        },
+        ":-webkit-autofill": {
+          color: "#666ee8",
+        },
+      },
+    };
+    const elements = this.stripe.elements();
+
+    this.cardNumber = elements.create("cardNumber");
+    this.cardNumber.mount(this.cardNumberElement.nativeElement);
+    this.cardNumber.addEventListener("change", this.cardHandler);
+
+    const cardExpiry = elements.create("cardExpiry");
+    cardExpiry.mount(this.cardExpiryElement.nativeElement);
+    cardExpiry.addEventListener("change", this.cardHandler);
+
+    const cardCvc = elements.create("cardCvc");
+    cardCvc.mount(this.cardCvcElement.nativeElement);
+    cardCvc.addEventListener("change", this.cardHandler);
+  }
+
+  ngOnInit() {
     // const stripe = await loadStripe('pk_test_51InEfmFUXuaVDPZFYcahVXD2oe1pQyOsVOFAvHvGOZunjYrxN8GRd2v2aNNxL5GvBMTEbbyIJG8iDTtkH01EfJ4n00LCzkuKTV');
     this.loadCart();
     this.initialForm();
   }
 
-  initialForm() {    
+  get cardInfoInvalid() {
+    return !(this.numberCompleted && this.expiryCompleted && this.cvcCompleted);
+  }
+
+  onChange(event) {
+    this.cardError = event.error?.message;
+
+    switch (event.elementType) {
+      case "cardNumber":
+        this.numberCompleted = event.complete;
+        break;
+      case "cardExpiry":
+        this.expiryCompleted = event.complete;
+        break;
+      case "cardCvc":
+        this.cvcCompleted = event.complete;
+        break;
+    }
+  }
+
+  initialForm() {
     this.orderForm = this.fb.group({
       fullName: [this.user.fullName, Validators.required],
       phone: [this.user.phoneNumber, Validators.required],
       email: [this.user.email, Validators.required],
-      cardNumber: ['', Validators.required]
+      nameOnCard: ["", Validators.required],
     });
   }
   showTotalPrice() {
-    let total=0;
-    this.items?.forEach(e=>{
+    let total = 0;
+    this.items?.forEach((e) => {
       total = total + e.totalPrice;
-    })
+    });
     return total;
   }
 
-  createOrder() {
-    // let orderDto = new OrderCreate()
-    // orderDto.fullName = this.orderForm.get('fullName').value;
-    // orderDto.email = this.orderForm.get('email').value;
-    // orderDto.phone = this.orderForm.get('phone').value;
-    // orderDto.cardNumber = this.orderForm.get('cardNumber').value;
-
-    this.orderForm.addControl('items', this.fb.control(this.items));  
+  async createOrder() {
+    this.orderForm.addControl("items", this.fb.control(this.items));
     console.log(this.orderForm.value);
     const formData = new FormData();
-    formData.append('accountId', this.user.id.toString());
-    formData.append('fullName', this.orderForm.get('fullName').value);
-    formData.append('phone', this.orderForm.get('phone').value);
-    formData.append('email', this.orderForm.get('email').value);
-    formData.append('cardNumber', this.orderForm.get('cardNumber').value);
+    formData.append("accountId", this.user.id.toString());
+    formData.append("fullName", this.orderForm.get("fullName").value);
+    formData.append("phone", this.orderForm.get("phone").value);
+    formData.append("email", this.orderForm.get("email").value);
     for (const index in this.items) {
       // instead of passing this.arrayValues.toString() iterate for each item and append it to form.
-      formData.append(
-        `items[${index}]`,
-        this.items[index].id.toString()
-      );
+      formData.append(`items[${index}]`, this.items[index].id.toString());
     }
-    this.orderService.createOrder(formData).subscribe(response => {
-      console.log(response);
-    })
+    const result = await this.orderService.createOrder(formData).toPromise();
+    this.order = result;
+    console.log("orderId ", this.order.id);
+    this.processing = true;
+    const paymentIntent = this.createPaymentIntent(this.order.id);
+    console.log('paymentIntent ', paymentIntent);
+  }
+
+  private async createPaymentIntent(id: number) {
+    console.log(id);
+    return this.orderService.payment(id).toPromise();
+  }
+
+  private confirmPaymentWithStripe(paymentIntent) {
+    console.log("nameOnCard ", this.orderForm.get("nameOnCard").value);
+    console.log("cardNumber ", this.cardNumber);
+    return this.stripe.confirmCardPayment(paymentIntent.clientSecret, {
+      payment_method: {
+        card: this.cardNumber,
+        billing_details: {
+          name: this.orderForm.get("nameOnCard").value,
+        },
+      },
+    });
   }
 
   loadCart() {
-    this.cartService.getCart(this.user.id).subscribe(response => {
+    this.cartService.getCart(this.user.id).subscribe((response) => {
       this.cart = response;
       this.items = response.items;
-    })
+    });
   }
   loadUser() {
-    this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
+    this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
       this.user = user;
-    })
+    });
 
-    this.accountService.getUser(this.user.id).subscribe(respone => {
+    this.accountService.getUser(this.user.id).subscribe((respone) => {
       this.user = respone;
-    })
-
+    });
   }
-
-
-  // getTotal() {
-  //   let total = 0;
-  //   for (let i = 0; i < this.cart.items.length; i++) {
-  //     let cart = this.cart.items[i];
-  //     total += cart.quantity * cart.totalPrice
-  //   }
-  //   return total;
-  // }
 }

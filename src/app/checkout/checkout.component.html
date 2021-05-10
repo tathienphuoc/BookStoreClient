@@ -19,32 +19,12 @@
                                 <h1 class="mb-3">Billing details</h1>
                                 <form [formGroup]="orderForm" class="needs-validation">
                                     <div class="row g-3">
-                                        <!-- <div class="col-sm-6">
-                                            <label for="firstName" class="form-label text-muted">First name <strong
-                                                    style="color: red;">*</strong></label>
-                                            <input type="text" class="form-control" id="firstName" placeholder=""
-                                                value="" required>
-                                            <div class="invalid-feedback">
-                                                Valid first name is required.
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            <label for="lastName" class="form-label text-muted">Last name <strong
-                                                    style="color: red;">*</strong></label>
-                                            <input type="text" class="form-control" id="lastName" placeholder=""
-                                                value="" required>
-                                            <div class="invalid-feedback">
-                                                Valid last name is required.
-                                            </div>
-                                        </div> -->
                                         <div class="col-12">
                                             <label for="address2" class="form-label text-muted">Full Name <strong
                                                     style="color: red;">*</strong> <span
                                                     class="text-muted"></span></label>
                                             <input formControlName="fullName" type="text" class="form-control"
-                                                id="address2" placeholder="Full Name"
-                                                >
+                                                id="address2" placeholder="Full Name">
                                             <br>
                                         </div>
                                         <div class="col-12">
@@ -61,34 +41,26 @@
                                                     style="color: red;">*</strong> <span
                                                     class="text-muted"></span></label>
                                             <input formControlName="email" type="text" class="form-control"
-                                                id="address2" placeholder="Email" >
+                                                id="address2" placeholder="Email">
 
                                         </div>
-
-                                        <!-- <div class="col-12">
-                                            <label for="address2" class="form-label text-muted" >Email address<strong
-                                                    style="color: red;">*</strong> <span
-                                                    class="text-muted"></span></label>
-                                            <input type="email" class="form-control" id="address2" placeholder="" value="{{user.email}}">
-
-                                        </div> -->
-                                        <div class="col-12">
-
-                                            <label for="address2" class="form-label text-muted">Card Number<strong
-                                                    style="color: red;">*</strong> <span
-                                                    class="text-muted"></span></label>
-                                            <input formControlName="cardNumber" type="text" class="form-control"
-                                                id="address2" placeholder="Card Number">
-
-
-
-                                            <!-- display form errors-->
-                                            <div id="card-errors" role="alert"></div>
-
+                                        <div>
+                                            <h2>Payment</h2>
+                                            <label for="address2" class="form-label text-muted">Name on card<strong
+                                                style="color: red;"> *</strong> <span
+                                                class="text-muted"></span></label>
+                                            <input formControlName="nameOnCard" type="text" class="form-control">
+                                            <div>
+                                                <div #cardNumber></div>
+                                                <div #cardExpiry></div>
+                                            </div>
+                                            <div #cardCvc></div>
+                                            <div *ngIf="cardError">
+                                                <span class="text-danger">{{cardError}}</span>
+                                            </div>
+                                            <br>
+                                            <span [class.d-none]="!processing" style="font-size: 14px;">Processing... please wait!</span>
                                         </div>
-
-
-
                                         <button type="submit" style="border-radius: 20px; width: 100%;height: auto; "
                                             class="btn btn-outline-dark" (click)="createOrder()">Complete Order</button>
 
@@ -104,8 +76,6 @@
 
                         </div> <!-- -->
                     </div>
-
-
                     <div class="col">
                         <div class="container mt-3">
                             <div class="container cart">
@@ -253,19 +223,11 @@
                         </div>
                     </div>  -->
                     </div>
-
-
                 </div>
             </div>
         </div>
     </main>
-
-
 </div>
-
-
-
-
 <!-- <div class="container mt-3">
     <div class="container cart">
         <table>

@@ -26,7 +26,7 @@ export class OrderService {
   }
 
   createOrder(model: any) {
-    return this.Http.post(this.baseUrl + "OrderReceipt/", model).pipe(
+    return this.Http.post<OrderRecipts>(this.baseUrl + "OrderReceipt/", model).pipe(
       map(response => {
         return response;
       })
@@ -39,5 +39,16 @@ export class OrderService {
         return res;
       })
     )
+  }
+
+  payment(orderId: number) {
+    const paymentInput= {
+      orderId: orderId
+    }
+    return this.Http.post(this.baseUrl + 'OrderReceipt/payment', paymentInput).pipe(
+      map(res => {
+        return res;
+      })
+    );
   }
 }
