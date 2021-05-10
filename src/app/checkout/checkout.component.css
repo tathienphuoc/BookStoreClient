@@ -1,4 +1,4 @@
- .cart {
+.cart {
   margin: 20px auto;
 }
 table {
@@ -8,17 +8,15 @@ table {
 .cart-info {
   display: flex;
   flex-wrap: wrap;
-  
+
   margin-left: auto;
-  
-  
 }
 
-tr button{
-    margin-top: 100px;
-} 
-.cart-info .product_name p{
- margin-top: 55px;
+tr button {
+  margin-top: 100px;
+}
+.cart-info .product_name p {
+  margin-top: 55px;
 }
 td img {
   width: 8rem;
@@ -26,15 +24,13 @@ td img {
   margin-right: 0.5rem;
 }
 
-
-
 .header_cart {
-   color: #ffffff;
-    background: #2f2b35;
-    font-size: 15px;
-    font-weight: 700;
-    height: 50px;
-   text-align: left;
+  color: #ffffff;
+  background: #2f2b35;
+  font-size: 15px;
+  font-weight: 700;
+  height: 50px;
+  text-align: left;
 }
 th {
   text-align: center;
@@ -48,17 +44,17 @@ td {
   text-align: center;
 }
 
-.total-price{
-    float: right;
-    padding-top: 150px;
+.total-price {
+  float: right;
+  padding-top: 150px;
 }
 
-.book_interested{
+.book_interested {
   padding-top: 150px;
 }
 /*update cart*/
-.updatecart{
-/* border-radius: 20px;
+.updatecart {
+  /* border-radius: 20px;
 float: right;
 background-color: gray;
 margin-left: 10px;
@@ -66,23 +62,21 @@ margin-left: 200px;
  padding: 15px 32px;
 padding:7px;
 margin:10px; */
-float:right;
+  float: right;
 
- padding:0.6em 2em;
+  padding: 0.6em 2em;
   border-radius: 20px;
-  color:#fff;
-  background-color:gray;
-  font-size:1.1em;
-  border:0;
-  cursor:pointer;
-  margin:1em;
-
+  color: #fff;
+  background-color: gray;
+  font-size: 1.1em;
+  border: 0;
+  cursor: pointer;
+  margin: 1em;
 }
-.updatecart:hover{
-opacity: 2;
-  background-color:black
+.updatecart:hover {
+  opacity: 2;
+  background-color: black;
 }
-
 
 /* button*/
 .container-cart table .close {
@@ -92,20 +86,19 @@ opacity: 2;
   width: 20px;
   height: 22px;
   opacity: 0.3;
-
 }
 .close:hover {
   opacity: 1;
   color: red;
 }
-.close:before, .close:after {
+.close:before,
+.close:after {
   position: absolute;
   left: 120px;
-  content: ' ';
+  content: " ";
   height: 10px;
   width: 2px;
-  background-color:red;
-  
+  background-color: red;
 }
 .close:before {
   transform: rotate(45deg);
@@ -114,159 +107,181 @@ opacity: 2;
   transform: rotate(-45deg);
 }
 
-.container_container_cart{
+.container_container_cart {
   background-color: cadetblue;
 }
 
-
-
-
 .wrapper {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    background-color: #060d25
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #060d25;
 }
 
 .card {
-    width: 400px;
-    background-color: #001334;
-    color: #fff
+  width: 400px;
+  background-color: #001334;
+  color: #fff;
 }
 
 .about {
-    padding: 10px;
-    color: #fff
+  padding: 10px;
+  color: #fff;
 }
 
 .about small {
-    font-size: 10px
+  font-size: 10px;
 }
 
 hr {
-    color: #fff;
-    margin-top: 0px
+  color: #fff;
+  margin-top: 0px;
 }
 
 .steam {
-    margin-top: -5px
+  margin-top: -5px;
 }
 
 .seller {
-    margin-top: -6px;
-    font-size: 14px
+  margin-top: -6px;
+  font-size: 14px;
 }
 
 .steam-price {
-    margin-right: 115px !important
+  margin-right: 115px !important;
 }
 
 .margin {
-    margin-top: -6px;
-    color: #6c757d !important;
-    font-size: 13px
+  margin-top: -6px;
+  color: #6c757d !important;
+  font-size: 13px;
 }
 
 .response div {
-    margin-right: 10px
+  margin-right: 10px;
 }
 
 .fa-check-circle {
-    color: #1775e5
+  color: #1775e5;
 }
 
 .fa-thumbs-up {
-    color: #79d254
+  color: #79d254;
 }
 
 .fa-thumbs-down {
-    color: #e05a59
+  color: #e05a59;
 }
 
 .cart {
-    height: 50px
+  height: 50px;
 }
 
 .pl-book {
-    background-color: #edf3f4;
+  background-color: #edf3f4;
 }
-.cart_info{
-  background-color: #fff;
-} 
-
-.wrapper_cart{
+.cart_info {
   background-color: #fff;
 }
 
-
+.wrapper_cart {
+  background-color: #fff;
+}
 
 /*  Interesting Book*/
 .card:hover img {
-    transform: scale(1.2, 1.2);
-    transition-duration: 500ms;
-    transition-timing-function: ease-out;
-    opacity: 0.7;
+  transform: scale(1.2, 1.2);
+  transition-duration: 500ms;
+  transition-timing-function: ease-out;
+  opacity: 0.7;
 }
 
 .card img {
-    transform: scale(1.0, 1.0);
-    transition-duration: 500ms;
-    transition-timing-function: ease-out;
+  transform: scale(1, 1);
+  transition-duration: 500ms;
+  transition-timing-function: ease-out;
 }
 
 .card-img-wrapper {
-    overflow: hidden;
-    position: relative;
+  overflow: hidden;
+  position: relative;
 }
 
 .member-icons {
-    position: absolute;
-    bottom: -30%;
-    left: 0;
-    right: 0;
-    margin-right: auto;
-    margin-left: auto;
-    opacity: 0;
+  position: absolute;
+  bottom: -30%;
+  left: 0;
+  right: 0;
+  margin-right: auto;
+  margin-left: auto;
+  opacity: 0;
 }
 
 .card-img-wrapper:hover .member-icons {
-    bottom: 0;
-    opacity: 1;
+  bottom: 0;
+  opacity: 1;
 }
 
 .animate {
-    transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 @keyframes fa-blink {
-    0% {opacity: 1;}
-    100% {opacity: 0.4;}
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.4;
+  }
 }
 
 .is-online {
-    animation: fa-blink 1.5s linear infinite;
-    color: rgb(1, 189, 42);
+  animation: fa-blink 1.5s linear infinite;
+  color: rgb(1, 189, 42);
 }
+input {
+  border-radius: 10px;
+}
+
 .StripeElement {
   background-color: white;
-  padding: 8px 12px;
-  border-radius: 4px;
-  border: 1px solid #060d25;
-  box-shadow: 0 1px 3px 0 #e6ebf1;
+  padding: 10px 12px;
+  border-radius: 5px;
+  /* border: 1px solid #ced4da; */
   -webkit-transition: box-shadow 150ms ease;
   transition: box-shadow 150ms ease;
-  }
-  
-  .StripeElement--focus {
-  box-shadow: 0 1px 3px 0 #2f4e6d;
-  }
-  
-  .StripeElement--invalid {
+  background-color: #edf3f4 !important;
+}
+
+.StripeElement--focus {
+  color: #495057;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.StripeElement--invalid {
   border-color: #fa755a;
-  }
-  
-  .StripeElement--webkit-autofill {
-  background-color: #475e91 !important;
-  }
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+input {
+  border: none;
+  background-color: #edf3f4;
+}
+input:focus {
+  background-color: #edf3f4;
+  border: none;
+}
+select {
+  border: none;
+  background-color: #edf3f4;
+}
+select:focus {
+  border: none;
+  background-color: #edf3f4;
+}

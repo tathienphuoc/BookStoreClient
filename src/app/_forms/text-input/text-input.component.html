@@ -12,6 +12,12 @@
     <div *ngIf="ngControl.control.errors?.maxlength" class="invalid-feedback">
         {{label}} tối đa {{ngControl.control.errors.maxlength['requiredLength']}} ký tự
     </div>
+    <div *ngIf="ngControl.control.errors?.email" class="invalid-feedback">
+        Vui lòng điền đúng email.
+    </div>
+    <div *ngIf="ngControl.control.errors?.pattern" class="invalid-feedback">
+        Sai định dạng.
+    </div>
     <div *ngIf="ngControl.control.errors?.isMatch" class="invalid-feedback">
         Mật khẩu không trùng khớp
     </div>

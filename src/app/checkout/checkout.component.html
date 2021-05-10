@@ -12,68 +12,66 @@
                 <div class="row row-cols-2">
                     <div class="col">
                         <div class="row g-5">
-                            <div class="col-md-5 col-lg-4 order-md-last">
-                            </div>
-                            <div class="col-md-7 col-lg-8">
-
-                                <h1 class="mb-3">Billing details</h1>
-                                <form [formGroup]="orderForm" class="needs-validation">
-                                    <div class="row g-3">
-                                        <div class="col-12">
-                                            <label for="address2" class="form-label text-muted">Full Name <strong
-                                                    style="color: red;">*</strong> <span
-                                                    class="text-muted"></span></label>
-                                            <input formControlName="fullName" type="text" class="form-control"
-                                                id="address2" placeholder="Full Name">
-                                            <br>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="address2" class="form-label text-muted">Phone<strong
-                                                    style="color: red;">*</strong> <span
-                                                    class="text-muted"></span></label>
-                                            <input formControlName="phone" type="text" class="form-control"
-                                                id="address2" placeholder="Phone">
-
-                                        </div>
-
-                                        <div class="col-12">
-                                            <label for="address2" class="form-label text-muted">Email<strong
-                                                    style="color: red;">*</strong> <span
-                                                    class="text-muted"></span></label>
-                                            <input formControlName="email" type="text" class="form-control"
-                                                id="address2" placeholder="Email">
-
-                                        </div>
-                                        <div>
-                                            <h2>Payment</h2>
-                                            <label for="address2" class="form-label text-muted">Name on card<strong
-                                                style="color: red;"> *</strong> <span
-                                                class="text-muted"></span></label>
-                                            <input formControlName="nameOnCard" type="text" class="form-control">
-                                            <div>
-                                                <div #cardNumber></div>
-                                                <div #cardExpiry></div>
-                                            </div>
-                                            <div #cardCvc></div>
-                                            <div *ngIf="cardError">
-                                                <span class="text-danger">{{cardError}}</span>
-                                            </div>
-                                            <br>
-                                            <span [class.d-none]="!processing" style="font-size: 14px;">Processing... please wait!</span>
-                                        </div>
-                                        <button type="submit" style="border-radius: 20px; width: 100%;height: auto; "
-                                            class="btn btn-outline-dark" (click)="createOrder()">Complete Order</button>
-
-
-
+                            <form [formGroup]="orderForm" class="needs-validation">
+                                <div class="row g-3 mt-3">
+                                    <h1 class="mb-3"><i class="fas fa-info-square"></i> Billing details</h1>
+                                    <div class="col-12">
+                                        <label for="address2" class="form-label text-muted">Your name<strong
+                                                style="color: red;">*</strong> <span class="text-muted"></span></label>
+                                                <app-text-input [formControl]='orderForm.controls["fullName"]'
+                                                [label]='"Your name"'></app-text-input> 
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="address2" class="form-label text-muted">Phone<strong
+                                                style="color: red;">*</strong> <span class="text-muted"></span></label>
+                                                <app-text-input [formControl]='orderForm.controls["phone"]'
+                                                [label]='"your phone"'></app-text-input>                                       
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="address2" class="form-label text-muted">Email<strong
+                                                style="color: red;">*</strong> <span class="text-muted"></span></label>
+                                                <app-text-input [formControl]='orderForm.controls["email"]'
+                                                [label]='"your email"'></app-text-input>                                    
 
                                     </div>
+                                    <div class="col-12">
+                                        <label for="address2" class="form-label text-muted">Select Delivery Method<strong
+                                                style="color: red;">*</strong> <span class="text-muted"></span></label>
+                                            <select [(ngModel)]="deliveryId" [ngModelOptions]="{standalone: true}" class="form-select">
+                                                <option *ngFor="let item of deliveryMethod" [value]="item.id">{{item.type}}</option>
+                                            </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <h2><i class="fab fa-cc-stripe"></i> Payment</h2>
+                                    </div>
 
-                                    <hr class="my-4">
+                                    <div class="col-9">
+                                        <input formControlName="nameOnCard" placeholder="Name on card" type="text" class="form-control">
+                                    </div>
 
-                                </form>
-                            </div> <!-- -->
+                                    <div class="col-3">
+                                        <div #cardExpiry class="mb-3"></div>
+                                    </div>
 
+                                    <div class="col-7">
+                                        <div #cardNumber class="mb-3"></div>
+                                    </div>
+
+                                    <div class="col-5">
+                                        <div #cardCvc class="mb-3"></div>
+                                    </div>
+                                    <div>
+                                        <div *ngIf="cardError">
+                                            <span class="text-danger">{{cardError}}</span>
+                                        </div>
+                                        <span [class.d-none]="!processing" style="font-size: 14px;">Processing...
+                                            please wait!</span>
+                                    </div>
+                                    <button type="submit" style="border-radius: 20px; width: 100%;height: auto; "
+                                        class="btn btn-outline-dark mb-3" (click)="createOrder()" [disabled]='!orderForm.valid && cardError == undefined'>Complete Order</button>
+                                </div>
+
+                            </form>
                         </div> <!-- -->
                     </div>
                     <div class="col">

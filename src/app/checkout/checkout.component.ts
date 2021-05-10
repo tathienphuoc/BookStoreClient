@@ -25,6 +25,7 @@ import { inspect } from "util"; // or directly
 import { environment } from "src/environments/environment";
 import { OrderRecipts } from "../models/orderRecipts";
 import { Router } from "@angular/router";
+import { DeliveryMethod } from "../models/deliveryMethod";
 
 declare var Stripe;
 @Component({
@@ -54,6 +55,10 @@ export class CheckoutComponent implements OnInit {
   cart: Cart;
   items: Item[] = [];
   books: Book[];
+  deliveryMethod: DeliveryMethod[];
+  deliveryId: number;
+  validationErrors: string[] = [];
+
   constructor(
     private cartService: CartService,
     private accountService: AccountService,
@@ -71,26 +76,13 @@ export class CheckoutComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.stripe = Stripe(environment.publishableKey);
-    const style = {
-      base: {
-        iconColor: "#666ee8",
-        color: "#31325f",
-        fontWeight: 400,
-        fontFamily:
-          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
-        fontSmoothing: "antialiased",
-        fontSize: "15px",
-        "::placeholder": {
-          color: "#aab7c4",
-        },
-        ":-webkit-autofill": {
-          color: "#666ee8",
-        },
-      },
-    };
+
     const elements = this.stripe.elements();
 
-    this.cardNumber = elements.create("cardNumber");
+    this.cardNumber = elements.create("cardNumber", {
+      showIcon: true,
+      placeholder: "Card Number"
+    });
     this.cardNumber.mount(this.cardNumberElement.nativeElement);
     this.cardNumber.addEventListener("change", this.cardHandler);
 
@@ -104,9 +96,14 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    // const stripe = await loadStripe('pk_test_51InEfmFUXuaVDPZFYcahVXD2oe1pQyOsVOFAvHvGOZunjYrxN8GRd2v2aNNxL5GvBMTEbbyIJG8iDTtkH01EfJ4n00LCzkuKTV');
     this.loadCart();
     this.initialForm();
+    this.loadDeliveryMethods();
+  }
+  loadDeliveryMethods() {
+    this.orderService.getDeliveryMethods().subscribe(response => {
+      this.deliveryMethod = response;
+    })
   }
 
   get cardInfoInvalid() {
@@ -132,9 +129,9 @@ export class CheckoutComponent implements OnInit {
   initialForm() {
     this.orderForm = this.fb.group({
       fullName: [this.user.fullName, Validators.required],
-      phone: [this.user.phoneNumber, Validators.required],
-      email: [this.user.email, Validators.required],
-      nameOnCard: ["", Validators.required],
+      phone: [this.user.phoneNumber, [Validators.required, Validators.pattern("^[0-9]*$")]],
+      email: [this.user.email, [Validators.required, Validators.email]],
+      nameOnCard: ['', [Validators.required]]
     });
   }
   showTotalPrice() {
@@ -146,6 +143,9 @@ export class CheckoutComponent implements OnInit {
   }
 
   async createOrder() {
+    if (this.deliveryId == null) {
+      this.deliveryId = 1;
+    };
     this.orderForm.addControl("items", this.fb.control(this.items));
     console.log(this.orderForm.value);
     const formData = new FormData();
@@ -153,6 +153,7 @@ export class CheckoutComponent implements OnInit {
     formData.append("fullName", this.orderForm.get("fullName").value);
     formData.append("phone", this.orderForm.get("phone").value);
     formData.append("email", this.orderForm.get("email").value);
+    formData.append("deliveryId", this.deliveryId.toString());
     for (const index in this.items) {
       // instead of passing this.arrayValues.toString() iterate for each item and append it to form.
       formData.append(`items[${index}]`, this.items[index].id.toString());
@@ -161,8 +162,11 @@ export class CheckoutComponent implements OnInit {
     this.order = result;
     console.log("orderId ", this.order.id);
     this.processing = true;
-    const paymentIntent = this.createPaymentIntent(this.order.id);
-    console.log('paymentIntent ', paymentIntent);
+    const paymentIntent = await this.createPaymentIntent(this.order.id);
+    console.log("paymentIntent ", paymentIntent);
+    if (paymentIntent != null) {
+      location.href="books/";
+    }
   }
 
   private async createPaymentIntent(id: number) {

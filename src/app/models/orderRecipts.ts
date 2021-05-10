@@ -1,3 +1,4 @@
+import { DeliveryMethod } from "./deliveryMethod";
 import { Item } from "./item";
 
 export interface OrderRecipts {
@@ -7,5 +8,6 @@ export interface OrderRecipts {
     phone: string;
     totalPrice: number;
     accountId: number;
+    deliveryMethod: DeliveryMethod;
     orderItems: Item[];
 }

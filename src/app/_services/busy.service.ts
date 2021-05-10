@@ -29,6 +29,6 @@ export class BusyService {
         this.busyRequestCount = 0;
         this.spinnerService.hide();
       }
-    }, 500);
+    }, 100);
   }
 }

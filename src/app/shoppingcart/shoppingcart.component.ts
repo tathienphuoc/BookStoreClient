@@ -65,11 +65,12 @@ export class ShoppingcartComponent implements OnInit {
   }
 
   orderLink() {
-    if (this.items.length == 0) {
-      this.toastr.error("Mua hàng trươc khi thanh toán");
-    } else {
-      location.href="/checkout";
-    }
+    location.href="/checkout";
+    // if (this.items.length == 0) {
+    //   this.toastr.error("Mua hàng trươc khi thanh toán");
+    // } else {
+    //   location.href="/checkout";
+    // }
   }
 
   showTotalPrice() {
@@ -78,5 +79,11 @@ export class ShoppingcartComponent implements OnInit {
       total = total + element.totalPrice;
     });
     return total;
+  }
+
+  backToShop() {
+    if (this.items?.length == 0) {
+      
+    }
   }
 }

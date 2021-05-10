@@ -47,6 +47,7 @@ import { HasRoleDirective } from './_directive/has-role.directive';
 import { RankComponent } from './rank/rank.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AdminOrderListComponent } from './admin/admin-order-list/admin-order-list.component';
+import { IgnoreDirtyDirective } from './_directive/ignore-dirty.directive';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { AdminOrderListComponent } from './admin/admin-order-list/admin-order-li
     HasRoleDirective,
     RankComponent,
     CheckoutComponent,
-    AdminOrderListComponent
+    AdminOrderListComponent,
+    IgnoreDirtyDirective
   ],
   imports: [
     BrowserModule,

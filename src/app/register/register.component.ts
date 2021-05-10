@@ -24,11 +24,11 @@ export class RegisterComponent implements OnInit {
 
   initializeFrom() {
     this.registerForm = this.fb.group({
-      userName: ['',Validators.required],
-      fullName: ['',Validators.required],
-      email: ['',Validators.required],
+      userName: ['',[Validators.required]],
+      fullName: ['',[Validators.required]],
+      email: ['',[Validators.required]],
       phoneNumber: ['',[Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
-      homeAddress: ['',Validators.required],
+      homeAddress: ['',[Validators.required]],
       password: ['',[Validators.required, Validators.minLength(8)]],
       confirmPassword: ['',[Validators.required, this.matchValue('password')]]
     })
