@@ -36,6 +36,14 @@ export class ShoppingcartComponent implements OnInit {
     // console.log( countCart[bookId]);
   }
 
+  showPrice(book: Book){
+    if(book.discount == 0) {
+      return book.price;
+    } else {
+      return Number((book.price - book.price*book.discount).toFixed(1)); ;
+    }
+  }
+
   loadCart() {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
       this.user = user;
@@ -43,6 +51,8 @@ export class ShoppingcartComponent implements OnInit {
     this.cartService.getCart(this.user.id).subscribe(response => {
       this.cart = response;
       this.items = response.items;
+      console.log(this.items);
+      
     })
   }
 
@@ -81,9 +91,27 @@ export class ShoppingcartComponent implements OnInit {
     return total;
   }
 
-  backToShop() {
-    if (this.items?.length == 0) {
-      
+  deleteItem(name: string, id: number) {
+    if(confirm("Are you sure to delete "+name)) {
+      this.cartService.removeItemsInCart(id).subscribe(response =>{
+        this.cart = response;
+        this.items = response.items;
+      }, error =>{
+        console.log(error);
+      })
     }
+  }
+  getSave(){
+    let savedMoney = 0;
+    this.items?.forEach(item => {
+      savedMoney = savedMoney 
+        + (item.totalPrice - item.quantity*item.unitPrice*item.book.discount);
+        console.log(item.quantity);
+    });
+    return savedMoney;
+  }
+
+  showTotalAfterDiscount() {
+    return this.showTotalPrice() - (this.showTotalPrice() - this.getSave());
   }
 }

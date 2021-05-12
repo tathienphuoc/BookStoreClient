@@ -63,4 +63,17 @@ img {
     border: 1px solid #fff;
     display: inline;
 }
+.btn-link {
+    color: white !important;
+    cursor: pointer;
+  }
+  .btn-outline-primary:hover,
+  .btn-link:hover {
+    opacity: 0.9;
+  }
+  .btn-outline-primary {
+    border: 1px solid white;
+   background-color: transparent !important;
+   color: white;
+  }
   

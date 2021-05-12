@@ -4,9 +4,9 @@
 </div>
 <div class="container mt-3">
     <div class="container cart">
-        <table>
+        <table *ngIf="items?.length != 0">
             <tr class="header_cart">
-                <th>Id</th>
+                <th>X</th>
                 <th>Image</th>
                 <th>Price</th>
                 <th>Quantity</th>
@@ -15,7 +15,7 @@
             </tr>
 
             <tr *ngFor="let item of items">
-                <td><a href="#" class="close">x</a></td>
+                <td><a (click)="deleteItem(item.book.name, item.book.id)" class="close">x</a></td>
                 <td>
                     <div class="cart-info">
                         <img src="{{item.book.image || '/assets/user.png'}}" />
@@ -24,10 +24,10 @@
                         </div>
                     </div>
                 </td>
-                <td>{{item.unitPrice}}</td>
+                <td>{{showPrice(item.book) | currency}}</td>
                 <td> <input type="number" #quantity (change)="changeQuantity(cart.id, item.id, quantity.value)"
                         value="{{item.quantity}}" min="1" /> </td>
-                <td>{{item.totalPrice}}</td>
+                <td>{{item.totalPrice | currency}}</td>
             </tr>
             <!-- <tr>
                 <td><a href="#" class="close"></a></td>
@@ -45,15 +45,15 @@
             </tr> -->
 
         </table>
-        <hr style="width:100%;text-align:left;margin-left:0;color:black">
+        <hr *ngIf="items?.length != 0" style="width:100%;text-align:left;margin-left:0;color:black">
         <a href="books/" class="link-secondary" *ngIf="items?.length == 0">
-            <div class="font-weight-bold text-lg-center" >
+            <div class="font-weight-bold text-lg-center">
                 <p style="font-size: 30px;"><i class="fad fa-long-arrow-left"></i> Back to shop !</p>
             </div>
         </a>
 
 
-        <div class="row" style="margin-top: 100px;">
+        <div class="row">
 
             <div class="col">
                 <div class="row row-cols-2">
@@ -75,32 +75,12 @@
                 </div>
 
             </div>
-            <div class="col">
+            <div class="col-6 mb-5" *ngIf="items?.length != 0">
                 <h2>Cart totals</h2>
-
-
-                <li class="list-group-item d-flex justify-content-between lh-sm">
-                    <div>
-                        <!-- <h6 class="my-0">Product name</h6> -->
-                        <strong>Subtotal</strong>
-
-                    </div>
-                    <span class="text-muted">$ {{showTotalPrice()}}</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-sm">
-                    <div>
-                        <!-- <h6 class="my-0">Second product</h6> -->
-                        <strong>Shipping fee</strong>
-                    </div>
-
-                    <br>
-                    <span class="text-muted"> $20.00</span>
-                </li>
-
 
                 <li class="list-group-item d-flex justify-content-between">
                     <strong>Total</strong>
-                    <span class="text-muted"> $20.00</span>
+                    <span class="text-muted">{{showTotalPrice() | currency}}</span>
                 </li>
 
 

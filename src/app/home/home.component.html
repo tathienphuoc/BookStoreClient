@@ -109,3 +109,26 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
+<div class="popular-books">
+    <h2 class="text-center">Popular Books</h2>
+    <div class="container-sm">
+        <div class="row">
+            <div class="col-3" *ngFor="let book of books">
+                <app-book-card [book]="book"></app-book-card>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="new-books">
+    <h2 class="text-center text-light">New Books</h2>
+    <div class="container-sm">
+        <div class="row">
+            <div class="col-3" *ngFor="let book of books">
+                <app-book-card [book]="book"></app-book-card>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-ads></app-ads>
+<app-footer></app-footer>

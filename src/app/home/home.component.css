@@ -143,4 +143,14 @@ img {
  background-color: transparent !important;
  color: white;
 }
+.popular-books{
+  background-color: #edf3f4;
+}
+.new-books{
+  background-color: #2f2b35;
+}
+.new-books h2,
+.popular-books h2{
+  transform: translateY(100%);
+}
 

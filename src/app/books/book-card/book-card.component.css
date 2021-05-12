@@ -118,6 +118,7 @@ em {
   box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   position: relative;
+  background-color: white;
 }
 .book-card .sale-icon {
   position: absolute;

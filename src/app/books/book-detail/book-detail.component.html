@@ -28,7 +28,7 @@
             <span>Categories:</span> {{displayCategory(book)}} <br />
             <span>Publisher:</span> {{book.publisher.name}}<br />
             <span>Co-author:</span> {{displayAuthors(book)}}<br />
-            <span>Released:</span> {{book.publicationDate}}
+            <span>Released:</span> {{book.publicationDate | date}}
           </div>
         </div>
       </div>

@@ -24,7 +24,7 @@ export class AdminBookCardComponent implements OnInit {
     if(book.discount == 0) {
       return book.price;
     } else {
-      return Number((book.price * book.discount).toFixed(1)); ;
+      return Number((book.price - book.price*book.discount).toFixed(1)); ;
     }
   }
   showAuthor (book: Book) {

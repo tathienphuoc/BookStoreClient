@@ -1,0 +1,95 @@
+.row{
+    margin: 25px 0;
+}
+
+.col{
+    margin-top: 25px;
+}
+
+.book-card {
+  width: 275px;
+  height: 520px;
+  padding: 2px 10px 0px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  position: relative;
+  background-color: white;
+}
+.book-card .sale-icon {
+  position: absolute;
+  top: 40px;
+  left: 35px;
+  width: 55px;
+  height: 25px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #00afd8;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 2px 10px;
+}
+.book-card-img {
+  display: block;
+  width: 250px;
+  height: 332px;
+  margin-top: 10px;
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3);
+}
+.book-card-body {
+  margin-top: 20px;
+  text-align: center;
+}
+.book-card-body > h2 {
+  font-size: 16px;
+  margin: 7px 0;
+}
+.book-card-body > span {
+  color: #a7a7a7;
+  font-size: 12px;
+  font-style: italic;
+  line-height: normal;
+}
+.book-card-body .price-box {
+  font-size: 24px;
+}
+.price-box del {
+  margin-right: 5px;
+  font-size: 18px;
+  opacity: 0.5;
+}
+.book-card-btn {
+  display: flex;
+  height: 35px;
+  align-items: center;
+  transform: translateY(60%);
+}
+em {
+  margin-right: 5px;
+}
+.book-card-btn a {
+  text-decoration: none;
+  text-align: center;
+  flex: 1;
+  line-height: 20px;
+  opacity: 0.5;
+  font-size: 14px;
+}
+.book-card-btn a:hover {
+  opacity: 0.8;
+  border: 1px solid black;
+}
+.btn-detail {
+  border: 1px solid #a7a7a7;
+  border-right: none;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+.btn-buy {
+  border: 1px solid #a7a7a7;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}

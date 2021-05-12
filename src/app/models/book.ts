@@ -15,7 +15,7 @@ export interface Book {
   title: string;
   image: string;
   summary: string;
-  publicationDate: string;
+  publicationDate: Date;
   quantityInStock: number;
   price: number;
   sold: number;

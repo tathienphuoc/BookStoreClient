@@ -96,7 +96,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>${{item.totalPrice}}</td>
+                                        <td>{{item.totalPrice | currency}}</td>
 
                                     </tr>
 
@@ -111,7 +111,7 @@
                                         <p style="font-size:large">Total Price</p>
                                     </div>
                                     <div class="col">
-                                        <p style="margin-left: 160px;font-size: large;">$ {{showTotalPrice()}}</p>
+                                        <p style="margin-left: 150px;font-size: large;">{{showTotalPrice() | currency}}</p>
                                     </div>
                                 </div>
 

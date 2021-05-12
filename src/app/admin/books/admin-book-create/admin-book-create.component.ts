@@ -20,10 +20,11 @@ import {
 } from "@angular/forms";
 import { FileUploader } from "ng2-file-upload";
 import { environment } from "src/environments/environment";
-import { take } from "rxjs/operators";
+import { max, take } from "rxjs/operators";
 import { User } from "src/app/models/user";
 import { IDropdownSettings } from "ng-multiselect-dropdown";
 import { ToastrService } from "ngx-toastr";
+import { DatepickerOptions } from "ng2-datepicker";
 
 @Component({
   selector: "app-admin-book-create",
@@ -31,6 +32,7 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./admin-book-create.component.css"],
 })
 export class AdminBookCreateComponent implements OnInit {
+  maxDate:Date;
   listCategories = [];
   listAuthors = [];
   selectedCategories = [];
@@ -48,6 +50,7 @@ export class AdminBookCreateComponent implements OnInit {
   bookCreate: BookCreate;
   category: string;
   user: User;
+  imageSrc: string;
   validationErrors: string[] = [];
   constructor(
     private bookService: BookService,
@@ -62,10 +65,12 @@ export class AdminBookCreateComponent implements OnInit {
       .pipe(take(1))
       .subscribe((user) => (this.user = user));
     this.bookCreate = new BookCreate();
+    this.maxDate = new Date();
   }
 
   ngOnInit(): void {
     this.initializeFrom();
+    this.maxDate = new Date();
     this.loadAuthors();
     this.loadCategories();
     this.loadPublishers();
@@ -82,7 +87,7 @@ export class AdminBookCreateComponent implements OnInit {
       textField: "fullName",
       itemsShowLimit: 3,
       allowSearchFilter: true,
-    };
+    }; 
   }
 
   handleFileInput(files: FileList) {
@@ -97,18 +102,18 @@ export class AdminBookCreateComponent implements OnInit {
         [
           Validators.required,
           Validators.maxLength(6),
-          Validators.pattern("^[0-9]"),
+          Validators.pattern("^[0-9]*$"),
         ],
       ],
       price: ["", Validators.required],
       discount: ["", Validators.required],
       summary: ["", Validators.required],
       quantityInStock: ["", Validators.required],
-      publicationDate: ["", Validators.required],
+      publicationDate: [new Date(), Validators.required],
       categoryId: ["", Validators.required],
       authorId: ["", Validators.required],
       order_ReceiptId: new FormArray([]),
-      publisherId: new FormControl(null),
+      publisherId: new FormControl(null)
     });
   }
   onItemDeSelectAuthor(item: any) {
@@ -168,55 +173,18 @@ export class AdminBookCreateComponent implements OnInit {
     });
   }
 
-  onCheckChange(event) {
-    const formArray: FormArray = this.formCreateBook.get(
-      "categoryId"
-    ) as FormArray;
-    /* Selected */
-    if (event.target.checked) {
-      // Add a new control in the arrayForm
-      formArray.push(new FormControl(event.target.value));
-    } else {
-    /* unselected */
-      // find the unselected element
-      let i: number = 0;
+  readURL(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+        const file = event.target.files[0];
 
-      formArray.controls.forEach((ctrl: FormControl) => {
-        if (ctrl.value == event.target.value) {
-          // Remove the unselected element from the arrayForm
-          formArray.removeAt(i);
-          return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.imageSrc = reader.result as string;
+          this.fileToUpload = file;
         }
-
-        i++;
-      });
-    }
-  }
-
-  onCheckAuthorChange(event) {
-    const formArray: FormArray = this.formCreateBook.get(
-      "authorId"
-    ) as FormArray;
-    /* Selected */
-    if (event.target.checked) {
-      // Add a new control in the arrayForm
-      formArray.push(new FormControl(event.target.value));
-    } else {
-    /* unselected */
-      // find the unselected element
-      let i: number = 0;
-
-      formArray.controls.forEach((ctrl: FormControl) => {
-        if (ctrl.value == event.target.value) {
-          // Remove the unselected element from the arrayForm
-          formArray.removeAt(i);
-          return;
-        }
-
-        i++;
-      });
-    }
-  }
+        reader.readAsDataURL(file);
+    }    
+}
 
   async loadCategories() {
     const result = await this.categoryService.getCategories().toPromise();
@@ -232,6 +200,8 @@ export class AdminBookCreateComponent implements OnInit {
     });
   }
   submitForm() {
+    // console.log(this.formCreateBook.get('publicationDate').value);
+    
     const formData = new FormData();
     formData.append("title", this.formCreateBook.get("title").value);
     formData.append("isbn", this.formCreateBook.get("isbn").value);
@@ -242,9 +212,10 @@ export class AdminBookCreateComponent implements OnInit {
       "quantityInStock",
       this.formCreateBook.get("quantityInStock").value
     );
+    const datestr = (new Date(this.formCreateBook.get("publicationDate").value)).toUTCString();
     formData.append(
       "publicationDate",
-      this.formCreateBook.get("publicationDate").value
+      datestr
     );
     for (const index in this.selectedCategories) {
       // instead of passing this.arrayValues.toString() iterate for each item and append it to form.

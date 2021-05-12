@@ -50,6 +50,14 @@ export class CartService {
     
   }
 
+  removeItemsInCart(idItem: number) {
+    return this.Http.delete<Cart>(this.baseUrl + "shoppingcart/" + idItem).pipe(
+      map(response => {
+        return response;
+      })
+    )
+  }
+
   changeQuantity(shoppingCartUpdate: ShoppingCartUpdate) {
     return this.Http.put(this.baseUrl + "shoppingcart/", shoppingCartUpdate);
   }

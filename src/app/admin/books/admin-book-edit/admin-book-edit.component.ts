@@ -2,6 +2,9 @@ import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angu
 import { FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators, FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { moment } from 'ngx-bootstrap/chronos/test/chain';
+import { setDate } from 'ngx-bootstrap/chronos/utils/date-setters';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { ToastrService } from 'ngx-toastr';
 import { Author } from 'src/app/models/author';
 import { Book } from 'src/app/models/book';
@@ -18,6 +21,9 @@ import { PublisherService } from 'src/app/_services/publisher.service';
   styleUrls: ['./admin-book-edit.component.css']
 })
 export class AdminBookEditComponent implements OnInit, AfterViewInit {
+datePickerValue: Date;
+  maxDate:Date;
+bsValue = new Date();
 listCategories = [];
 listAuthors = [];
 selectedCategories = [] ;
@@ -31,7 +37,7 @@ book: Book;
 authors: Author[];
 categories: Category[];
 publishers: Publisher[];
-formCreateBook: FormGroup;
+bsConfig: Partial<BsDatepickerConfig>;
 @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {  
   if (this.editForm.dirty) {
     $event.returnValue = true;
@@ -44,17 +50,28 @@ formCreateBook: FormGroup;
               private categoryService: CategoryService, 
               private authorService:AuthorService,
               private publisherService: PublisherService) {}
-  async ngAfterViewInit() {
-    
-    }
+  ngAfterViewInit() {
+  }
 
+  ignoreDirty() {
+    
+  }
   async ngOnInit() {   
     await this.loadBook();
     console.log(this.book);
-    
+    this.maxDate = new Date();
+    this.datePickerValue = new Date(this.book.publicationDate);
     this.loadCategories();
     this.loadAuthors();
     this.loadPublishers();
+    setTimeout(() => {
+      this.editForm?.form.controls['selectedCategories'].markAsPristine();
+    this.editForm?.form.controls['selectedAuthors'].markAsPristine();
+    }, 1);
+    this.bsConfig = {
+      containerClass: 'theme-red',
+      dateInputFormat: 'DD MMMM YYYY'
+    }
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'id',
@@ -160,7 +177,7 @@ formCreateBook: FormGroup;
     formData.append('price', this.book.price.toString());
     formData.append('isbn', this.book.isbn);
     formData.append('discount', this.book.discount.toString());
-    formData.append('publicationDate', this.book.publicationDate);
+    formData.append('publicationDate', this.datePickerValue.toUTCString());
     formData.append('publisherId', this.book.publisherId.toString());
     formData.append('quantityInStock', this.book.quantityInStock.toString());
     formData.append('summary', this.book.summary.toString());
@@ -217,5 +234,6 @@ formCreateBook: FormGroup;
       this.publishers = response;
     })
   }
-
 }
+
+

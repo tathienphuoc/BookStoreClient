@@ -14,6 +14,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { DataTablesModule } from "angular-datatables";
+import { DatepickerModule } from 'ng2-datepicker';
+
 
 
 import { TabsModule } from "ngx-bootstrap/tabs";
@@ -48,6 +50,10 @@ import { RankComponent } from './rank/rank.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AdminOrderListComponent } from './admin/admin-order-list/admin-order-list.component';
 import { IgnoreDirtyDirective } from './_directive/ignore-dirty.directive';
+import { AdsComponent } from './ads/ads.component';
+import { FooterComponent } from './footer/footer.component';
+import { TestComponent } from './test/test.component';
+import { DateInputComponent } from './_forms/date-input/date-input.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +80,11 @@ import { IgnoreDirtyDirective } from './_directive/ignore-dirty.directive';
     RankComponent,
     CheckoutComponent,
     AdminOrderListComponent,
-    IgnoreDirtyDirective
+    IgnoreDirtyDirective,
+    AdsComponent,
+    FooterComponent,
+    TestComponent,
+    DateInputComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +108,8 @@ import { IgnoreDirtyDirective } from './_directive/ignore-dirty.directive';
     MatButtonModule,
     NgMultiSelectDropDownModule.forRoot(),
     PaginationModule,
-    DataTablesModule
+    DataTablesModule,
+    DatepickerModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

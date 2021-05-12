@@ -1,0 +1,31 @@
+.ads-container {
+    background-color: white;
+    height: 350px;
+  }
+  .ads-item {
+      margin-top: 50px;
+    text-align: center;
+    width: 400px;
+    height: 300px;
+    align-items: center;
+  }
+  .bi {
+    font-size: 70px;
+  }
+  .bi-book {
+    color: #27c8ea;
+  }
+  .bi-pencil {
+    color: #86e154;
+  }
+  .bi-bookmarks-fill {
+    color: #e1dc54;
+  }
+  .title p{
+      font-size: 18px;
+  }
+  .content{
+      color: #757575;
+      text-align: center;
+  }
+  
