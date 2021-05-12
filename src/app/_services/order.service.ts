@@ -49,6 +49,13 @@ export class OrderService {
       })
     )
   }
+  getOrdersByUser(idUser: number) {
+    return this.Http.get<OrderRecipts[]>(this.baseUrl+'OrderReceipt/'+idUser).pipe(
+      map(res => {
+        return res;
+      })
+    )
+  }
 
   payment(orderId: number) {
     const paymentInput= {

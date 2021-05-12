@@ -46,11 +46,13 @@
     </div>
     <div class="dropdown mr-3" *ngIf="(currentUser$ | async) as user" dropdown>
       <img src="{{user.image || '/assets/user.png'}}" alt="{{user.photoUrl}}">
-      <a class="dropdown-toggle text-info  ml-3" dropdownToggle>Xin chào {{user.fullName | titlecase}}</a>
+      <a class="dropdown-toggle text-info  ml-3" dropdownToggle>Hi {{user.fullName | titlecase}}</a>
       <div class="dropdown-menu mt-3" *dropdownMenu>
-        <a class="dropdown-item" routerLink="user/edit">Thông tin</a>
+        <a class="dropdown-item" routerLink="user/info">Account</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" (click)="logout()">Đăng xuất</a>
+        <a class="dropdown-item" routerLink="user/orders">Orders</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" (click)="logout()">Logout</a>
       </div>
     </div>
     <div *ngIf="(currentUser$ | async) === null">

@@ -15,6 +15,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { DataTablesModule } from "angular-datatables";
 import { DatepickerModule } from 'ng2-datepicker';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
@@ -54,6 +55,8 @@ import { AdsComponent } from './ads/ads.component';
 import { FooterComponent } from './footer/footer.component';
 import { TestComponent } from './test/test.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
+import { UserOrdersListComponent } from './user/user-orders-list/user-orders-list.component';
+import { UserInfoComponent } from './user/user-info/user-info.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +87,9 @@ import { DateInputComponent } from './_forms/date-input/date-input.component';
     AdsComponent,
     FooterComponent,
     TestComponent,
-    DateInputComponent
+    DateInputComponent,
+    UserOrdersListComponent,
+    UserInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -109,7 +114,8 @@ import { DateInputComponent } from './_forms/date-input/date-input.component';
     NgMultiSelectDropDownModule.forRoot(),
     PaginationModule,
     DataTablesModule,
-    DatepickerModule
+    DatepickerModule,
+    ModalModule.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -1,0 +1,38 @@
+.row {
+  padding: 0 15px;
+}
+.col {
+  border-radius: 10px;
+  background-color: white;
+  padding: 45px 50px 20px;
+  height: 890px;
+  width: 1050px;
+  margin-top: 50px;
+}
+.container-fluid {
+  height: 1000px;
+  background-color: #edf3f4;
+}
+.img-thumbnail {
+  margin: 25px;
+  width: 85%;
+  height: 85%;
+}
+
+.card-body {
+    padding: 0 25px;
+}
+
+.card-footer {
+    padding: 10px 15px;
+    background-color: #fff;
+    border-top: none;
+}
+
+.secure-text {
+    color: #555;
+}
+
+.header {
+    margin-bottom: -10px;
+}

@@ -15,6 +15,8 @@ import { RankComponent } from './rank/rank.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 import { AdminOrderListComponent } from './admin/admin-order-list/admin-order-list.component';
+import { UserOrdersListComponent } from './user/user-orders-list/user-orders-list.component';
+import { UserInfoComponent } from './user/user-info/user-info.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {
@@ -33,6 +35,8 @@ const routes: Routes = [
       {path: 'rank', component: RankComponent },
       {path: 'shoppingcart', component: ShoppingcartComponent },
       {path:'checkout',component:CheckoutComponent},
+      {path:'user/orders',component:UserOrdersListComponent},
+      {path:'user/info',component:UserInfoComponent},
       
       // {path: 'members/:username', component: MemberDetailComponent},
       // {path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard]},

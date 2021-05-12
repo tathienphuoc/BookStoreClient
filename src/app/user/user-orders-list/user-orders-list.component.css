@@ -48,3 +48,15 @@
     width: 50px;
     height: 80px;
   }
+  :host /deep/ .all-tab :heading{
+    text-align: center;
+    font-size: large;
+    width: 230px;
+  }
+  :host /deep/ .all-tab a {
+      color: rgba(0,0,0,.8);
+  }
+  :host /deep/ .all-tab a:hover {
+    color: #ee4d2d;
+}
+
