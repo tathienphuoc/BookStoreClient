@@ -12,26 +12,26 @@
     <div class="col">
       <h1>Register</h1>
       <form [formGroup]='registerForm' (ngSubmit)="registerForm.valid && register()">
-        <label for="exampleInputEmail1" class="form-label">Username or email address</label>
+        <label for="exampleInputEmail1" class="form-label">Username</label>
         <app-text-input [formControl]='registerForm.controls["userName"]' [label]='"Tên đăng nhập"'></app-text-input>
         
-        <label for="exampleInputEmail1" class="form-label">Username or email address</label>
+        <label for="exampleInputEmail1" class="form-label">Full name</label>
         <app-text-input [formControl]='registerForm.controls["fullName"]' [label]='"Họ và tên"'></app-text-input>
         
-        <label for="exampleInputEmail1" class="form-label">Username or email address</label>
+        <label for="exampleInputEmail1" class="form-label">Email</label>
         <app-text-input [formControl]='registerForm.controls["email"]' [label]='"Email"'></app-text-input>
         
-        <label for="exampleInputEmail1" class="form-label">Username or email address</label>
+        <label for="exampleInputEmail1" class="form-label">Phone number</label>
         <app-text-input [formControl]='registerForm.controls["phoneNumber"]' [label]='"Điện thoại"'></app-text-input>
         
-        <label for="exampleInputEmail1" class="form-label">Username or email address</label>
+        <label for="exampleInputEmail1" class="form-label">Address</label>
         <app-text-input [formControl]='registerForm.controls["homeAddress"]' [label]='"Địa chỉ"'></app-text-input>
         
-        <label for="exampleInputEmail1" class="form-label">Username or email address</label>
+        <label for="exampleInputEmail1" class="form-label">Password</label>
         <app-text-input [formControl]='registerForm.controls["password"]' [label]='"Mật khẩu"' [type]='"password"'>
         </app-text-input>
         
-        <label for="exampleInputEmail1" class="form-label">Username or email address</label>
+        <label for="exampleInputEmail1" class="form-label">Confirm Password</label>
         <app-text-input [formControl]='registerForm.controls["confirmPassword"]' [label]='"Xác thực mật khẩu"'
           [type]='"password"'></app-text-input>
         <div class="row mt-5" *ngIf="validationErrors.length >0">

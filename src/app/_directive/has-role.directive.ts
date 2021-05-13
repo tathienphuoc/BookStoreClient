@@ -10,7 +10,7 @@ import { AccountService } from '../_services/account.service';
 })
 export class HasRoleDirective implements OnInit {
   @Input() appHasRole: string[];
-  user: User;
+  user: any;
 
   constructor(private viewContainerRef: ViewContainerRef, 
     private templateRef: TemplateRef<any>, 

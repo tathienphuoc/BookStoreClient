@@ -2,12 +2,14 @@ import { Book } from "./book";
 import { User } from "./user";
 
 export class ReviewParams {
-    accountId: number;
+    accountId: string;
     bookId: number;
+    email: string;
     content: "This is content";
     createdAt = new Date();
-    liked: boolean = false;
-    constructor(user: User) {
+    liked: boolean;
+    constructor(user: any) {
         this.accountId = user.id;
+        this.email = user.email
     }
 }

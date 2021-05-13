@@ -16,6 +16,11 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { DataTablesModule } from "angular-datatables";
 import { DatepickerModule } from 'ng2-datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
 
 
 
@@ -115,11 +120,24 @@ import { UserInfoComponent } from './user/user-info/user-info.component';
     PaginationModule,
     DataTablesModule,
     DatepickerModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    SocialLoginModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('292888465652858')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -10,14 +10,17 @@ import { ReplaySubject } from 'rxjs';
 })
 export class AccountService {
   baseUrl = environment.apiUrl;
-  private currentUserSource = new ReplaySubject<User>(1);
+  private currentUserSource = new ReplaySubject<any>(1);
   currentUser$ = this.currentUserSource.asObservable();
   
   constructor(private http: HttpClient) { }
 
   register(model: any) {
+    console.log(model);
+    
     return this.http.post(this.baseUrl + 'account/register', model).pipe(
       map((user: User) => {
+        console.log(user);
         this.setCurrentUser(user);
       })
     )
@@ -40,10 +43,14 @@ export class AccountService {
     )
   }
 
-  setCurrentUser(user: User) {     
+  setCurrentUser(user: any) { 
+    console.log('setCurrentUser ', user);
+
     if (user != null) {
-      const roles = this.getDecodedToken(user.token).role;
-      user.roles = roles;
+      if (user.token != undefined) {
+        const roles = this.getDecodedToken(user.token).role;
+        user.roles = roles;
+      }
       localStorage.setItem('user', JSON.stringify(user));
       this.currentUserSource.next(user);
     }

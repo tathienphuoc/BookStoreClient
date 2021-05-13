@@ -47,8 +47,8 @@
                     </ul>
                 </div>
                 <div class="dropdown mr-3" *ngIf="(currentUser$ | async) as user" dropdown>
-                    <img src="{{user.image || '/assets/user.png'}}" alt="{{user.photoUrl}}">
-                    <a class="dropdown-toggle text-info ml-3" dropdownToggle>Hi {{user.fullName | titlecase}}</a>
+                    <img src="{{user.response?.picture?.data?.url || user.image || '/assets/user.png'}}" alt="{{user.response?.picture?.data?.url ||user.image}}">
+                    <a class="dropdown-toggle text-info ml-3" dropdownToggle>Hi {{user.name || user.fullName | titlecase}}</a>
                     <div class="dropdown-menu mt-3" *dropdownMenu>
                         <a class="dropdown-item" routerLink="user/info">Account</a>
                         <div class="dropdown-divider"></div>

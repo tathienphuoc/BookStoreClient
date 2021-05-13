@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Review } from '../models/review';
 import { ReviewParams } from '../models/reviewParams';
@@ -13,7 +14,13 @@ export class ReviewService {
   constructor(private http: HttpClient) { }
 
   addLike(reviewParams: ReviewParams){
-    return this.http.post(this.baseUrl+ "review/add-review", reviewParams);
+    return this.http.post(this.baseUrl+ "review/add-review", reviewParams).pipe(
+      map(respone => {
+        console.log(respone);
+        
+        return respone;
+      })
+    )
   }
 
   getReviews() {

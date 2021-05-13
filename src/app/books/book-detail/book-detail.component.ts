@@ -27,7 +27,7 @@ export class BookDetailComponent implements OnInit {
   categories: Category[];
   authors: Author[];
   reviews: Review[];
-  user: User;
+  user: any;
   a = 0;
   name: string = '';
   reviewParams: ReviewParams;
@@ -100,7 +100,8 @@ export class BookDetailComponent implements OnInit {
       this.toastr.success("Bạn đã thích sách " + this.book.title);
       location.href="books/"+id;
     }, error => {
-      this.toastr.error(error.error);
+      console.log(error);
+      this.toastr.error('addlike error ', error);
     })
   }
   getReview() {

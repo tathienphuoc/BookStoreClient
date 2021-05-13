@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs/internal/Observable';
 import { Book } from '../models/book';
@@ -17,13 +18,16 @@ export class HomeComponent implements OnInit {
   model : any = {}
   bookParams: BookParams;
   books: Book[];
-  currentUser$: Observable<User>;
+  currentUser$: Observable<any>;
+  currentUserFB$: Observable<SocialUser>;
   constructor(private accountService : AccountService, private router: Router,
-    private toastr: ToastrService, private bookService: BookService) {
+    private toastr: ToastrService, private bookService: BookService,
+    private authService: SocialAuthService) {
       this.bookParams = new BookParams();
      }
 
   ngOnInit(): void {
+    this.currentUserFB$  = this.authService.authState;
     this.currentUser$ = this.accountService.currentUser$;
     this.loadBooks();
   }
@@ -37,5 +41,6 @@ export class HomeComponent implements OnInit {
 
   logout() {
     this.accountService.logout();
+    this.authService.signOut();
   }
 }

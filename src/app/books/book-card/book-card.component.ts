@@ -19,7 +19,7 @@ import { CartService } from 'src/app/_services/cart.service';
 export class BookCardComponent implements OnInit {
   @Input() book: Book;
   @Input() author: Author;
-  user: User = undefined;
+  user: any = undefined;
   bookIds: Array<Book> = [];
   shoppingcartParam: ShoppingCartParam;
   id: number;
@@ -48,6 +48,8 @@ export class BookCardComponent implements OnInit {
 
   addToCart(accountId: number, book: Book) {
     this.bookIds.push(book);
+    console.log(this.user);
+    
     if(this.user?.roles == undefined){
       this.toastr.error("Vui lòng đăng nhập trước khi mua hàng !");
     } else {
