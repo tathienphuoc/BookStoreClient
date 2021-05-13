@@ -68,6 +68,7 @@ export class RankComponent implements OnInit, AfterViewInit {
   }
 
   loadBooks() {
+    this.bookParams.pageSize = 10;
     this.bookService.getBooks(this.bookParams).subscribe(response => {
       this.books = response.result.sort((one, two) => (one.reviews.length > two.reviews.length ? -1 : 1));            
     })

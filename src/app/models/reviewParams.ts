@@ -2,7 +2,7 @@ import { Book } from "./book";
 import { User } from "./user";
 
 export class ReviewParams {
-    accountId: string;
+    accountId: number;
     bookId: number;
     email: string;
     content: "This is content";

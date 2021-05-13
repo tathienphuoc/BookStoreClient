@@ -130,7 +130,7 @@ export class BookDetailComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-        this.toastr.error("addlike error ", error);
+        this.toastr.error(error.error);
       }
     );
   }
