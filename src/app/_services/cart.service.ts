@@ -25,8 +25,8 @@ export class CartService {
   
 
 
-  addToCart(accountId: number, books: Book[]) {
-    let params = new ShoppingCartParam(accountId, books[0].id);
+  addToCart(accountId: number, books: Book[], quantity: number) {
+    let params = new ShoppingCartParam(accountId, books[0].id, quantity);
     console.log(params);
     return this.Http.post('http://localhost:5001/api/shoppingcart', params).pipe(
       map(response => {

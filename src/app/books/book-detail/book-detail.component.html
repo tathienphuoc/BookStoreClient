@@ -20,8 +20,8 @@
             </div>
             <span class="in-stock">{{book.quantityInStock}} in stock</span>
             <form class="add-to-card">
-              <input type="number" name="" id="" value="1" />
-              <button class="hover" type="submit">ADD TO CART</button>
+              <input #quantity type="number" min="1" id="" value="1" />
+              <button class="hover" (click)="addToCart(user?.id, book, quantity.value)" type="submit">ADD TO CART</button>
             </form>
           </div>
           <div class="product-categories">

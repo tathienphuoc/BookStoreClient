@@ -14,8 +14,9 @@
                 <tab heading='All' customClass="all-tab">
                     <div class="container mt-3 border-1">
                         <div class="row">
-                            <div class="col-8">Shop</div>
-                            <div class="col-4">Status</div>
+                            <div *ngFor="let item of items">
+                                <app-book-order [item]='item'></app-book-order>
+                            </div>
                         </div>
                     </div>
                 </tab>
@@ -30,11 +31,5 @@
                 </tab>
             </tabset>
         </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-8">Shop</div>
-        <div class="col-4">Status</div>
     </div>
 </div>

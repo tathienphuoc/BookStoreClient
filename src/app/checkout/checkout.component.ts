@@ -26,6 +26,7 @@ import { environment } from "src/environments/environment";
 import { OrderRecipts } from "../models/orderRecipts";
 import { Router } from "@angular/router";
 import { DeliveryMethod } from "../models/deliveryMethod";
+import { ToastrService } from "ngx-toastr";
 
 declare var Stripe;
 @Component({
@@ -64,7 +65,8 @@ export class CheckoutComponent implements OnInit {
     private accountService: AccountService,
     private fb: FormBuilder,
     private orderService: OrderService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     let u: User;
     accountService.currentUser$.pipe(take(1)).subscribe((user) => {
@@ -165,7 +167,8 @@ export class CheckoutComponent implements OnInit {
     const paymentIntent = await this.createPaymentIntent(this.order.id);
     console.log("paymentIntent ", paymentIntent);
     if (paymentIntent != null) {
-      location.href="books/";
+      this.toastr.success("Đơn hàng đã được thanh toán ");
+      this.router.navigate(['../books']);
     }
   }
 

@@ -62,6 +62,7 @@ import { TestComponent } from './test/test.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
 import { UserOrdersListComponent } from './user/user-orders-list/user-orders-list.component';
 import { UserInfoComponent } from './user/user-info/user-info.component';
+import { BookOrderComponent } from './user/book-order/book-order.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { UserInfoComponent } from './user/user-info/user-info.component';
     TestComponent,
     DateInputComponent,
     UserOrdersListComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    BookOrderComponent
   ],
   imports: [
     BrowserModule,

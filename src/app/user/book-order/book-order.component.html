@@ -1,0 +1,32 @@
+<div class="container-fluid p-3 pt-4 f-flex">
+    <div class="row w-100 m-auto order-container f-flex">
+        <div class="row m-auto order-item">
+            <div class="col-sm-10 order-detail my-3">
+                <img src="{{item.book.image}}" alt="" />
+                <div class="ms-3">
+                    <h2>
+                        {{item.book.title}}
+                    </h2>
+                    <p>{{displayCategory(item.book)}}</p>
+                    <span>x{{item.quantity}}</span>
+                </div>
+            </div>  
+            <div class="col-sm-2 price-box font-weight-bold">
+                <div><span>{{item.totalPrice | currency}}</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="row w-100 m-auto mt-1 py-3 px-4 total-price-container">
+        <div class="col-sm-12 total-price mt-3">
+            <div class="font-weight-bold me-3">
+                <span>Total price: </span><span class="price-text">{{item.totalPrice | currency}}</span>
+            </div>
+        </div>
+        <div class="col-sm-12 total-price mt-3">
+            <div class="btn-group">
+                <a class="btn btn-lg btn-dark rounded-pill hover">Mua Lần Nữa</a>
+                <a class="btn btn-lg btn-outline-dark rounded-pill ms-1 hover">Chi Tiết Đơn Hủy</a>
+            </div>
+        </div>
+    </div>
+</div>
