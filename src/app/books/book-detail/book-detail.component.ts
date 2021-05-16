@@ -149,4 +149,12 @@ export class BookDetailComponent implements OnInit {
       this.categories = response;
     });
   }
+  checkQuantity(event: any, maxQuantity: number) {
+    event.target.value = Number(event.target.value);
+    if (event.target.value < 0) {
+      event.target.value = 0;
+    }else if (event.target.value > maxQuantity) {
+      event.target.value = maxQuantity;
+    }
+  }
 }

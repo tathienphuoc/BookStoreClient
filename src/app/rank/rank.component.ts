@@ -22,7 +22,7 @@ import { ReviewService } from "../_services/review.service";
   templateUrl: "./rank.component.html",
   styleUrls: ["./rank.component.css"],
 })
-export class RankComponent implements OnInit, AfterViewInit {
+export class RankComponent implements OnInit {
   categories: Category[];
   reviews: Review[];
   bookIds: number[];
@@ -37,23 +37,21 @@ export class RankComponent implements OnInit, AfterViewInit {
   ) {
     this.bookParams = new BookParams();
   }
-  ngAfterViewInit(): void {
+
+  activeBtn(event) {
     let categories = document.getElementsByClassName('btn');
     for (let i = 0; i < categories.length; i++) {
-      categories[i].addEventListener('click', function () {
-        let preActive = document.querySelector("[class*='btn btn-lg active']")
-        preActive.classList.remove("active");
-        categories[i].classList.add("active");
-      })
+      categories[i].classList.remove("active");
     }
+    event.target.classList.add("active");
   }
 
-  getNumOfLike() {}
+  getNumOfLike() { }
 
   ngOnInit(): void {
     this.loadAllReview();
     this.loadCatgories();
-    this.loadBooks();  
+    this.loadBooks();
   }
   loadAllReview() {
     this.reviewService.getReviews().subscribe((response) => {
@@ -62,7 +60,7 @@ export class RankComponent implements OnInit, AfterViewInit {
     });
   }
 
-  changeCategory(categoryId: number) { 
+  changeCategory(categoryId: number) {
     this.bookParams.categoryid = categoryId;
     this.loadBooks();
   }
@@ -70,7 +68,7 @@ export class RankComponent implements OnInit, AfterViewInit {
   loadBooks() {
     this.bookParams.pageSize = 10;
     this.bookService.getBooks(this.bookParams).subscribe(response => {
-      this.books = response.result.sort((one, two) => (one.reviews.length > two.reviews.length ? -1 : 1));            
+      this.books = response.result.sort((one, two) => (one.reviews.length > two.reviews.length ? -1 : 1));
     })
   }
   count(book: Book) {

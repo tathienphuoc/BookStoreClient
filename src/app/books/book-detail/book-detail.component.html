@@ -20,7 +20,7 @@
             </div>
             <span class="in-stock">{{book.quantityInStock}} in stock</span>
             <form class="add-to-card">
-              <input #quantity type="number" min="1" max="{{book.quantityInStock}}" value="1" />
+              <input #quantity (input)="checkQuantity($event,book.quantityInStock)" type="number" min="1" max="{{book.quantityInStock}}" value="1" />
               <button class="hover" (click)="addToCart(user?.id, book, quantity.value)" type="submit">ADD TO CART</button>
             </form>
           </div>

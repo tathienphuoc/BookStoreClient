@@ -5,8 +5,8 @@
       <h1>Bảng xếp hạng Bookie</h1>
     </div>
     <div class="categories" >
-      <a class="btn btn-lg active" (click)="changeCategory(0)">Tất cả</a>
-      <a class="btn btn-lg" (click)="changeCategory(category.id)" *ngFor="let category of categories">{{category.name}}</a>
+      <a class="btn btn-lg active" (click)="changeCategory(0);activeBtn($event)">Tất cả</a>
+      <a class="btn btn-lg" (click)="changeCategory(category.id);activeBtn($event)" *ngFor="let category of categories">{{category.name}}</a>
     </div> 
     <div routerLink='/books/{{book.id}}' class="rank-item d-flex" *ngFor="let book of books; let i = index">
       <div class="rank-number">
