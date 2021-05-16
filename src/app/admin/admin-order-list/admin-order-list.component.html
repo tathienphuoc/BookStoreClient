@@ -28,7 +28,7 @@
                         <td>{{ order.fullName }}</td>
                         <td>{{ order.phone}}</td>
                         <td>{{ order.totalPrice | currency}}</td>
-                        <td>{{ order.status}}</td>
+                        <td>{{ showStatus(order.status)}}</td>
                         <td>{{ order.deliveryMethod?.type}}</td>
                         <td><button (click)="openModal(template, order)" class="btn btn-secondary"><i
                                     class="fas fa-info-square"></i></button></td>
@@ -72,7 +72,7 @@
                     <tr *ngFor="let item of itemsOfSpecOrder">
                         <td><img src="{{item.book.image}}" alt=""></td>
                         <td>{{item.book.title}}</td>
-                        <td>{{item.unitPrice}}</td>
+                        <td>{{item.unitPrice | currency}}</td>
                         <td>{{item.quantity}}</td>
                     </tr>
                 </tbody>

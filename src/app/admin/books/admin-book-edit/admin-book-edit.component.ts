@@ -35,7 +35,7 @@ import { PublisherService } from "src/app/_services/publisher.service";
   templateUrl: "./admin-book-edit.component.html",
   styleUrls: ["./admin-book-edit.component.css"],
 })
-export class AdminBookEditComponent implements OnInit, AfterViewInit {
+export class AdminBookEditComponent implements OnInit {
   datePickerValue: Date;
   maxDate: Date;
   bsValue = new Date();
@@ -46,8 +46,9 @@ export class AdminBookEditComponent implements OnInit, AfterViewInit {
   reviews = [];
   dropdownSettings: IDropdownSettings = {};
   dropdownAuthorSettings: IDropdownSettings = {};
-  @ViewChild("editForm") editForm: NgForm;
-  fileToUpload: File = null;
+  // @ViewChild("editForm") editForm: NgForm;
+  editForm: FormGroup;
+  fileToUpload: File;
   imageSrc: string;
   book: Book;
   authors: Author[];
@@ -66,21 +67,62 @@ export class AdminBookEditComponent implements OnInit, AfterViewInit {
     private publisherService: PublisherService,
     private mailService: MailService
   ) {}
-  ngAfterViewInit() {}
+  initializeFrom() {
+    let dateString = this.book.publicationDate;
+    let newDate = new Date(dateString);
+    console.log(newDate);
 
-  ignoreDirty() {}
+    this.editForm = this.fb.group({
+      title: [this.book.title, Validators.required],
+      isbn: [
+        this.book.isbn,
+        [
+          Validators.required,
+          Validators.maxLength(6),
+          Validators.pattern("^[0-9]*$"),
+        ],
+      ],
+      price: [
+        this.book.price,
+        [Validators.required, Validators.pattern("^[0-9]*$")],
+      ],
+      discount: [
+        this.book.discount,
+        [Validators.required, Validators.pattern("^[0-9][0-9]?$|^100$")],
+      ],
+      summary: [this.book.summary, Validators.required],
+      quantityInStock: [
+        this.book.quantityInStock,
+        [Validators.required, Validators.pattern("^[0-9]*$")],
+      ],
+      publicationDate: [new Date(), Validators.required],
+      categoryId: [this.selectedCategories, Validators.required],
+      authorId: [this.selectedAuthors, Validators.required],
+      // order_ReceiptId: new FormArray([]),
+      publisherId: new FormControl(this.book.publisherId),
+    });
+  }
+
+  isDirty() {
+    if (this.editForm.dirty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   async ngOnInit() {
     await this.loadBook();
+    this.initializeFrom();
     console.log(this.book);
     this.maxDate = new Date();
     this.datePickerValue = new Date(this.book.publicationDate);
     this.loadCategories();
     this.loadAuthors();
     this.loadPublishers();
-    setTimeout(() => {
-      this.editForm?.form.controls["selectedCategories"].markAsPristine();
-      this.editForm?.form.controls["selectedAuthors"].markAsPristine();
-    }, 1);
+    // setTimeout(() => {
+    //   this.editForm?.form.controls["selectedCategories"].markAsPristine();
+    //   this.editForm?.form.controls["selectedAuthors"].markAsPristine();
+    // }, 1);
     this.bsConfig = {
       containerClass: "theme-red",
       dateInputFormat: "DD MMMM YYYY",
@@ -101,16 +143,23 @@ export class AdminBookEditComponent implements OnInit, AfterViewInit {
     };
   }
   onItemDeSelectCategory(item: any) {
+    const index = this.selectedCategories
+      .map((item) => item.id)
+      .indexOf(item.id);
+    if (index > -1) {
+      this.selectedCategories.splice(index, 1);
+    }
     if (this.selectedCategories.length == 0) {
       this.toastr.error("Choose at least one category");
     }
   }
   onItemSelectCategory(item: any) {
+    this.selectedCategories.push(item);
     console.log("select", this.selectedCategories);
   }
   onSelectAllCategory(items: any) {
     items.forEach((element) => {
-      this.selectedCategories.push(element.id);
+      this.selectedCategories.push(element);
     });
     console.log("selectAll", this.selectedCategories);
   }
@@ -123,14 +172,21 @@ export class AdminBookEditComponent implements OnInit, AfterViewInit {
   }
 
   onItemDeSelectAuthor(item: any) {
+    const index = this.selectedAuthors.map((item) => item.id).indexOf(item.id);
+    if (index > -1) {
+      this.selectedAuthors.splice(index, 1);
+    }
     if (this.selectedAuthors.length == 0) {
       this.toastr.error("Choose at least one author");
     }
   }
-  onItemSelectAuthor(item: any) {}
+  onItemSelectAuthor(item: any) {
+    this.selectedAuthors.push(item);
+    console.log("select", this.selectedAuthors);
+  }
   onSelectAllAuthor(items: any) {
     items.forEach((element) => {
-      this.selectedAuthors.push(element.id);
+      this.selectedAuthors.push(element);
     });
   }
   onDeSelectAllAuthor(items: any) {
@@ -174,15 +230,24 @@ export class AdminBookEditComponent implements OnInit, AfterViewInit {
   updateBook() {
     const formData = new FormData();
     formData.append("id", this.book.id.toString());
-    formData.append("title", this.book.title);
-    formData.append("price", this.book.price.toString());
-    formData.append("isbn", this.book.isbn);
-    formData.append("discount", this.book.discount.toString());
-    formData.append("publicationDate", this.datePickerValue.toUTCString());
-    formData.append("publisherId", this.book.publisherId.toString());
-    formData.append("quantityInStock", this.book.quantityInStock.toString());
-    formData.append("summary", this.book.summary.toString());
+    formData.append("title", this.editForm.get("title").value);
+    formData.append("price", this.editForm.get("price").value);
+    formData.append("isbn", this.editForm.get("isbn").value);
+    const x = Number(this.editForm.get("discount").value);
+    let discount = x/100;
+    formData.append("discount", discount.toFixed(2).toString());
+    const datestr = new Date(
+      this.editForm.get("publicationDate").value
+    ).toUTCString();
+    formData.append("publicationDate", datestr);
+    formData.append("publisherId", this.editForm.get("publisherId").value);
+    formData.append(
+      "quantityInStock",
+      this.editForm.get("quantityInStock").value
+    );
+    formData.append("summary", this.editForm.get("summary").value);
     for (let cate of this.selectedCategories) {
+      console.log(cate.id);
       formData.append("categoryId", cate.id);
     }
     for (let author of this.selectedAuthors) {
@@ -195,11 +260,11 @@ export class AdminBookEditComponent implements OnInit, AfterViewInit {
       console.log(res);
       if (res) {
         this.sendMail(this.reviews);
-        this.editForm.form.markAsPristine();
+        this.editForm.markAsPristine();
         this.toastr.success("Book successfully updated");
       }
     });
-    console.log(this.book);
+    // console.log(this.book);
   }
   sendMail(reviews: any) {
     reviews.forEach((review) => {
@@ -208,7 +273,7 @@ export class AdminBookEditComponent implements OnInit, AfterViewInit {
         formData.append("toEmail", review.account.email);
         formData.append(
           "subject",
-          "Chúc mừng bạn, cuốn sách bạn yêu thích vừa được giảm giá, mua ngay thôi !"
+          "Hooray! Congratulations! , Your love book is sale off, BUY IT NOW !"
         );
         formData.append("body", this.getBodyEmail());
         this.mailService.sendMail(formData).subscribe(

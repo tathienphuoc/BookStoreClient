@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Book } from "src/app/models/book";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { BookService } from "src/app/_services/book.service";
 import { AuthorService } from "src/app/_services/author.service";
 import { Author } from "src/app/models/author";
@@ -36,6 +36,7 @@ export class BookDetailComponent implements OnInit {
   constructor(
     private bookService: BookService,
     private route: ActivatedRoute,
+    private router: Router,
     private authorService: AuthorService,
     private accountService: AccountService,
     private toastr: ToastrService,
@@ -100,6 +101,7 @@ export class BookDetailComponent implements OnInit {
         .addToCart(accountId, this.bookIds, quantity)
         .subscribe((response) => {
           this.toastr.info("Đã thêm sách vào giỏ hàng");
+          this.router.navigate([this.router.url]);
           console.log(response);
         });
     }
@@ -123,20 +125,20 @@ export class BookDetailComponent implements OnInit {
       this.authors = authors;
     });
   }
-  addLike(id: number) {
-    if (id != undefined) {
+  addLike(id: any) {
+    if (id == undefined) {
       location.href="login/";
     }
     this.reviewService.addLike(this.reviewParams).subscribe(
       () => {
-        this.toastr.success("Bạn đã thích sách " + this.book.title);
-        location.href = "books/" + id;
+        location.href = "books/"+ this.book.id;
       },
       (error) => {
         console.log(error);
         this.toastr.error(error.error);
       }
-    );
+      );
+    this.toastr.success("Bạn đã thích sách " + this.book.title);
   }
   getReview() {
     this.reviewService.getReviews().subscribe((reviews) => {
@@ -151,8 +153,8 @@ export class BookDetailComponent implements OnInit {
   }
   checkQuantity(event: any, maxQuantity: number) {
     event.target.value = Number(event.target.value);
-    if (event.target.value < 0) {
-      event.target.value = 0;
+    if (event.target.value <= 0) {
+      event.target.value = 1;
     }else if (event.target.value > maxQuantity) {
       event.target.value = maxQuantity;
     }

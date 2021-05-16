@@ -41,7 +41,7 @@
                         <li class="nav-item">
                             <a class="nav-link active bi bi-basket icon" aria-current="page" routerLink="/shoppingcart"
                                 routerLinkActive="active">
-                                <span class="amount">3</span>
+                                <span *ngIf="Items?.length != 0" class="amount">{{countItems()}}</span>
                             </a>
                         </li>
                     </ul>

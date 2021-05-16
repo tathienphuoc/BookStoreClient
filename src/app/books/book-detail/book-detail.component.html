@@ -7,7 +7,7 @@
         <div class="product-detail">
           <h1 class="lead">{{book.title}}</h1>
           <span class="rating">
-            <button class="btn btn-outline-primary" (click)='addLike(book.id)'>
+            <button class="btn btn-outline-primary" (click)='addLike(user?.id)'>
               <em class="bi bi-suit-heart"></em><span class="rating-text" >{{count(book)}} điểm. Bình chọn ngay</span>
             </button>
           </span>

@@ -107,7 +107,7 @@ import { BookOrderComponent } from './user/book-order/book-order.component';
     FormsModule,
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right'
+      positionClass: 'toast-top-right'
     }),
     TabsModule.forRoot(),
     NgxGalleryModule,

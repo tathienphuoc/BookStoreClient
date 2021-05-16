@@ -56,11 +56,9 @@ export class BookService {
       params = params.append('titleSearch', bookParams.titleSearch);
     }
     console.log(params);
-    
     return getPaginationResult<Book[]>(this.baseUrl + 'book/', params, this.http)
       .pipe(map(response => {
         console.log(response);
-        
         return response;
       }))
     }

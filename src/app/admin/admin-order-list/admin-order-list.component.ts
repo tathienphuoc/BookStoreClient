@@ -43,6 +43,15 @@ export class AdminOrderListComponent implements OnDestroy, OnInit {
       this.dtTrigger.next()
     })
   }
+  showStatus(statusId : number) {
+    if (statusId == 1) {
+      return "Paid"
+    } if (statusId == 0) {
+      return "Pending"
+    } else {
+      return "N/A"
+    }
+  }
 
   openModal(template: TemplateRef<any>,  order: OrderRecipts) {
     this.modalRef = this.modalService.show(template, this.config);
