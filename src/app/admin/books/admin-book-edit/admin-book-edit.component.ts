@@ -87,7 +87,7 @@ export class AdminBookEditComponent implements OnInit {
         [Validators.required, Validators.pattern("^[0-9]*$")],
       ],
       discount: [
-        this.book.discount,
+        this.book.discount*100,
         [Validators.required, Validators.pattern("^[0-9][0-9]?$|^100$")],
       ],
       summary: [this.book.summary, Validators.required],
