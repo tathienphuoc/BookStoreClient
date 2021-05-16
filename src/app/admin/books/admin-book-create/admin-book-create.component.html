@@ -92,8 +92,8 @@
             
             <div class="form-group row">
                 <div class="col-sm-10">
-                    <button type="submit" [disabled]="!formCreateBook.valid" class="btn btn-primary"
-                        (click)="submitForm()">Create</button>
+                    <button type="submit" [disabled]="!formCreateBook.valid || !fileToUpload" class="btn btn-primary"
+                        >Create</button>
                 </div>
             </div>
         </form>

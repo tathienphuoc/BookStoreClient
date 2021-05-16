@@ -32,7 +32,7 @@ import { DatepickerOptions } from "ng2-datepicker";
   styleUrls: ["./admin-book-create.component.css"],
 })
 export class AdminBookCreateComponent implements OnInit {
-  maxDate:Date;
+  maxDate: Date;
   listCategories = [];
   listAuthors = [];
   selectedCategories = [];
@@ -87,7 +87,7 @@ export class AdminBookCreateComponent implements OnInit {
       textField: "fullName",
       itemsShowLimit: 3,
       allowSearchFilter: true,
-    }; 
+    };
   }
 
   handleFileInput(files: FileList) {
@@ -105,15 +105,15 @@ export class AdminBookCreateComponent implements OnInit {
           Validators.pattern("^[0-9]*$"),
         ],
       ],
-      price: ["", Validators.required],
-      discount: ["", Validators.required],
-      summary: ["", Validators.required],
-      quantityInStock: ["", Validators.required],
+      price: ["", [Validators.required, Validators.pattern("^[0-9]*$")]],
+      discount: ["", [Validators.required, Validators.pattern("^[0-9][0-9]?$|^100$")]],
+      summary: ["", Validators.required], 
+      quantityInStock: ["", [Validators.required, Validators.pattern("^[0-9]*$")]],
       publicationDate: [new Date(), Validators.required],
       categoryId: ["", Validators.required],
       authorId: ["", Validators.required],
       order_ReceiptId: new FormArray([]),
-      publisherId: new FormControl(null)
+      publisherId: new FormControl(null),
     });
   }
   onItemDeSelectAuthor(item: any) {
@@ -175,16 +175,16 @@ export class AdminBookCreateComponent implements OnInit {
 
   readURL(event: any): void {
     if (event.target.files && event.target.files[0]) {
-        const file = event.target.files[0];
+      const file = event.target.files[0];
 
-        const reader = new FileReader();
-        reader.onload = () => {
-          this.imageSrc = reader.result as string;
-          this.fileToUpload = file;
-        }
-        reader.readAsDataURL(file);
-    }    
-}
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageSrc = reader.result as string;
+        this.fileToUpload = file;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 
   async loadCategories() {
     const result = await this.categoryService.getCategories().toPromise();
@@ -201,22 +201,23 @@ export class AdminBookCreateComponent implements OnInit {
   }
   submitForm() {
     // console.log(this.formCreateBook.get('publicationDate').value);
-    
+
     const formData = new FormData();
     formData.append("title", this.formCreateBook.get("title").value);
     formData.append("isbn", this.formCreateBook.get("isbn").value);
     formData.append("price", this.formCreateBook.get("price").value);
-    formData.append("discount", this.formCreateBook.get("discount").value);
+    const x = Number(this.formCreateBook.get("discount").value);
+    let discount = x/100;
+    formData.append("discount", discount.toFixed(2).toString());
     formData.append("summary", this.formCreateBook.get("summary").value);
     formData.append(
       "quantityInStock",
       this.formCreateBook.get("quantityInStock").value
     );
-    const datestr = (new Date(this.formCreateBook.get("publicationDate").value)).toUTCString();
-    formData.append(
-      "publicationDate",
-      datestr
-    );
+    const datestr = new Date(
+      this.formCreateBook.get("publicationDate").value
+    ).toUTCString();
+    formData.append("publicationDate", datestr);
     for (const index in this.selectedCategories) {
       // instead of passing this.arrayValues.toString() iterate for each item and append it to form.
       formData.append(
@@ -249,6 +250,7 @@ export class AdminBookCreateComponent implements OnInit {
     this.bookService.addBook(formData).subscribe(
       (response) => {
         console.log(response);
+        this.toastr.success("Book successfully created");
       },
       (error) => {
         this.validationErrors = error;

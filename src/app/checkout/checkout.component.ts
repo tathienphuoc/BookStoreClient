@@ -40,15 +40,15 @@ export class CheckoutComponent implements OnInit {
   @ViewChild("cardCvc") cardCvcElement: ElementRef;
 
   order: OrderRecipts;
-  cardError: any;
+  cardError: any = null;
 
   private stripe: any;
   private cardNumber: any;
   private cardHandler = this.onChange.bind(this);
 
-  private numberCompleted = false;
-  private expiryCompleted = false;
-  private cvcCompleted = false;
+  numberCompleted = false;
+  expiryCompleted = false;
+  cvcCompleted = false;
 
   processing = false;
   orderForm: FormGroup;
@@ -136,7 +136,7 @@ export class CheckoutComponent implements OnInit {
       nameOnCard: ['', [Validators.required]]
     });
   }
-  showTotalPrice() {
+  showTotalPrice() {    
     let total = 0;
     this.items?.forEach((e) => {
       total = total + e.totalPrice;
@@ -144,7 +144,7 @@ export class CheckoutComponent implements OnInit {
     return total;
   }
 
-  async createOrder() {
+  async createOrder() {    
     if (this.deliveryId == null) {
       this.deliveryId = 1;
     };

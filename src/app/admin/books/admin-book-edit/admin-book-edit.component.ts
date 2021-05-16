@@ -55,16 +55,10 @@ export class AdminBookEditComponent implements OnInit, AfterViewInit {
   publishers: Publisher[];
   bsConfig: Partial<BsDatepickerConfig>;
   discountPrevious: number;
-  @HostListener("window:beforeunload", ["$event"]) unloadNotification(
-    $event: any
-  ) {
-    if (this.editForm.dirty) {
-      $event.returnValue = true;
-    }
-  }
   constructor(
     private bookService: BookService,
     private route: ActivatedRoute,
+    private router: Router,
     private fb: FormBuilder,
     private toastr: ToastrService,
     private categoryService: CategoryService,
@@ -175,21 +169,6 @@ export class AdminBookEditComponent implements OnInit, AfterViewInit {
     this.reviews = result.reviews;
     this.discountPrevious = result.discount;
     this.imageSrc = result.image;
-
-    // .subscribe(book => {
-    //   book.bookCategories.forEach(e=>{
-    //     let a = {
-    //       id: e.category.id,
-    //       name: e.category.name
-    //     }
-    //     this.selectedCategories.push(a);
-    //     console.log("loadbook" + this.selectedCategories);
-
-    //   })
-    //   book.authorBooks.forEach(e=>{
-    //     this.selectedAuthors.push(e.author);
-    //   })
-    // })
   }
 
   updateBook() {
@@ -212,10 +191,12 @@ export class AdminBookEditComponent implements OnInit, AfterViewInit {
     if (this.fileToUpload != null) {
       formData.append("image", this.fileToUpload);
     }
-    this.bookService.updateBook(formData).subscribe((res) => {
+    this.bookService.updateBook(formData).subscribe((res: Book) => {
       console.log(res);
       if (res) {
         this.sendMail(this.reviews);
+        this.editForm.form.markAsPristine();
+        this.toastr.success("Book successfully updated");
       }
     });
     console.log(this.book);

@@ -111,8 +111,9 @@ export class BookDetailComponent implements OnInit {
       .subscribe((book) => {
         this.book = book;
         console.log(book);
-
-        this.reviewParams.bookId = book.id;
+        if (this.reviewParams != undefined) {
+          this.reviewParams.bookId = book.id;
+        }
         this.loadAuthorByBook(book.id);
         this.loadplsher(book.publisherId);
       });
@@ -123,6 +124,9 @@ export class BookDetailComponent implements OnInit {
     });
   }
   addLike(id: number) {
+    if (id != undefined) {
+      location.href="login/";
+    }
     this.reviewService.addLike(this.reviewParams).subscribe(
       () => {
         this.toastr.success("Bạn đã thích sách " + this.book.title);

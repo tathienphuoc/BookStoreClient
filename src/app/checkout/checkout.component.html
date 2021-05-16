@@ -18,35 +18,39 @@
                                     <div class="col-12">
                                         <label for="address2" class="form-label text-muted">Your name<strong
                                                 style="color: red;">*</strong> <span class="text-muted"></span></label>
-                                                <app-text-input [formControl]='orderForm.controls["fullName"]'
-                                                [label]='"Your name"'></app-text-input> 
+                                        <app-text-input [formControl]='orderForm.controls["fullName"]'
+                                            [label]='"Your name"'></app-text-input>
                                     </div>
                                     <div class="col-12">
                                         <label for="address2" class="form-label text-muted">Phone<strong
                                                 style="color: red;">*</strong> <span class="text-muted"></span></label>
-                                                <app-text-input [formControl]='orderForm.controls["phone"]'
-                                                [label]='"your phone"'></app-text-input>                                       
+                                        <app-text-input [formControl]='orderForm.controls["phone"]'
+                                            [label]='"your phone"'></app-text-input>
                                     </div>
                                     <div class="col-12">
                                         <label for="address2" class="form-label text-muted">Email<strong
                                                 style="color: red;">*</strong> <span class="text-muted"></span></label>
-                                                <app-text-input [formControl]='orderForm.controls["email"]'
-                                                [label]='"your email"'></app-text-input>                                    
+                                        <app-text-input [formControl]='orderForm.controls["email"]'
+                                            [label]='"your email"'></app-text-input>
 
                                     </div>
                                     <div class="col-12">
-                                        <label for="address2" class="form-label text-muted">Select Delivery Method<strong
-                                                style="color: red;">*</strong> <span class="text-muted"></span></label>
-                                            <select [(ngModel)]="deliveryId" [ngModelOptions]="{standalone: true}" class="form-select">
-                                                <option *ngFor="let item of deliveryMethod" [value]="item.id">{{item.type}}</option>
-                                            </select>
+                                        <label for="address2" class="form-label text-muted">Select Delivery
+                                            Method<strong style="color: red;">*</strong> <span
+                                                class="text-muted"></span></label>
+                                        <select [(ngModel)]="deliveryId" [ngModelOptions]="{standalone: true}"
+                                            class="form-select">
+                                            <option *ngFor="let item of deliveryMethod" [value]="item.id">{{item.type}}
+                                            </option>
+                                        </select>
                                     </div>
                                     <div class="col-12">
                                         <h2><i class="fab fa-cc-stripe"></i> Payment</h2>
                                     </div>
 
                                     <div class="col-9">
-                                        <input formControlName="nameOnCard" placeholder="Name on card" type="text" class="form-control">
+                                        <input formControlName="nameOnCard" placeholder="Name on card" type="text"
+                                            class="form-control">
                                     </div>
 
                                     <div class="col-3">
@@ -68,7 +72,8 @@
                                             please wait!</span>
                                     </div>
                                     <button type="submit" style="border-radius: 20px; width: 100%;height: auto; "
-                                        class="btn btn-outline-dark mb-3" (click)="createOrder()" [disabled]='!orderForm.valid && cardError == undefined'>Complete Order</button>
+                                        class="btn btn-outline-dark mb-3" (click)="createOrder()"
+                                        [disabled]='!orderForm.valid || !numberCompleted || !expiryCompleted || !cvcCompleted '>Complete Order</button>
                                 </div>
 
                             </form>
@@ -111,7 +116,8 @@
                                         <p style="font-size:large">Total Price</p>
                                     </div>
                                     <div class="col">
-                                        <p style="margin-left: 150px;font-size: large;">{{showTotalPrice() | currency}}</p>
+                                        <p style="margin-left: 150px;font-size: large;">{{showTotalPrice() | currency}}
+                                        </p>
                                     </div>
                                 </div>
 

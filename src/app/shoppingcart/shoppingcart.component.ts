@@ -75,12 +75,11 @@ export class ShoppingcartComponent implements OnInit {
   }
 
   orderLink() {
-    location.href="/checkout";
-    // if (this.items.length == 0) {
-    //   this.toastr.error("Mua hàng trươc khi thanh toán");
-    // } else {
-    //   location.href="/checkout";
-    // }
+    if (this.items?.length == 0 || this.items?.length == undefined) {
+      this.toastr.error("Mua hàng trươc khi thanh toán");
+    } else {
+      location.href="/checkout";
+    }
   }
 
   showTotalPrice() {
