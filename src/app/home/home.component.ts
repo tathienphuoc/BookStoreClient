@@ -40,8 +40,12 @@ export class HomeComponent implements OnInit {
     this.loadBooks();
     this.getCart();
   }
-  countItems(){        
-    return this.Items?.length;
+  countItems(){    
+    let x = 0;
+    this.Items?.forEach(element => {
+      x = x + element.quantity;
+    });
+    return x;
   }
   getCart() {
     this.cart.getCart(this.account?.id).subscribe(response => {
