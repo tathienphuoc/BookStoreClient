@@ -9,27 +9,14 @@
 </div>
 <div class="container-fluid d-flex">
     <div class="row m-auto flex-1">
-        <div class="col">
-            <tabset class="member-tabset" #orderTabs>
-                <tab heading='All' customClass="all-tab">
-                    <div class="container mt-3 border-1">
-                        <div class="row">
-                            <div *ngFor="let item of items">
-                                <app-book-order [item]='item'></app-book-order>
-                            </div>
-                        </div>
+        <div class="col mt-4 mb-4">
+            <div class="container mt-3 mb-3 border-1">
+                <div class="row">
+                    <div *ngFor="let item of items">
+                        <app-book-order [item]='item'></app-book-order>
                     </div>
-                </tab>
-                <tab heading='Processing' customClass="all-tab">
-                    <h1>Processing</h1>
-                </tab>
-                <tab heading='Shipping' customClass="all-tab">
-                    <h1>Shipping</h1>
-                </tab>
-                <tab heading='Completed' customClass="all-tab">
-                    <h1>Completed</h1>
-                </tab>
-            </tabset>
+                </div>
+            </div>
         </div>
     </div>
 </div>

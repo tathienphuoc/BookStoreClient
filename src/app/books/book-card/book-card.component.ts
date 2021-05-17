@@ -52,6 +52,8 @@ export class BookCardComponent implements OnInit {
     
     if(this.user?.roles == undefined){
       this.toastr.error("Vui lòng đăng nhập trước khi mua hàng !");
+    } if (book.quantityInStock == 0) {
+      this.toastr.error("Sorry the shop only has "+ 0 +" books left");
     } else {
       this.shoppingcartService.addToCart(accountId, this.bookIds, 1).subscribe(response => {
         window.location.href = '/shoppingcart';

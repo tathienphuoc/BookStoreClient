@@ -83,7 +83,7 @@ export class CheckoutComponent implements OnInit {
 
     this.cardNumber = elements.create("cardNumber", {
       showIcon: true,
-      placeholder: "Card Number"
+      placeholder: "Card Number",
     });
     this.cardNumber.mount(this.cardNumberElement.nativeElement);
     this.cardNumber.addEventListener("change", this.cardHandler);
@@ -103,9 +103,9 @@ export class CheckoutComponent implements OnInit {
     this.loadDeliveryMethods();
   }
   loadDeliveryMethods() {
-    this.orderService.getDeliveryMethods().subscribe(response => {
+    this.orderService.getDeliveryMethods().subscribe((response) => {
       this.deliveryMethod = response;
-    })
+    });
   }
 
   get cardInfoInvalid() {
@@ -131,12 +131,15 @@ export class CheckoutComponent implements OnInit {
   initialForm() {
     this.orderForm = this.fb.group({
       fullName: [this.user.fullName, Validators.required],
-      phone: [this.user.phoneNumber, [Validators.required, Validators.pattern("^[0-9]*$")]],
+      phone: [
+        this.user.phoneNumber,
+        [Validators.required, Validators.pattern("^[0-9]*$")],
+      ],
       email: [this.user.email, [Validators.required, Validators.email]],
-      nameOnCard: ['', [Validators.required]]
+      nameOnCard: ["", [Validators.required]],
     });
   }
-  showTotalPrice() {    
+  showTotalPrice() {
     let total = 0;
     this.items?.forEach((e) => {
       total = total + e.totalPrice;
@@ -144,10 +147,10 @@ export class CheckoutComponent implements OnInit {
     return total;
   }
 
-  async createOrder() {    
+  async createOrder() {
     if (this.deliveryId == null) {
       this.deliveryId = 1;
-    };
+    }
     this.orderForm.addControl("items", this.fb.control(this.items));
     console.log(this.orderForm.value);
     const formData = new FormData();
@@ -160,16 +163,22 @@ export class CheckoutComponent implements OnInit {
       // instead of passing this.arrayValues.toString() iterate for each item and append it to form.
       formData.append(`items[${index}]`, this.items[index].id.toString());
     }
-    const result = await this.orderService.createOrder(formData).toPromise();
-    this.order = result;
-    console.log("orderId ", this.order.id);
-    this.processing = true;
-    const paymentIntent = await this.createPaymentIntent(this.order.id);
-    console.log("paymentIntent ", paymentIntent);
-    if (paymentIntent != null) {
-      this.toastr.success("Đơn hàng đã được thanh toán ");
-      this.router.navigate(['../books']);
-    }
+    this.orderService.createOrder(formData).subscribe(
+      async (result) => {
+        this.order = result;
+        console.log("orderId ", this.order?.id);
+        this.processing = true;
+        const paymentIntent = await this.createPaymentIntent(this.order?.id);
+        console.log("paymentIntent ", paymentIntent);
+        if (paymentIntent != null) {
+          this.toastr.success("Đơn hàng đã được thanh toán ");
+          this.router.navigate(["../books"]);
+        }
+      },
+      (error) => {
+        this.toastr.error(error.error);
+      }
+    );
   }
 
   private async createPaymentIntent(id: number) {

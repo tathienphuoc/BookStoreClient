@@ -68,10 +68,17 @@ export class ShoppingcartComponent implements OnInit {
     this.params.cartId = cartId;
     this.params.cartItemId = cartItem;
     this.params.quantity = quantity;
-    this.cartService.changeQuantity(this.params).subscribe(response => {
-      window.location.href = '/shoppingcart';
-      console.log(response);
-    })
+    const quantityInStock = this.items.find(x=>x.id == cartItem).book.quantityInStock;
+    if (quantityInStock < quantity) {
+      this.toastr.error("Sorry the shop only has "+ quantityInStock +" books left")
+    } else {
+      this.cartService.changeQuantity(this.params).subscribe(response => {
+        window.location.href = '/shoppingcart';
+        console.log(response);
+      },error => {
+        this.toastr.error(error.error);
+      })
+    }
   }
 
   orderLink() {

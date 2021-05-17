@@ -52,7 +52,11 @@ export class HeaderComponent implements OnInit {
   }
 
   countItems(){    
-    return this.Items?.length;
+    let x = 0;
+    this.Items?.forEach(element => {
+      x = x + element.quantity;
+    });
+    return x;
   }
 
   logout() {

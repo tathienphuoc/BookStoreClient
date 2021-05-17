@@ -100,11 +100,13 @@ export class BookDetailComponent implements OnInit {
       this.cartService
         .addToCart(accountId, this.bookIds, quantity)
         .subscribe((response) => {
-          this.toastr.info("Đã thêm sách vào giỏ hàng");
-          this.router.navigate([this.router.url]);
+          location.href = this.router.url;
           console.log(response);
+          this.toastr.info("Đã thêm sách vào giỏ hàng");
+        }, error => {
+          this.toastr.error(error.error); 
         });
-    }
+      }
   }
 
   loadBook() {
