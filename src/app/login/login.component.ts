@@ -36,6 +36,8 @@ export class LoginComponent implements OnInit {
     this.accountService.login(this.model).subscribe((response) => {
       this.toastr.success("Đăng nhập thành công");
       window.location.href = "/";
+    }, error => {
+      this.toastr.error(error.error);
     });
   }
   signInWithFB() {

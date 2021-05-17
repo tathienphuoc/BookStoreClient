@@ -21,7 +21,7 @@
   <div class="row m-auto flex-1">
     <div class="col">
       <h1>Login</h1>
-      <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
+      <form #loginForm="ngForm" autocomplete="off">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Username or email address</label>
           <input type="email" name="username" [(ngModel)]="model.username" class="form-control" id="exampleInputEmail1"
@@ -39,7 +39,7 @@
           <input type="checkbox" class="form-check-input" id="exampleCheck1" />
           <label class="form-check-label" for="exampleCheck1">Remember me</label>
         </div>
-        <button type="submit" class="btn btn-login">Log in</button>
+        <button type="submit" (click)="login()" class="btn btn-login">Log in</button>
         <button class="btn btn-login ml-3" (click)="signInWithFB()"><i class="fab fa-facebook"> Login with facebook</i></button>
         <span class="forgot-pwd">
           <a>Lost your password?</a>

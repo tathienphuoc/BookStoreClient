@@ -39,8 +39,9 @@ export class RegisterComponent implements OnInit {
       console.log(response);
       this.route.navigateByUrl('/');
     }, error => {
-      this.validationErrors = error;
-      console.log(error);
+      this.validationErrors.push(error);
+      console.log(error.error);
+      this.toastr.error(error.error);
     })
   }
 
