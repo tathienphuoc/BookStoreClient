@@ -171,7 +171,7 @@ export class CheckoutComponent implements OnInit {
         const paymentIntent = await this.createPaymentIntent(this.order?.id);
         console.log("paymentIntent ", paymentIntent);
         if (paymentIntent != null) {
-          this.toastr.success("Đơn hàng đã được thanh toán ");
+          this.toastr.success("Payment received ");
           this.router.navigate(["../books"]);
         }
       },

@@ -2,7 +2,7 @@
     <div class="book-detail-container" *ngIf="book">
         <div class="col-12">
             <div class="alert alert-warning" *ngIf="isDirty()">
-                <strong>Chú ý: Thông tin đã được chỉnh sửa. Thông tin chỉnh sửa sẽ mất nếu không được lưu</strong>
+                <strong>Information: </strong> You have made changes. Any unsaved changes will be lost
             </div>
         </div>
         <form [formGroup]='editForm'(ngSubmit)="updateBook()">
@@ -90,7 +90,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Image</label>
-                        <input type="file" accept=".png, .jpg" name="image" [(ngModel)]="book.image" [ngModelOptions]="{standalone: true}" (change)="readURL($event)"
+                        <input type="file" accept=".png, .jpg, .jpeg" name="image" [(ngModel)]="book.image" [ngModelOptions]="{standalone: true}" (change)="readURL($event)"
                             class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
                     </div>
                 </div>

@@ -69,7 +69,13 @@ export class BookDetailComponent implements OnInit {
   displayPublisher() {
     return this.name;
   }
-
+  showPrice(book: Book) {
+    if(book.discount == 0) {
+      return book.price;
+    } else {
+      return Number((book.price - book.price*book.discount).toFixed(1)); ;
+    }
+  }
   count(book: Book) {
     return book.reviews.length;
   }
@@ -94,13 +100,13 @@ export class BookDetailComponent implements OnInit {
     console.log(this.user);
 
     if (this.user?.roles == undefined) {
-      this.toastr.error("Vui lòng đăng nhập trước khi mua hàng !");
+      this.toastr.error("Please login before purchasing !");
     } else {
       this.cartService.addToCart(accountId, this.bookIds, quantity).subscribe(
         (response) => {
           location.href = this.router.url;
           console.log(response);
-          this.toastr.info("Đã thêm sách vào giỏ hàng");
+          this.toastr.info("Added book to cart");
         },
         (error) => {
           this.toastr.error(error.error);
@@ -143,7 +149,7 @@ export class BookDetailComponent implements OnInit {
         setTimeout(() => {
           location.href = "books/" + this.book.id;
         }, 500);
-        this.toastr.success("Bạn đã thích sách " + this.book.title);
+        this.toastr.success("You liked " + this.book.title);
       },
       (error) => {
         if (error) {

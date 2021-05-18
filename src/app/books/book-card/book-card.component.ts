@@ -51,7 +51,7 @@ export class BookCardComponent implements OnInit {
     console.log(this.user);
     
     if(this.user?.roles == undefined){
-      this.toastr.error("Vui lòng đăng nhập trước khi mua hàng !");
+      this.toastr.error("Please login before purchasing !");
     } if (book.quantityInStock == 0) {
       this.toastr.error("Sorry the shop only has "+ 0 +" books left");
     } else {

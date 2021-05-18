@@ -83,7 +83,7 @@ export class ShoppingcartComponent implements OnInit {
 
   orderLink() {
     if (this.items?.length == 0 || this.items?.length == undefined) {
-      this.toastr.error("Mua hàng trươc khi thanh toán");
+      this.toastr.error("Please add the book to the cart before payment");
     } else {
       location.href="/checkout";
     }

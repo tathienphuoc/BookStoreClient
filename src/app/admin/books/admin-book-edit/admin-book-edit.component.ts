@@ -87,7 +87,7 @@ export class AdminBookEditComponent implements OnInit {
         [Validators.required, Validators.pattern("^[0-9]*$")],
       ],
       discount: [
-        this.book.discount*100,
+        this.book.discount * 100,
         [Validators.required, Validators.pattern("^[0-9][0-9]?$|^100$")],
       ],
       summary: [this.book.summary, Validators.required],
@@ -234,7 +234,7 @@ export class AdminBookEditComponent implements OnInit {
     formData.append("price", this.editForm.get("price").value);
     formData.append("isbn", this.editForm.get("isbn").value);
     const x = Number(this.editForm.get("discount").value);
-    let discount = x/100;
+    let discount = x / 100;
     formData.append("discount", discount.toFixed(2).toString());
     const datestr = new Date(
       this.editForm.get("publicationDate").value
@@ -277,7 +277,7 @@ export class AdminBookEditComponent implements OnInit {
           "subject",
           "Hooray! Congratulations! , Your love book is sale off, BUY IT NOW !"
         );
-        formData.append("body", this.getBodyEmail());
+        formData.append("body", this.getBody());
         this.mailService.sendMail(formData).subscribe(
           (response) => {},
           (error) => {
@@ -299,14 +299,40 @@ export class AdminBookEditComponent implements OnInit {
       " is safe off " +
       discountPecent +
       " % !!! Just only $" +
-      (this.book.price - (this.book.discount * this.book.price)) +
-      ". " + "<a href='http://localhost:4200/books/"+this.route.snapshot.paramMap.get("bookId")+"'>BUY NOW!</a>";
+      (this.book.price - this.book.discount * this.book.price) +
+      ". " +
+      "<a href='http://localhost:4200/books/" +
+      this.route.snapshot.paramMap.get("bookId") +
+      "'>BUY NOW!</a>" +
+      this.getBody();
+
     body = content;
     console.log(body);
     return body;
   }
 
-  getListEmail() {}
+  getBody() {
+    let bookName = this.book.title;
+    let discountPecent = (this.book.discount * 100).toFixed(2);
+    console.log(discountPecent);
+    const tag = 'https://res.cloudinary.com/images-store/image/upload/v1621360438/tag_fjthhe.png';
+    let content =
+      "Hi ! Your love book " +
+      bookName +
+      " is sale off " +
+      discountPecent +
+      " % !!! Just only $" +
+      (this.book.price - this.book.discount * this.book.price) +
+      ". " +
+      "<a href='http://localhost:4200/books/" +
+      this.route.snapshot.paramMap.get("bookId") +
+      "'>BUY NOW!</a>";
+
+
+    let body =
+      '<!DOCTYPE html><html lang="en">  <head>    <meta charset="UTF-8" />    <meta http-equiv="X-UA-Compatible" content="IE=edge" />    <meta name="viewport" content="width=device-width, initial-scale=1.0" />    <title>Document</title>  </head>  <body>    <h1 style="margin-left: 50px">'+content+'</h1>    <div      style="        margin: auto;        position: relative;        text-align: center;        color: black;        width: 350px;        height: 500px;      "    >      <img        style="width: 100%; height: 100%"        src="'+this.book.image+'"        alt=""      />      <div style="position: absolute; top: -5px; right: -150px">        <img style="width: 200px" src="'+tag+'" alt="" />        <div          style="            transform: rotate(48deg) translate(-91px, -93px);            font-size: 20px;            font-weight: bold;          "        >          Discount<br />'+discountPecent+' %</div>      </div>    </div>  </body></html>';
+    return body;
+  }
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);

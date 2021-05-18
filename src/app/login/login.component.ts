@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.accountService.login(this.model).subscribe((response) => {
-      this.toastr.success("Đăng nhập thành công");
+      this.toastr.success("Login success !");
       window.location.href = "/";
     }, error => {
       this.toastr.error(error.error);
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
           };
           this.accountService.register(model).subscribe((response) => {
             console.log('user ',response);
-            this.toastr.success("Đăng nhập thành công");
+            this.toastr.success("Login success !");
             this.router.navigate(['../']);
           }, error => {
             console.log('error ',error);

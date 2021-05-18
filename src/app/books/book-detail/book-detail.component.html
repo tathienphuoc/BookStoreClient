@@ -3,7 +3,7 @@
     <div class="book-detail-container">
       <div class="product-section">
         <img src="{{book.image || '/assets/user.png'}}" alt="" />
-        <p class="sale-icon">Sale!</p>
+        <p class="sale-icon" *ngIf="book.discount != 0">Sale!</p>
         <div class="product-detail">
           <h1 class="lead">{{book.title}}</h1>
           <span class="rating">
@@ -16,7 +16,8 @@
           </p>
           <div class="product-offer">
             <div class="price-box">
-              <span class="price-text"><del>$3.00</del>${{book.price}}</span>
+              <span class="price-text"><del
+                *ngIf="book.discount !=0 ">${{book.price}}</del>${{showPrice(book)}}</span>
             </div>
             <span class="in-stock">{{book.quantityInStock}} in stock</span>
             <form class="add-to-card">
