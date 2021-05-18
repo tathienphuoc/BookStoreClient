@@ -297,7 +297,7 @@ export class AdminBookEditComponent implements OnInit {
       discountPecent +
       " % !!! Just only $" +
       this.book.price * this.book.discount +
-      ". BUY NOW !";
+      ". " + "<a href='http://localhost:4200/books/"+this.route.snapshot.paramMap.get("bookId")+"'>BUY NOW!</a>";
     body = content;
     return body;
   }
