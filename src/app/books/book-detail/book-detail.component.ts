@@ -22,7 +22,7 @@ import { CartService } from "src/app/_services/cart.service";
   templateUrl: "./book-detail.component.html",
   styleUrls: ["./book-detail.component.css"],
 })
-export class BookDetailComponent implements OnInit, AfterViewInit {
+export class BookDetailComponent implements OnInit {
   book: Book;
   books: Book[];
   categories: Category[];
@@ -50,13 +50,9 @@ export class BookDetailComponent implements OnInit, AfterViewInit {
       this.reviewParams = new ReviewParams(user);
     });
   }
-  ngAfterViewInit(): void {
-    this.activeButton(this.user.id, this.book.id);
-  }
-  ngOnInit(): void {
-    this.loadBook();
+  async ngOnInit() {
+    await this.loadBook();
     this.getReview();
-    this.activeButton(this.user.id, this.book.id);
   }
   role() {
     let role = this.user.roles.toString();
@@ -116,26 +112,26 @@ export class BookDetailComponent implements OnInit, AfterViewInit {
   async loadBook() {
     const result = await this.bookService
       .getBook(this.route.snapshot.paramMap.get("bookId"))
-      .subscribe((book) => {
-        this.book = book;
-        if (this.reviewParams != undefined) {
-          this.reviewParams.bookId = book.id;
-        }
-        this.loadAuthorByBook(book.id);
-        this.loadplsher(book.publisherId);
-      });
+      .toPromise();
+    this.book = result;
+    if (this.reviewParams != undefined) {
+      this.reviewParams.bookId = this.book.id;
+    }
+    this.loadAuthorByBook(this.book.id);
+    this.loadplsher(this.book.publisherId);
+    // ((book) => {
+    //   this.book = book;
+    //   if (this.reviewParams != undefined) {
+    //     this.reviewParams.bookId = book.id;
+    //   }
+    //   this.loadAuthorByBook(book.id);
+    //   this.loadplsher(book.publisherId);
+    // });
   }
   loadAuthorByBook(id: number) {
     this.authorService.getAuthorByBook(id).subscribe((authors) => {
       this.authors = authors;
     });
-  }
-
-  activeButton(acountId: any, bookId: any) {
-    if (this.reviewService.isLiked(acountId, bookId)) {
-      let likeButton = document.querySelector(".rating > button");
-      likeButton.classList.add("active");
-    }
   }
 
   addLike(id: any) {
@@ -150,11 +146,9 @@ export class BookDetailComponent implements OnInit, AfterViewInit {
         this.toastr.success("Bạn đã thích sách " + this.book.title);
       },
       (error) => {
-        console.log(error);
-        setTimeout(() => {
-          location.href = "books/" + this.book.id;
-        }, 500);
-        this.toastr.error(error.error);
+        if (error) {
+          this.toastr.error(error.error);
+        }
       }
     );
   }

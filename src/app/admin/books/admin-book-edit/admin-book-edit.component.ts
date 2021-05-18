@@ -256,10 +256,12 @@ export class AdminBookEditComponent implements OnInit {
     if (this.fileToUpload != null) {
       formData.append("image", this.fileToUpload);
     }
-    this.bookService.updateBook(formData).subscribe((res: Book) => {
+    this.bookService.updateBook(formData).subscribe(async (res: Book) => {
       console.log(res);
       if (res) {
-        this.sendMail(this.reviews);
+        await this.loadBook();
+        console.log(this.book.discount);
+        this.sendMail(this.book.reviews);
         this.editForm.markAsPristine();
         this.toastr.success("Book successfully updated");
       }
@@ -288,17 +290,19 @@ export class AdminBookEditComponent implements OnInit {
 
   getBodyEmail() {
     let body = "";
-    const bookName = this.book.title;
-    const discountPecent = this.book.discount * 100;
-    const content =
+    let bookName = this.book.title;
+    let discountPecent = this.book.discount * 100;
+    console.log(discountPecent);
+    let content =
       "Hi ! Your love book " +
       bookName +
       " is safe off " +
       discountPecent +
       " % !!! Just only $" +
-      this.book.price * this.book.discount +
+      (this.book.price - (this.book.discount * this.book.price)) +
       ". " + "<a href='http://localhost:4200/books/"+this.route.snapshot.paramMap.get("bookId")+"'>BUY NOW!</a>";
     body = content;
+    console.log(body);
     return body;
   }
 
