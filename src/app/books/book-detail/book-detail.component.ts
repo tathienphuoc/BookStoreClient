@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewChecked, AfterViewInit, Component, OnInit } from "@angular/core";
 import { Book } from "src/app/models/book";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BookService } from "src/app/_services/book.service";
@@ -22,7 +22,7 @@ import { CartService } from "src/app/_services/cart.service";
   templateUrl: "./book-detail.component.html",
   styleUrls: ["./book-detail.component.css"],
 })
-export class BookDetailComponent implements OnInit {
+export class BookDetailComponent implements OnInit,AfterViewInit{
   book: Book;
   books: Book[];
   categories: Category[];
@@ -50,10 +50,13 @@ export class BookDetailComponent implements OnInit {
       this.reviewParams = new ReviewParams(user);
     });
   }
-
+  ngAfterViewInit(): void {
+    this.activeButton(this.user.id, this.book.id);
+  }
   ngOnInit(): void {
     this.loadBook();
     this.getReview();
+    this.activeButton(this.user.id, this.book.id);
   }
   role() {
     let role = this.user.roles.toString();
@@ -114,7 +117,6 @@ export class BookDetailComponent implements OnInit {
       .getBook(this.route.snapshot.paramMap.get("bookId"))
       .subscribe((book) => {
         this.book = book;
-        console.log(book);
         if (this.reviewParams != undefined) {
           this.reviewParams.bookId = book.id;
         }
@@ -127,6 +129,14 @@ export class BookDetailComponent implements OnInit {
       this.authors = authors;
     });
   }
+
+  activeButton(acountId: any, bookId: any) {
+    if (this.reviewService.isLiked(acountId, bookId)) {
+      let likeButton = document.querySelector(".rating > button");
+      likeButton.classList.add("active");
+    }
+  }
+
   addLike(id: any) {
     if (id == undefined) {
       location.href="login/";

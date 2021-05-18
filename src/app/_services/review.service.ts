@@ -10,20 +10,33 @@ import { ReviewParams } from '../models/reviewParams';
 })
 export class ReviewService {
   baseUrl = environment.apiUrl;
-  review: Review[] =[];
+  review: Review[] = [];
   constructor(private http: HttpClient) { }
 
-  addLike(reviewParams: ReviewParams){
-    return this.http.post(this.baseUrl+ "review/add-review", reviewParams).pipe(
+  addLike(reviewParams: ReviewParams) {
+    return this.http.post(this.baseUrl + "review/add-review", reviewParams).pipe(
       map(respone => {
         console.log(respone);
-        
+
         return respone;
       })
     )
   }
 
   getReviews() {
-    return this.http.get<Review[]>(this.baseUrl+ "review/user-review");
+    return this.http.get<Review[]>(this.baseUrl + "review/user-review");
+  }
+
+  isLiked(accountId: number, bookId: number) {
+    this.getReviews().subscribe((reviews) => {
+      this.review = reviews;
+    })
+
+    let isLiked: boolean = this.review.some((review) => {
+      return (review.accountId === accountId && review.bookId === bookId && review.liked === true);
+    });
+    console.log("LIke " + isLiked);
+    // isLiked = true;
+    return true;
   }
 }
