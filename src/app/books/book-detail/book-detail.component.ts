@@ -132,13 +132,18 @@ export class BookDetailComponent implements OnInit {
       location.href="login/";
     }
     this.reviewService.addLike(this.reviewParams).subscribe(
-      () => {
-        location.href = "books/"+ this.book.id;
+      (response) => {
+        setTimeout(() => {
+          location.href = "books/"+ this.book.id;
+        }, 500);
+        this.toastr.success("Bạn đã thích sách " + this.book.title);
       },
       (error) => {
         console.log(error);
+        setTimeout(() => {
+          location.href = "books/"+ this.book.id;
+        }, 500);
         this.toastr.error(error.error);
-        this.toastr.success("Bạn đã thích sách " + this.book.title);
       }
       );
   }
