@@ -9,10 +9,12 @@
   margin-top: 25px;
   margin-bottom: 25px;
   width: 1230px;
+  height: 1184px;
 }
 .rank-body {
   margin: auto;
   width: 1230px;
+  margin-top: 0px;
 }
 .heading h1 {
   padding: 16px;
