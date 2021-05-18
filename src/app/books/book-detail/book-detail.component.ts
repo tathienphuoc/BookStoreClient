@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { Book } from "src/app/models/book";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BookService } from "src/app/_services/book.service";
@@ -22,7 +22,7 @@ import { CartService } from "src/app/_services/cart.service";
   templateUrl: "./book-detail.component.html",
   styleUrls: ["./book-detail.component.css"],
 })
-export class BookDetailComponent implements OnInit,AfterViewInit{
+export class BookDetailComponent implements OnInit, AfterViewInit {
   book: Book;
   books: Book[];
   categories: Category[];
@@ -92,7 +92,7 @@ export class BookDetailComponent implements OnInit,AfterViewInit{
     });
     return name;
   }
-  
+
   addToCart(accountId: number, book: Book, quantity: number) {
     this.bookIds.push(book);
     console.log(this.user);
@@ -100,20 +100,21 @@ export class BookDetailComponent implements OnInit,AfterViewInit{
     if (this.user?.roles == undefined) {
       this.toastr.error("Vui lòng đăng nhập trước khi mua hàng !");
     } else {
-      this.cartService
-        .addToCart(accountId, this.bookIds, quantity)
-        .subscribe((response) => {
+      this.cartService.addToCart(accountId, this.bookIds, quantity).subscribe(
+        (response) => {
           location.href = this.router.url;
           console.log(response);
           this.toastr.info("Đã thêm sách vào giỏ hàng");
-        }, error => {
-          this.toastr.error(error.error); 
-        });
-      }
+        },
+        (error) => {
+          this.toastr.error(error.error);
+        }
+      );
+    }
   }
 
-  loadBook() {
-    this.bookService
+  async loadBook() {
+    const result = await this.bookService
       .getBook(this.route.snapshot.paramMap.get("bookId"))
       .subscribe((book) => {
         this.book = book;
@@ -139,23 +140,23 @@ export class BookDetailComponent implements OnInit,AfterViewInit{
 
   addLike(id: any) {
     if (id == undefined) {
-      location.href="login/";
+      location.href = "login/";
     }
     this.reviewService.addLike(this.reviewParams).subscribe(
       (response) => {
         setTimeout(() => {
-          location.href = "books/"+ this.book.id;
+          location.href = "books/" + this.book.id;
         }, 500);
         this.toastr.success("Bạn đã thích sách " + this.book.title);
       },
       (error) => {
         console.log(error);
         setTimeout(() => {
-          location.href = "books/"+ this.book.id;
+          location.href = "books/" + this.book.id;
         }, 500);
         this.toastr.error(error.error);
       }
-      );
+    );
   }
   getReview() {
     this.reviewService.getReviews().subscribe((reviews) => {
@@ -172,7 +173,7 @@ export class BookDetailComponent implements OnInit,AfterViewInit{
     event.target.value = Number(event.target.value);
     if (event.target.value <= 0) {
       event.target.value = 1;
-    }else if (event.target.value > maxQuantity) {
+    } else if (event.target.value > maxQuantity) {
       event.target.value = maxQuantity;
     }
   }
