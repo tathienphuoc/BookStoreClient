@@ -138,9 +138,9 @@ export class BookDetailComponent implements OnInit {
       (error) => {
         console.log(error);
         this.toastr.error(error.error);
+        this.toastr.success("Bạn đã thích sách " + this.book.title);
       }
       );
-    this.toastr.success("Bạn đã thích sách " + this.book.title);
   }
   getReview() {
     this.reviewService.getReviews().subscribe((reviews) => {
