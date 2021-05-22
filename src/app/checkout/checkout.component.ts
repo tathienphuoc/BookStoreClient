@@ -8,14 +8,7 @@ import { User } from "../models/user";
 import { Item } from "../models/item";
 import { ShoppingCartUpdate } from "../models/shoppingCartUpdate";
 // import { loadStripe } from '@stripe/stripe-js';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  NgModel,
-  Validators,
-} from "@angular/forms";
+import { FormArray, FormBuilder, FormControl, FormGroup, NgModel, Validators } from "@angular/forms";
 import { OrderCreate } from "../models/orderCreate";
 import { OrderService } from "../_services/order.service";
 import { Observable } from "rxjs";
@@ -35,6 +28,7 @@ declare var Stripe;
   styleUrls: ["./checkout.component.css"],
 })
 export class CheckoutComponent implements OnInit {
+  publicKeyStripe = environment.publishableKey;
   @ViewChild("cardNumber") cardNumberElement: ElementRef;
   @ViewChild("cardExpiry") cardExpiryElement: ElementRef;
   @ViewChild("cardCvc") cardCvcElement: ElementRef;
@@ -77,7 +71,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    this.stripe = Stripe(environment.publishableKey);
+    this.stripe = Stripe(this.publicKeyStripe);
 
     const elements = this.stripe.elements();
 
@@ -131,10 +125,7 @@ export class CheckoutComponent implements OnInit {
   initialForm() {
     this.orderForm = this.fb.group({
       fullName: [this.user.fullName, Validators.required],
-      phone: [
-        this.user.phoneNumber,
-        [Validators.required, Validators.pattern("^[0-9]*$")],
-      ],
+      phone: [this.user.phoneNumber, [Validators.required, Validators.pattern("^[0-9]*$")]],
       email: [this.user.email, [Validators.required, Validators.email]],
       nameOnCard: ["", [Validators.required]],
     });

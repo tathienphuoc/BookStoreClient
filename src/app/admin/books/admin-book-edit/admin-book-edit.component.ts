@@ -29,6 +29,7 @@ import { BookService } from "src/app/_services/book.service";
 import { CategoryService } from "src/app/_services/category.service";
 import { MailService } from "src/app/_services/mail.service";
 import { PublisherService } from "src/app/_services/publisher.service";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-admin-book-edit",
@@ -36,6 +37,7 @@ import { PublisherService } from "src/app/_services/publisher.service";
   styleUrls: ["./admin-book-edit.component.css"],
 })
 export class AdminBookEditComponent implements OnInit {
+  baseUrl = environment.apiUrl;
   datePickerValue: Date;
   maxDate: Date;
   bsValue = new Date();
@@ -286,29 +288,6 @@ export class AdminBookEditComponent implements OnInit {
         );
       }
     });
-  }
-
-  getBodyEmail() {
-    let body = "";
-    let bookName = this.book.title;
-    let discountPecent = this.book.discount * 100;
-    console.log(discountPecent);
-    let content =
-      "Hi ! Your love book " +
-      bookName +
-      " is safe off " +
-      discountPecent +
-      " % !!! Just only $" +
-      (this.book.price - this.book.discount * this.book.price) +
-      ". " +
-      "<a href='http://localhost:4200/books/" +
-      this.route.snapshot.paramMap.get("bookId") +
-      "'>BUY NOW!</a>" +
-      this.getBody();
-
-    body = content;
-    console.log(body);
-    return body;
   }
 
   getBody() {
